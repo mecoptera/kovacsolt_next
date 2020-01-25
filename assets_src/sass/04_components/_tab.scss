@@ -1,0 +1,26 @@
+.c-tabs {
+  &__tab-container {
+    display: flex;
+  }
+
+  &__tab {
+    border-bottom: 4px solid transparent;
+    cursor: pointer;
+    flex: 1 1 0;
+    font-weight: bold;
+    padding: 16px 0;
+    text-align: center;
+
+    &--active {
+      border-bottom-color: var(--color-primary);
+    }
+  }
+}
+
+.c-tab-content {
+  display: none;
+
+  &--active {
+    display: block;
+  }
+}

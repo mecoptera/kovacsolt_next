@@ -1,0 +1,39 @@
+.q-planner-design {
+  display: block;
+  margin: auto;
+  max-width: 912px;
+  padding: 0 var(--grid-gap);
+
+  &__product {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding-bottom: 100%;
+    position: relative;
+  }
+
+  &__zone {
+    position: absolute;
+    border: 2px dashed var(--color-secondary);
+  }
+}
+
+.q-planner-overlay {
+  background: #fff;
+  box-shadow: var(--shadow-level-2);
+  left: var(--grid-gap);
+  position: absolute;
+  top: 0;
+  width: calc(100% - var(--grid-gap) * 2);
+}
+
+.q-planner-settings {
+  background: #fff;
+  box-shadow: var(--shadow-level-1);
+
+  &__title {
+    background: var(--color-background-primary);
+    font-weight: bold;
+    padding: var(--grid-gap);
+  }
+}

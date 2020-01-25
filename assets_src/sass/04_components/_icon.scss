@@ -1,0 +1,22 @@
+.c-icon {
+  display: inline-flex;
+  vertical-align: top;
+
+  &__svg {
+    &--fill-inherit {
+      fill: currentColor;
+    }
+
+    &--fill-white {
+      fill: var(--color-text-body-inverse);
+    }
+
+    &--fill-text {
+      fill: var(--color-text-body);
+    }
+
+    &--fill-brand {
+      fill: var(--color-primary);
+    }
+  }
+}

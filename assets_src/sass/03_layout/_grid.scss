@@ -1,0 +1,54 @@
+$sizes: 'lg', 'md', 'sm';
+$aligns: 'center', 'flex-start', 'flex-end';
+
+@mixin respond($size: 'sm') {
+  @if $size == 'sm' {
+    @media (max-width: 400px) { @content; }
+  } @else if $size == 'md' {
+    @media (max-width: 600px) { @content; }
+  } @else if $size == 'lg' {
+    @media (max-width: 900px) { @content; }
+  }
+}
+
+.l-grid {
+  display: flex;
+  flex-wrap: wrap;
+
+  &--align {
+    @each $align in $aligns {
+      &-#{$align} {
+        align-items: $align;
+      }
+    }
+  }
+
+  &__col {
+    flex: 1 1 0;
+    padding: 12px;
+
+    @for $i from 0 through 12 {
+      &--#{$i} {
+        flex: 0 0 calc(100% / 12 * #{$i});
+      }
+
+      &--offset-#{$i} {
+        margin-left: calc(100% / 12 * #{$i});
+      }
+
+      @each $size in $sizes {
+        &--#{$size}-#{$i} {
+          @include respond($size) {
+            flex: 0 0 calc(100% / 12 * #{$i});
+          }
+        }
+
+        &--offset-#{$size}-#{$i} {
+          @include respond($size) {
+            margin-left: calc(100% / 12 * #{$i});
+          }
+        }
+      }
+    }
+  }
+}
