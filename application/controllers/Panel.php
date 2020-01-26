@@ -13,7 +13,6 @@ class Panel extends MY_Controller {
     $this->session->set_flashdata('login_error_redirect', 'panel');
     $this->session->set_flashdata('login_success_redirect', 'panel/dashboard');
 
-    $this->load->model('user_model', 'userModel');
     $this->load->library('slice');
   }
 
@@ -26,9 +25,5 @@ class Panel extends MY_Controller {
 
   public function dashboard() {
     $this->slice->view('panel/dashboard');
-  }
-
-  public function designs() {
-    $this->slice->view('panel/designs');
   }
 }

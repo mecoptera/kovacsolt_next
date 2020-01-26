@@ -1,4 +1,5 @@
 /node_modules
+/uploads
 /assets
 /application/cache
 .env

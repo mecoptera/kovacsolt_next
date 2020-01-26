@@ -30,22 +30,22 @@
           <span>Dashboard</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ base_url('panel/designs') }}">
+        <a class="nav-link" href="{{ base_url('panel/design') }}">
           <i class="fas fa-fw fa-icons"></i>
           <span>Designs</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ base_url('panel/baseproducts') }}">
+        <a class="nav-link" href="{{ base_url('panel/baseproduct') }}">
           <i class="fas fa-fw fa-tshirt"></i>
           <span>Base Products</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ base_url('panel/products') }}">
+        <a class="nav-link" href="{{ base_url('panel/product') }}">
           <i class="fas fa-fw fa-tshirt"></i>
           <span>Designed Products</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ base_url('panel/orders') }}">
+        <a class="nav-link" href="{{ base_url('panel/order') }}">
           <i class="fas fa-fw fa-tshirt"></i>
           <span>Orders</span></a>
       </li>

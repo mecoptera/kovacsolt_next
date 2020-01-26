@@ -7,8 +7,8 @@ class User_model extends CI_Model {
     return $this->db->query('SELECT * FROM `users` WHERE `email` = ?', [ $email ])->row();
   }
 
-  public function login($id) {
-    $this->session->set_userdata('user', $id);
+  public function login($userData) {
+    $this->session->set_userdata('user', $userData);
   }
 
   public function isLoggedIn() {

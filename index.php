@@ -1,4 +1,10 @@
 <?php
+
+  require_once __DIR__ . '/application/libraries/dotenv/autoloader.php';
+
+  $dotenv = new Dotenv\Dotenv(__DIR__);
+  $dotenv->load();
+
 /**
  * CodeIgniter
  *
@@ -304,12 +310,6 @@ switch (ENVIRONMENT)
 	}
 
 	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
-
-
-	require_once APPPATH . 'libraries/dotenv/autoloader.php';
-
-	$dotenv = new Dotenv\Dotenv(__DIR__);
-	$dotenv->load();
 
 /*
  * --------------------------------------------------------------------

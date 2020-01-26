@@ -21,7 +21,6 @@ class Authentication extends MY_Controller {
   }
 
   public function logout() {
-    $this->load->model('user_model', 'userModel');
     $this->userModel->logout();
 
     return redirect('');
@@ -31,7 +30,6 @@ class Authentication extends MY_Controller {
     $redirectError = $this->session->flashdata('login_error_redirect') ? $this->session->flashdata('login_error_redirect') : 'authentication';
     $redirectSuccess = $this->session->flashdata('login_success_redirect') ? $this->session->flashdata('login_success_redirect') : '';
 
-    $this->load->model('user_model', 'userModel');
     $user = $this->userModel->getByEmail($this->input->post('email'));
 
     if (!$user) {
@@ -56,7 +54,7 @@ class Authentication extends MY_Controller {
       }
     }
 
-    $this->userModel->login($user->id);
+    $this->userModel->login($user);
 
     if ($this->input->post('ajax')) {
       return $this->output->json([ 'message' => $authVerified ], 200);

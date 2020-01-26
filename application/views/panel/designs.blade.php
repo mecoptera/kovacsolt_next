@@ -11,9 +11,8 @@
   <div class="col-lg-12">
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form id="design-upload-form" method="post" action="{{ base_url('panel.designs.upload') }}" enctype="multipart/form-data">
-          @csrf
-          <input type="file" name="images[]" class="d-none custom-file-input" id="inputGroupFile" multiple>
+        <form id="design-upload-form" method="post" action="{{ base_url('panel/design/upload') }}" enctype="multipart/form-data">
+          <input type="file" name="image" class="d-none custom-file-input" id="inputGroupFile" multiple>
 
           <div class="input-group">
             <div class="input-group-prepend">
@@ -51,9 +50,9 @@
         </div>
 
         <div class="card-body d-flex flex-column align-items-center justify-content-between">
-          <div style="background-image: url({{ url($design->getFirstMediaUrl('design')) }}); background-size: contain; background-repeat: no-repeat; background-position: center; width: 200px; height: 200px;" class="mb-4"></div>
+          <div style="background-image: url({{ base_url('media/design/' . $design->id) }}); background-size: contain; background-repeat: no-repeat; background-position: center; width: 200px; height: 200px;" class="mb-4"></div>
 
-          <form method="post" action="{{ base_url('panel.designs.rename', $design->id) }}" class="form-inline">
+          <form method="post" action="{{ base_url('panel/design/rename/' . $design->id) }}" class="form-inline">
             <div class="form-group mx-sm-3">
               <input type="text" name="name" value="{{ $design->name }}" placeholder="Name" class="form-control">
             </div>

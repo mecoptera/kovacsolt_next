@@ -14,6 +14,12 @@ class Migration_Create_designs extends CI_Migration {
         'type' => 'INT',
         'unsigned' => true,
       ),
+      'is_admin' => array(
+        'type' => 'TINYINT',
+        'constraint' => '1',
+        'unsigned' => true,
+        'default' => 0,
+      ),
       'name' => array(
         'type' => 'VARCHAR',
         'constraint' => '255',

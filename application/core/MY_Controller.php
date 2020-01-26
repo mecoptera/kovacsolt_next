@@ -6,6 +6,12 @@ class MY_Controller extends CI_Controller {
   protected $middlewares = [];
   private $middlewareResults = [];
 
+  public function __construct() {
+    parent::__construct();
+
+    $this->load->model('user_model', 'userModel');
+  }
+
   public function _remap($method, $params = []) {
     $this->_run_middlewares();
 
