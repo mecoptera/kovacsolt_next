@@ -15,9 +15,7 @@
 
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form method="post" action="{{ route('panel.baseproducts.update', [ 'id' => $baseProduct->id ]) }}">
-          @csrf
-
+        <form method="post" action="{{ base_url('panel/base_product/edit/' . $baseProduct->id) }}">
           <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" name="name" id="name" placeholder="Name" class="form-control" value="{{ $baseProduct->name }}">
@@ -38,9 +36,7 @@
 
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form method="post" action="{{ route('panel.baseproducts.views.create', [ 'id' => $baseProduct->id ]) }}">
-          @csrf
-
+        <form method="post" action="{{ base_url('panel/base_product_view/create/' . $baseProduct->id) }}">
           <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" name="name" id="name" placeholder="Name" class="form-control">
@@ -72,8 +68,8 @@
                 <tr>
                   <td>{{ $baseProductView->name }}</td>
                   <td>
-                    <a href="{{ route('panel.baseproductviews.edit', $baseProductView->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
-                    <a href="{{ route('panel.baseproductviews.delete', $baseProductView->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
+                    <a href="{{ base_url('panel/base_product_view/' . $baseProductView->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
+                    <a href="{{ base_url('panel/base_product_view/delete' . $baseProductView->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
                   </td>
                 </tr>
               @endforeach
@@ -93,9 +89,7 @@
 
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form method="post" action="{{ route('panel.baseproducts.colors.create', [ 'id' => $baseProduct->id ]) }}">
-          @csrf
-
+        <form method="post" action="{{ base_url('panel.baseproducts.colors.create' . $baseProduct->id) }}">
           <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" name="name" id="name" placeholder="Name" class="form-control">
@@ -135,8 +129,8 @@
                   <td>{{ $baseProductColor->name }}</td>
                   <td>{{ $baseProductColor->value }}</td>
                   <td>
-                    <a href="{{ route('panel.baseproductcolors.edit', $baseProductColor->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
-                    <a href="{{ route('panel.baseproductcolors.delete', $baseProductColor->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
+                    <a href="{{ base_url('panel.baseproductcolors.edit' . $baseProductColor->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
+                    <a href="{{ base_url('panel.baseproductcolors.delete' . $baseProductColor->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
                   </td>
                 </tr>
               @endforeach
@@ -156,9 +150,7 @@
 
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form method="post" action="{{ route('panel.baseproducts.variants.create', [ 'id' => $baseProduct->id ]) }}" enctype="multipart/form-data">
-          @csrf
-
+        <form method="post" action="{{ base_url('panel.baseproducts.variants.create' . $baseProduct->id) }}" enctype="multipart/form-data">
           <div class="form-group">
             <label for="view">View:</label>
             <select class="custom-select" id="view" name="view">
@@ -222,8 +214,8 @@
                     <div>Zone: <b>{{ $baseProductVariant->base_product_zone ? $baseProductVariant->base_product_zone->name : '---' }}</b></div>
                   </td>
                   <td>
-                    <a href="{{ route('panel.baseproductvariants.edit', $baseProductVariant->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
-                    <a href="{{ route('panel.baseproductvariants.delete', $baseProductVariant->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
+                    <a href="{{ base_url('panel.baseproductvariants.edit' . $baseProductVariant->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
+                    <a href="{{ base_url('panel.baseproductvariants.delete' . $baseProductVariant->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
                   </td>
                 </tr>
               @endforeach
@@ -243,9 +235,7 @@
 
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form method="post" action="{{ route('panel.baseproducts.zones.create', [ 'id' => $baseProduct->id ]) }}">
-          @csrf
-
+        <form method="post" action="{{ base_url('panel.baseproducts.zones.create' . $baseProduct->id) }}">
           <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" name="name" id="name" placeholder="Name" class="form-control">
@@ -277,8 +267,8 @@
                 <tr>
                   <td>{{ $baseProductZone->name }}</td>
                   <td>
-                    <a href="{{ route('panel.baseproductzones.edit', $baseProductZone->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
-                    <a href="{{ route('panel.baseproductzones.delete', $baseProductZone->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
+                    <a href="{{ base_url('panel.baseproductzones.edit' . $baseProductZone->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
+                    <a href="{{ base_url('panel.baseproductzones.delete' . $baseProductZone->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
                   </td>
                 </tr>
               @endforeach

@@ -33,7 +33,9 @@ class Media {
     }
   }
 
-  public function url($entityType, $entityId) {
-
+  public function delete($entityType, $entityId) {
+    $folder = FCPATH . 'uploads/' . $entityType . '/' . $entityId;
+    array_map('unlink', glob($folder . '/*.*'));
+    rmdir($folder);
   }
 }

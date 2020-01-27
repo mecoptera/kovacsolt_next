@@ -15,9 +15,7 @@
   <div class="col-lg-12">
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form method="post" action="{{ route('panel.baseproducts.create') }}" class="form-inline">
-          @csrf
-
+        <form method="post" action="{{ base_url('panel/base_product/create') }}" class="form-inline">
           <div class="form-group mx-sm-3">
             <input type="text" name="name" placeholder="Name" class="form-control">
           </div>
@@ -49,8 +47,8 @@
               <td>{{ $baseProduct->name }}</td>
               <td>{{ $baseProduct->updated_at }}</td>
               <td>
-                <a href="{{ route('panel.baseproducts.edit', $baseProduct->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
-                <a href="{{ route('panel.baseproducts.delete', $baseProduct->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
+                <a href="{{ base_url('panel/base_product/edit/' . $baseProduct->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
+                <a href="{{ base_url('panel/base_product/delete/' . $baseProduct->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
               </td>
             </tr>
           @endforeach

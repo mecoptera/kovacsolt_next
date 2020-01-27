@@ -44,7 +44,7 @@
               <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" x-placement="bottom-end">
-              <a class="dropdown-item" href="{{ base_url('panel.designs.delete', $design->id) }}">Delete</a>
+              <a class="dropdown-item" href="{{ base_url('panel/design/delete/' . $design->id) }}">Delete</a>
             </div>
           </div>
         </div>

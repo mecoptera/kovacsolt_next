@@ -10,7 +10,7 @@ class Design_model extends CI_Model {
       $this->input->post('name'),
       $isTemporary,
       date('Y-m-d H:i:s'),
-      date('Y-m-d H:i:s')
+      date('Y-m-d H:i:s'),
     ]);
 
     return $this->db->insert_id();
@@ -21,6 +21,14 @@ class Design_model extends CI_Model {
   }
 
   public function rename($id) {
-    $this->db->query('UPDATE `designs` SET `name` = ? WHERE `id` = ?', [ $this->input->post('name'), $id ]);
+    $this->db->query('UPDATE `designs` SET `name` = ?, `updated_at` = ? WHERE `id` = ?', [
+      $this->input->post('name'),
+      date('Y-m-d H:i:s'),
+      $id,
+    ]);
+  }
+
+  public function delete($id) {
+    $this->db->query('DELETE FROM `designs` WHERE `id` = ?', [ $id ]);
   }
 }

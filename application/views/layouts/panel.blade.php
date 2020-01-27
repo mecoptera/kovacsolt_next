@@ -35,7 +35,7 @@
           <span>Designs</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ base_url('panel/baseproduct') }}">
+        <a class="nav-link" href="{{ base_url('panel/base_product') }}">
           <i class="fas fa-fw fa-tshirt"></i>
           <span>Base Products</span></a>
       </li>
