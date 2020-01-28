@@ -13,7 +13,7 @@
     <div class="q-welcome__footer">
       <div class="q-welcome__description">
         <div class="q-welcome__about">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos ducimus consequuntur, vero totam nisi. Necessitatibus tempora provident officia, repellat eius repellendus similique quam qui ut dolore sed aspernatur dicta. Veniam!</p>
+          <?php echo $this->markdown->parse_file(APPPATH . 'views_md/welcome-header.md'); ?>
 
           <a href="{{ base_url('page.planner.step1') }}" class="c-button c-button--link">Tudj meg többet</a>
         </div>
