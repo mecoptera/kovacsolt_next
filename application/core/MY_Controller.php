@@ -32,8 +32,8 @@ class MY_Controller extends CI_Controller {
 
       if (file_exists(APPPATH . 'middlewares/' . $middlewareParts[0] . '.php')) {
         require APPPATH . 'middlewares/' . $middlewareParts[0] . '.php';
-        $ci = &get_instance();
-        $middlewareObject = new $middlewareParts[0]($ci);
+        $CI = &get_instance();
+        $middlewareObject = new $middlewareParts[0]($CI);
 
         if (!method_exists($middlewareObject, $middlewareParts[1])) {
           $this->show_error('Middleware function <b>' . $middlewareParts[1] . '</b> in <b>' . $middlewareParts[0] . '</b> doesn\'t exists.');

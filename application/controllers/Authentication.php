@@ -14,16 +14,14 @@ class Authentication extends MY_Controller {
   }
 
   public function index() {
+    if ($this->userModel->isLoggedIn()) {
+      redirect('');
+    }
+
     $this->session->set_flashdata('login_error_redirect', 'authentication');
     $this->session->set_flashdata('login_success_redirect', '');
 
     return $this->slice->view('login');
-  }
-
-  public function logout() {
-    $this->userModel->logout();
-
-    return redirect('');
   }
 
   protected function indexPost(...$params) {
@@ -61,5 +59,11 @@ class Authentication extends MY_Controller {
     } else {
       return redirect($redirectSuccess);
     }
+  }
+
+  public function logout() {
+    $this->userModel->logout();
+
+    return redirect('');
   }
 }

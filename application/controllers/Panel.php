@@ -3,9 +3,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Panel extends MY_Controller {
-  protected $middlewares = [
-    'Auth.isLoggedIn' => 'except::index'
-  ];
+  protected $middlewares = [ 'Auth.isLoggedIn' => 'except::index' ];
 
   public function __construct() {
     parent::__construct();
@@ -17,10 +15,13 @@ class Panel extends MY_Controller {
   }
 
   public function index() {
+    if ($this->userModel->isLoggedIn()) {
+      redirect('panel/dashboard');
+    }
+
     $this->load->helper('MY_form_helper');
 
     $this->slice->view('panel/login', [ 'errors' => $this->session->flashdata('errors') ]);
-    
   }
 
   public function dashboard() {

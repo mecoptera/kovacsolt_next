@@ -22,8 +22,10 @@ class Media {
 
     $this->CI->load->library('upload', $config);
 
-    if (!mkdir($folder, 0777, true)) {
-      die('Failed to create folders...');
+    if (!file_exists($folder)) {
+      if (!mkdir($folder, 0777, true)) {
+        die('Failed to create folders...');
+      }
     }
 
     if (!$this->CI->upload->do_upload('image')) {
