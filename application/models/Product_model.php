@@ -23,12 +23,11 @@ class Product_model extends CI_Model {
   }
 
   public function update($id) {
-    $this->db->query('UPDATE `products` SET `name` = ?, `price` = ?, `discount` = ?, `is_public` = ?, `show_on_welcome` = ?, `updated_at` = ? WHERE `id` = ?', [
+    $this->db->query('UPDATE `products` SET `name` = ?, `price` = ?, `is_public` = ?, `show_on_welcome` = ?, `updated_at` = ? WHERE `id` = ?', [
       $this->input->post('name'),
       $this->input->post('price'),
-      $this->input->post('discount'),
-      $this->input->post('is_public'),
-      $this->input->post('show_on_welcome'),
+      $this->input->post('is_public') === 'on',
+      $this->input->post('show_on_welcome') === 'on',
       date('Y-m-d H:i:s'),
       $id
     ]);

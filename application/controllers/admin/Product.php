@@ -28,6 +28,7 @@ class Product extends MY_Controller {
     $this->load->model('base_product_model', 'baseProductModel');
     $this->load->model('base_product_variant_model', 'baseProductVariantModel');
     $this->load->model('design_model', 'designModel');
+    $this->load->model('product_variant_model', 'productVariantModel');
 
     $product = $this->productModel->get($id);
 
@@ -36,37 +37,19 @@ class Product extends MY_Controller {
       'baseProducts' => $this->baseProductModel->getAll(),
       'baseProductVariants' => $this->baseProductVariantModel->getByBaseProductId($product->base_product_id),
       'designs' => $this->designModel->getAdmin(),
-      'productVariants' => [],
+      'productVariants' => $this->productVariantModel->getByProductId($id),
     ]);
+  }
+
+  public function editPost($id) {
+    $this->productModel->update($id);
+
+    redirect('panel/product/edit/' . $id);
   }
 
   public function createPost() {
     $this->productModel->insert(true);
 
     redirect('panel/product');
-  }
-
-  public function uploadPost() {
-    $designId = $this->designModel->insert(true, false);
-
-    $this->load->library('media');
-    $this->media->upload('design', $designId);
-
-    redirect('panel/design');
-  }
-
-  public function renamePost($id) {
-    $this->designModel->rename($id);
-
-    redirect('panel/design');
-  }
-
-  public function delete($id) {
-    $this->designModel->delete($id);
-
-    $this->load->library('media');
-    $this->media->delete('design', $id);
-
-    redirect('panel/design');
   }
 }

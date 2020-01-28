@@ -11,22 +11,20 @@
   <div class="col-lg-6">
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form method="post" action="{{ route('panel.productvariants.update', [ 'id' => $productVariant->id ]) }}">
-          @csrf
-
+        <form method="post" action="{{ base_url('panel/product_variant/' . $productVariant->id) }}">
           <div class="form-group">
-            <label for="width">Width:</label>
-            <input type="number" step="any" name="width" id="width" placeholder="Design width" class="form-control" value="{{ $productVariant->design_width }}" max="100" min="0">
+            <label for="design_width">Width:</label>
+            <input type="number" step="any" name="design_width" id="design_width" placeholder="Design width" class="form-control" value="{{ $productVariant->design_width }}" max="100" min="0">
           </div>
 
           <div class="form-group">
-            <label for="left">Left:</label>
-            <input type="number" name="left" id="left" placeholder="Design left" class="form-control" value="{{ $productVariant->design_left }}" max="100" min="0">
+            <label for="design_left">Left:</label>
+            <input type="number" name="design_left" id="design_left" placeholder="Design left" class="form-control" value="{{ $productVariant->design_left }}" max="100" min="0">
           </div>
 
           <div class="form-group">
-            <label for="top">Top:</label>
-            <input type="number" name="top" id="top" placeholder="Design top" class="form-control" value="{{ $productVariant->design_top }}" max="100" min="0">
+            <label for="design_top">Top:</label>
+            <input type="number" name="design_top" id="design_top" placeholder="Design top" class="form-control" value="{{ $productVariant->design_top }}" max="100" min="0">
           </div>
 
           <input type="submit" class="btn btn-primary float-right" value="Save">
@@ -38,9 +36,9 @@
   <div class="col-lg-6">
     <div class="card shadow mb-4">
       <div class="card-body">
-        <div style="position: relative; padding-bottom: 100%; width: 100%; background-position: center; background-repeat: no-repeat; background-size: contain; background-image: url('{{ url($productVariant->base_product_variant->getFirstMediaUrl('base_product_variant', 'thumb')) }}')">
-          <div style="position: absolute; width: {{ $productVariant->base_product_variant->base_product_zone->width }}%; height: {{ $productVariant->base_product_variant->base_product_zone->height }}%; left: {{ $productVariant->base_product_variant->base_product_zone->left }}%; top: {{ $productVariant->base_product_variant->base_product_zone->top }}%;">
-            <img id="design" src="{{ url($productVariant->design_image['planner']) }}" style="position: absolute; width: {{ $productVariant->design_width }}%; left: {{ $productVariant->design_left }}%; top: {{ $productVariant->design_top }}%;">
+        <div style="position: relative; padding-bottom: 100%; width: 100%; background-position: center; background-repeat: no-repeat; background-size: contain; background-image: url('{{ base_url('media/variant/' . $productVariant->base_product_variant_id) }}')">
+          <div style="position: absolute; width: {{ $productVariant->base_product_zone_width }}%; height: {{ $productVariant->base_product_zone_height }}%; left: {{ $productVariant->base_product_zone_left }}%; top: {{ $productVariant->base_product_zone_top }}%;">
+            <img id="design" src="{{ base_url('media/design/' . $productVariant->design_id) }}" style="position: absolute; width: {{ $productVariant->design_width }}%; left: {{ $productVariant->design_left }}%; top: {{ $productVariant->design_top }}%;">
           </div>
         </div>
       </div>
@@ -53,9 +51,9 @@
 @section('footer')
 <script>
   const designElement = document.querySelector('#design');
-  const widthInputElement = document.querySelector('#width');
-  const leftInputElement = document.querySelector('#left');
-  const topInputElement = document.querySelector('#top');
+  const widthInputElement = document.querySelector('#design_width');
+  const leftInputElement = document.querySelector('#design_left');
+  const topInputElement = document.querySelector('#design_top');
 
   widthInputElement.addEventListener('change', event => {
     designElement.style.width = widthInputElement.value + '%';

@@ -28,7 +28,6 @@ class Base_Product_Zone extends MY_Controller {
 
   public function indexPost($id) {
     $this->baseProductZoneModel->update($id);
-    
 
     foreach ($this->input->post('base_product_variant_id') as $baseProductVariantId) {
       $this->load->model('base_product_variant_model', 'baseProductVariantModel');

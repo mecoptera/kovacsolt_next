@@ -15,7 +15,7 @@
   <div class="col-lg-12">
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form method="post" action="{{ base_url('panel/product/update/' . $product->id) }}">
+        <form method="post" action="{{ current_url() }}">
           <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" name="name" id="name" placeholder="Name" class="form-control" value="{{ $product->name }}">
@@ -62,8 +62,8 @@
       <div class="card-body">
         <form method="post" action="{{ base_url('panel/product_variant/create/' . $product->id) }}" enctype="multipart/form-data">
           <div class="form-group">
-            <label for="base_product_variant">Variant:</label>
-            <select class="custom-select" id="base_product_variant" name="base_product_variant">
+            <label for="base_product_variant_id">Variant:</label>
+            <select class="custom-select" id="base_product_variant_id" name="base_product_variant_id">
               @foreach($baseProductVariants as $baseProductVariant)
                 <option value="{{ $baseProductVariant->id }}">{{ $baseProductVariant->base_product_view_name }} | {{ $baseProductVariant->base_product_color_name }}</option>
               @endforeach
@@ -71,12 +71,12 @@
           </div>
 
           <div class="form-group">
-            <label for="image">Design:</label>
+            <label for="design_id">Design:</label>
             <div class="row" style="max-height: 350px; overflow: auto;">
               @foreach($designs as $design)
                 <div class="col-lg-3 mb-4">
                   <label class="card p-4" style="cursor: pointer;">
-                    <input type="radio" name="design" value="{{ $design->id }}" url="{{ base_url('media/design/' . $design->id) }}">
+                    <input type="radio" name="design_id" value="{{ $design->id }}" url="{{ base_url('media/design/' . $design->id) }}">
                     <div style="background-image: url({{ base_url('media/design/' . $design->id) }}); background-size: contain; background-position: center; background-repeat: no-repeat; width: 100%; padding-bottom: 100%;"></div>
                     <span class="u-uppercase u-font-bold">{{ $design->name }}</span>
                   </label>
@@ -111,9 +111,9 @@
               @foreach($productVariants as $productVariant)
                 <tr>
                   <td>
-                    <div style="position: relative; width: 128px; height: 128px; background-position: center; background-repeat: no-repeat; background-size: contain; background-image: url('{{ base_url('media/variant/' . $productVariant->id) }}')">
+                    <div style="position: relative; width: 128px; height: 128px; background-position: center; background-repeat: no-repeat; background-size: contain; background-image: url('{{ base_url('media/variant/' . $productVariant->base_product_variant_id) }}')">
                       <div style="position: absolute; width: {{ $productVariant->base_product_zone_width }}%; height: {{ $productVariant->base_product_zone_height }}%; left: {{ $productVariant->base_product_zone_left }}%; top: {{ $productVariant->base_product_zone_top }}%;">
-                        <img id="design" src="{{ base_url('media/variant/' . $productVariant->id) }}" style="position: absolute; width: {{ $productVariant->design_width }}%; left: {{ $productVariant->design_left }}%; top: {{ $productVariant->design_top }}%;">
+                        <img id="design" src="{{ base_url('media/design/' . $productVariant->design_id) }}" style="position: absolute; width: {{ $productVariant->design_width }}%; left: {{ $productVariant->design_left }}%; top: {{ $productVariant->design_top }}%;">
                       </div>
                     </div>
                   </td>
@@ -123,7 +123,7 @@
                     <div>Design: <b>{{ $productVariant->design_name }}</b></div>
                   </td>
                   <td>
-                    <a href="{{ base_url('panel/product_variant/edit/' . $productVariant->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
+                    <a href="{{ base_url('panel/product_variant/' . $productVariant->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
                     <a href="{{ base_url('panel/product_variant/delete/' . $productVariant->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
                   </td>
                 </tr>

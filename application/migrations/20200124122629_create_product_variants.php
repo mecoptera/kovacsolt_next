@@ -23,11 +23,11 @@ class Migration_Create_product_variants extends CI_Migration {
         'type' => 'INT',
         'unsigned' => true,
       ),
-      'desing_width' => array(
+      'design_width' => array(
         'type' => 'FLOAT',
         'unsigned' => true,
       ),
-      'desing_left' => array(
+      'design_left' => array(
         'type' => 'FLOAT',
         'unsigned' => true,
       ),
