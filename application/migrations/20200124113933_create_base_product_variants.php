@@ -25,6 +25,7 @@ class Migration_Create_base_product_variants extends CI_Migration {
       'base_product_zone_id' => array(
         'type' => 'INT',
         'unsigned' => true,
+        'null' => true,
       ),
       'default' => array(
         'type' => 'TINYINT',

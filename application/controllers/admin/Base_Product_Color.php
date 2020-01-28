@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Base_Product_View extends MY_Controller {
+class Base_Product_Color extends MY_Controller {
   protected $middlewares = [ 'Auth.isLoggedIn' => '' ];
 
   public function __construct() {
@@ -11,23 +11,23 @@ class Base_Product_View extends MY_Controller {
     $this->session->set_flashdata('login_error_redirect', 'panel');
     $this->session->set_flashdata('login_success_redirect', 'panel/dashboard');
 
-    $this->load->model('base_product_view_model', 'baseProductViewModel');
+    $this->load->model('base_product_color_model', 'baseProductColorModel');
     $this->load->library('slice');
   }
 
   public function index($id) {
-    $this->slice->view('panel/baseproductview-edit', [ 'baseProductView' => $this->baseProductViewModel->get($id) ]);
+    $this->slice->view('panel/baseproductcolor-edit', [ 'baseProductColor' => $this->baseProductColorModel->get($id) ]);
   }
 
   public function indexPost($id) {
-    $this->baseProductViewModel->update($id);
-    $baseProductView = $this->baseProductViewModel->get($id);
+    $this->baseProductColorModel->update($id);
+    $baseProductColor = $this->baseProductColorModel->get($id);
 
-    redirect('panel/base_product/edit/' . $baseProductView->base_product_id);
+    redirect('panel/base_product/edit/' . $baseProductColor->base_product_id);
   }
 
   public function createPost($baseProductId) {
-    $this->baseProductViewModel->insert($baseProductId);
+    $this->baseProductColorModel->insert($baseProductId);
 
     redirect('panel/base_product/edit/' . $baseProductId);
   }

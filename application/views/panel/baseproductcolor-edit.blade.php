@@ -11,9 +11,7 @@
 
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form method="post" action="{{ route('panel.baseproductcolors.update', [ 'id' => $baseProductColor->id ]) }}">
-          @csrf
-
+        <form method="post" action="{{ base_url('panel/base_product_color/' . $baseProductColor->id) }}">
           <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" name="name" id="name" placeholder="Name" class="form-control" value="{{ $baseProductColor->name }}">

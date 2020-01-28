@@ -19,6 +19,12 @@ class Migration_Create_products extends CI_Migration {
         'unsigned' => true,
         'null' => true,
       ),
+      'is_admin' => array(
+        'type' => 'TINYINT',
+        'constraint' => '1',
+        'unsigned' => true,
+        'default' => 0,
+      ),
       'name' => array(
         'type' => 'VARCHAR',
         'constraint' => '255',

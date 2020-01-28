@@ -15,17 +15,15 @@
   <div class="col-lg-12">
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form method="post" action="{{ route('panel.products.create') }}">
-          @csrf
-
+        <form method="post" action="{{ base_url('panel/product/create') }}">
           <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" name="name" placeholder="Name" class="form-control">
           </div>
 
           <div class="form-group">
-            <label for="base_product">Base product:</label>
-            <select class="custom-select" id="base_product" name="base_product">
+            <label for="base_product_id">Base product:</label>
+            <select class="custom-select" id="base_product_id" name="base_product_id">
               @foreach($baseProducts as $baseProduct)
                 <option value="{{ $baseProduct->id }}">{{ $baseProduct->name }}</option>
               @endforeach
@@ -60,8 +58,8 @@
               <td>{{ $product->name }}</td>
               <td>{{ $product->updated_at }}</td>
               <td>
-                <a href="{{ route('panel.products.edit', $product->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
-                <a href="{{ route('panel.products.delete', $product->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
+                <a href="{{ base_url('panel/product/edit/' . $product->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
+                <a href="{{ base_url('panel/product/delete/' . $product->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
               </td>
             </tr>
           @endforeach

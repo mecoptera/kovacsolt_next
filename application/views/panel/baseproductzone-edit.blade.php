@@ -11,20 +11,18 @@
   <div class="col-lg-6">
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form method="post" action="{{ route('panel.baseproductzones.update', [ 'id' => $baseProductZone->id ]) }}">
-          @csrf
-
+        <form method="post" action="{{ base_url('panel/base_product_zone/' . $baseProductZone->id) }}">
           <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" name="name" id="name" placeholder="Name" class="form-control" value="{{ $baseProductZone ? $baseProductZone->name : '' }}">
           </div>
 
           <div class="form-group">
-            <label for="view_id">Variants to attach:</label>
-            <select class="custom-select" name="variant_id[]" id="variant_id" multiple>
+            <label for="base_product_variant_id">Variants to attach:</label>
+            <select class="custom-select" name="base_product_variant_id[]" id="base_product_variant_id" multiple>
               @foreach($baseProductVariants as $baseProductVariant)
                 <option value="{{ $baseProductVariant->id }}"  {{ $baseProductVariant->base_product_zone_id === $baseProductZone->id ? 'selected' : '' }}>
-                  {{ $baseProductVariant->base_product_view->name }} | {{ $baseProductVariant->base_product_color->name }}
+                  {{ $baseProductVariant->base_product_view_name }} | {{ $baseProductVariant->base_product_color_name }}
                 </option>
               @endforeach
             </select>
@@ -63,8 +61,8 @@
           <label for="zone-image-select">Zone background:</label>
           <select class="custom-select" id="zone-image-select">
             @foreach($baseProductVariants as $baseProductVariant)
-              <option value="{{ url($baseProductVariant->getFirstMediaUrl('base_product_variant', 'planner')) }}" {{ $baseProductVariant->base_product_zone_id === $baseProductZone->id ? 'selected' : '' }}>
-                {{ $baseProductVariant->base_product_view->name }} | {{ $baseProductVariant->base_product_color->name }}
+              <option value="{{ base_url('media/variant/' . $baseProductVariant->id) }}" {{ $baseProductVariant->base_product_zone_id === $baseProductZone->id ? 'selected' : '' }}>
+                {{ $baseProductVariant->base_product_view_name }} | {{ $baseProductVariant->base_product_color_name }}
               </option>
             @endforeach
           </select>

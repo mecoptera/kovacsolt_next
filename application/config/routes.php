@@ -11,4 +11,7 @@ $route['media/([a-z]+)/(\d+)/([a-z]+)'] = 'media/index/$1/$2/$3';
 
 $route['panel/dashboard'] = 'panel/dashboard';
 $route['panel/base_product_view/(:num)'] = 'admin/base_product_view/index/$1';
+$route['panel/base_product_color/(:num)'] = 'admin/base_product_color/index/$1';
+$route['panel/base_product_variant/(:num)'] = 'admin/base_product_variant/index/$1';
+$route['panel/base_product_zone/(:num)'] = 'admin/base_product_zone/index/$1';
 $route['panel/(.+)'] = 'admin/$1';

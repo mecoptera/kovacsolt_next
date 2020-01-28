@@ -89,7 +89,7 @@
 
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form method="post" action="{{ base_url('panel.baseproducts.colors.create' . $baseProduct->id) }}">
+        <form method="post" action="{{ base_url('panel/base_product_color/create/' . $baseProduct->id) }}">
           <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" name="name" id="name" placeholder="Name" class="form-control">
@@ -129,8 +129,8 @@
                   <td>{{ $baseProductColor->name }}</td>
                   <td>{{ $baseProductColor->value }}</td>
                   <td>
-                    <a href="{{ base_url('panel.baseproductcolors.edit' . $baseProductColor->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
-                    <a href="{{ base_url('panel.baseproductcolors.delete' . $baseProductColor->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
+                    <a href="{{ base_url('panel/base_product_color/' . $baseProductColor->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
+                    <a href="{{ base_url('panel/base_product_color/delete/' . $baseProductColor->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
                   </td>
                 </tr>
               @endforeach
@@ -150,28 +150,20 @@
 
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form method="post" action="{{ base_url('panel.baseproducts.variants.create' . $baseProduct->id) }}" enctype="multipart/form-data">
+        <form method="post" action="{{ base_url('panel/base_product_variant/create/' . $baseProduct->id) }}" enctype="multipart/form-data">
           <div class="form-group">
-            <label for="view">View:</label>
-            <select class="custom-select" id="view" name="view">
+            <label for="base_product_view_id">View:</label>
+            <select class="custom-select" id="base_product_view_id" name="base_product_view_id">
               @foreach($baseProductViews as $baseProductView)
                 <option value="{{ $baseProductView->id }}">{{ $baseProductView->name }}</option>
               @endforeach
             </select>
           </div>
           <div class="form-group">
-            <label for="color">Color:</label>
-            <select class="custom-select" id="color" name="color">
+            <label for="base_product_color_id">Color:</label>
+            <select class="custom-select" id="base_product_color_id" name="base_product_color_id">
               @foreach($baseProductColors as $baseProductColor)
                 <option value="{{ $baseProductColor->id }}">{{ $baseProductColor->name }}</option>
-              @endforeach
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="zone">Zone:</label>
-            <select class="custom-select" id="zone" name="zone">
-              @foreach($baseProductZones as $baseProductZone)
-                <option value="{{ $baseProductZone->id }}">{{ $baseProductZone->name }}</option>
               @endforeach
             </select>
           </div>
@@ -206,16 +198,16 @@
               @foreach($baseProductVariants as $baseProductVariant)
                 <tr>
                   <td>
-                    <img src="{{ url($baseProductVariant->getFirstMediaUrl('base_product_variant', 'thumb')) }}" style="width: 100px; height: 100px;">
+                    <img src="{{ base_url('media/variant/' . $baseProductVariant->id) }}" style="width: 100px; height: 100px;">
                   </td>
                   <td>
-                    <div>View: <b>{{ $baseProductVariant->base_product_view->name }}</b></div>
-                    <div>Color: <b>{{ $baseProductVariant->base_product_color->name }}</b></div>
-                    <div>Zone: <b>{{ $baseProductVariant->base_product_zone ? $baseProductVariant->base_product_zone->name : '---' }}</b></div>
+                    <div>View: <b>{{ $baseProductVariant->base_product_view_name }}</b></div>
+                    <div>Color: <b>{{ $baseProductVariant->base_product_color_name }}</b></div>
+                    <div>Zone: <b>{{ $baseProductVariant->base_product_zone_id ? $baseProductVariant->base_product_zone_name : '---' }}</b></div>
                   </td>
                   <td>
-                    <a href="{{ base_url('panel.baseproductvariants.edit' . $baseProductVariant->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
-                    <a href="{{ base_url('panel.baseproductvariants.delete' . $baseProductVariant->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
+                    <a href="{{ base_url('panel/base_product_variant/' . $baseProductVariant->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
+                    <a href="{{ base_url('panel/base_product_variant/delete/' . $baseProductVariant->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
                   </td>
                 </tr>
               @endforeach
@@ -227,6 +219,7 @@
   </div>
 </div>
 
+
 <div class="row">
   <div class="col-lg-6">
     <div class="d-sm-flex align-items-center mb-4 mt-4">
@@ -235,7 +228,7 @@
 
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form method="post" action="{{ base_url('panel.baseproducts.zones.create' . $baseProduct->id) }}">
+        <form method="post" action="{{ base_url('panel/base_product_zone/create/' . $baseProduct->id) }}">
           <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" name="name" id="name" placeholder="Name" class="form-control">
@@ -267,8 +260,8 @@
                 <tr>
                   <td>{{ $baseProductZone->name }}</td>
                   <td>
-                    <a href="{{ base_url('panel.baseproductzones.edit' . $baseProductZone->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
-                    <a href="{{ base_url('panel.baseproductzones.delete' . $baseProductZone->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
+                    <a href="{{ base_url('panel/base_product_zone/' . $baseProductZone->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
+                    <a href="{{ base_url('panel/base_product_zone/delete/' . $baseProductZone->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
                   </td>
                 </tr>
               @endforeach
@@ -279,7 +272,6 @@
     </div>
   </div>
 </div>
-
 @endsection
 
 @section('footer')

@@ -11,12 +11,10 @@
 
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form method="post" action="{{ route('panel.baseproductvariants.update', [ 'id' => $baseProductVariant->id ]) }}" enctype="multipart/form-data">
-          @csrf
-
+        <form method="post" action="{{ base_url('panel/base_product_variant/' . $baseProductVariant->id) }}" enctype="multipart/form-data">
           <div class="form-group">
-            <label for="view">View:</label>
-            <select class="custom-select" id="view" name="view">
+            <label for="base_product_view_id">View:</label>
+            <select class="custom-select" id="base_product_view_id" name="base_product_view_id">
               @foreach($baseProductViews as $baseProductView)
                 <option value="{{ $baseProductView->id }}" {{ $baseProductView->id === $baseProductVariant->base_product_view_id ? 'selected' : '' }}>
                   {{ $baseProductView->name }}
@@ -25,8 +23,8 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="color">Color:</label>
-            <select class="custom-select" id="color" name="color">
+            <label for="base_product_color_id">Color:</label>
+            <select class="custom-select" id="base_product_color_id" name="base_product_color_id">
               @foreach($baseProductColors as $baseProductColor)
                 <option value="{{ $baseProductColor->id }}" {{ $baseProductColor->id === $baseProductVariant->base_product_color_id ? 'selected' : '' }}>
                   {{ $baseProductColor->name }}
@@ -35,10 +33,21 @@
             </select>
           </div>
           <div class="form-group">
+            <label for="base_product_zone_id">Zone:</label>
+            <select class="custom-select" id="base_product_zone_id" name="base_product_zone_id">
+              <option>---</option>
+              @foreach($baseProductZones as $baseProductZone)
+                <option value="{{ $baseProductZone->id }}" {{ $baseProductZone->id === $baseProductVariant->base_product_zone_id ? 'selected' : '' }}>
+                  {{ $baseProductZone->name }}
+                </option>
+              @endforeach
+            </select>
+          </div>
+          <div class="form-group">
             <label for="image">Image:</label>
             <input type="file" name="image" class="form-control" id="image">
             <div class="mt-4">
-              <img src="{{ url($baseProductVariant->getFirstMediaUrl('base_product_variant', 'thumb')) }}" style="width: 100px; height: 100px;">
+              <img src="{{ base_url('media/variant/' . $baseProductVariant->id) }}" style="width: 100px; height: 100px;">
             </div>
           </div>
 

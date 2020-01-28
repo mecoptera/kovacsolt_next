@@ -10,8 +10,6 @@ class Base_product_view_model extends CI_Model {
       date('Y-m-d H:i:s'),
       date('Y-m-d H:i:s'),
     ]);
-
-    return $this->db->insert_id();
   }
 
   public function update($id) {
@@ -20,10 +18,6 @@ class Base_product_view_model extends CI_Model {
       date('Y-m-d H:i:s'),
       $id,
     ]);
-  }
-
-  public function getAll() {
-    return $this->db->query('SELECT * FROM `base_product_views`')->result();
   }
 
   public function get($id) {

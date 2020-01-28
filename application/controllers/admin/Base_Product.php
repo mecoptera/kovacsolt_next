@@ -27,13 +27,16 @@ class Base_Product extends MY_Controller {
 
   public function edit($id) {
     $this->load->model('base_product_view_model', 'baseProductViewModel');
+    $this->load->model('base_product_color_model', 'baseProductColorModel');
+    $this->load->model('base_product_variant_model', 'baseProductVariantModel');
+    $this->load->model('base_product_zone_model', 'baseProductZoneModel');
 
     $this->slice->view('panel/baseproduct-edit', [
       'baseProduct' => $this->baseProductModel->get($id),
       'baseProductViews' => $this->baseProductViewModel->getByBaseProductId($id),
-      'baseProductColors' => [],
-      'baseProductVariants' => [],
-      'baseProductZones' => [],
+      'baseProductColors' => $this->baseProductColorModel->getByBaseProductId($id),
+      'baseProductVariants' => $this->baseProductVariantModel->getByBaseProductId($id),
+      'baseProductZones' => $this->baseProductZoneModel->getByBaseProductId($id),
     ]);
   }
 
