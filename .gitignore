@@ -2,5 +2,7 @@
 /uploads
 /assets
 /application/cache
+/application/config/config.php
+/application/config/database.php
 .env
 package-lock.json

@@ -1,10 +1,5 @@
 <?php
 
-  require_once __DIR__ . '/application/libraries/dotenv/autoloader.php';
-
-  $dotenv = new Dotenv\Dotenv(__DIR__);
-  $dotenv->load();
-
 /**
  * CodeIgniter
  *

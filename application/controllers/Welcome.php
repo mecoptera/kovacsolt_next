@@ -10,6 +10,8 @@ class Welcome extends MY_Controller {
   }
 
   public function index() {
-    $this->slice->view('page/welcome', [ 'products' => [] ]);
+    $this->load->model('product_model', 'productModel');
+
+    $this->slice->view('page/welcome', [ 'products' => $this->productModel->getAllFeatured() ]);
   }
 }

@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Media extends MY_Controller {
+class Media extends CI_Controller {
   public function index($entityType, $entityId, $size = 'original') {
     if (preg_match("/^[a-z]+$/", $entityType) === false) {
       die('Error type');

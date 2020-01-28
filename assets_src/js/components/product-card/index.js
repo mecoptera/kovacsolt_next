@@ -45,15 +45,26 @@ export default class KProductCard extends Bamboo {
           const data = this._state.get('detail');
           const hideInfo = this._state.get('hideInfo');
 
-          const zoneStyle = this._state.get('hover') ? '' : `width: ${data.productVariantDefault.baseProductVariant.baseProductZone.width}%; height: ${data.productVariantDefault.baseProductVariant.baseProductZone.height}%; left: ${data.productVariantDefault.baseProductVariant.baseProductZone.left}%; top: ${data.productVariantDefault.baseProductVariant.baseProductZone.top}%;`;
-          const designStyle = this._state.get('hover') ? '' : `width: ${data.productVariantDefault.designWidth}%; left: ${data.productVariantDefault.designLeft}%; top: ${data.productVariantDefault.designTop}%;`;
+          const zoneStyle = this._state.get('hover') ? '' : `width: ${data.baseProductZoneWidth}%; height: ${data.baseProductZoneHeight}%; left: ${data.baseProductZoneLeft}%; top: ${data.baseProductZoneTop}%;`;
+          const designStyle = this._state.get('hover') ? '' : `width: ${data.productVariantDesignWidth}%; left: ${data.productVariantDesignLeft}%; top: ${data.productVariantDesignTop}%;`;
 
           this.classList.toggle('c-product--hover', !!this._state.get('hover'));
           this.classList.toggle('c-product--hide-info', hideInfo);
 
-          const productImage = window.kovacsolt.baseUrl + data.productVariantDefault.baseProductVariant.image[this._state.get('hiRes') ? 'planner' : 'thumb'];
-          const designImage = window.kovacsolt.baseUrl + data.productVariantDefault.designImage[this._state.get('hiRes') ? 'planner' : 'thumb'];
+          const productImage = window.kovacsolt.baseUrl + 'media/variant/' + data.baseProductVariantId;
+          const designImage = window.kovacsolt.baseUrl + 'media/design/' + data.productVariantDesignId;
+console.log(html`
+            <div class="c-product__product-layer">
+              <div class="c-product__image" style="${'background-image: url(' + productImage + ');'}"></div>
 
+              <div class="c-product__zone" style="${zoneStyle}">
+                <div class="c-product__design-full" style="${'background-image: url(' + designImage + ');'}"></div>
+                <img class="c-product__design" src="${designImage}" style="${designStyle}">
+              </div>
+            </div>
+
+            ${!hideInfo && data.discount ? html`<div class="c-product__discount" data-discount="${'-' + data.discount + '%'}"></div>` : html``}
+          `);
           return html`
             <div class="c-product__product-layer">
               <div class="c-product__image" style="${'background-image: url(' + productImage + ');'}"></div>

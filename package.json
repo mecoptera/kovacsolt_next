@@ -29,7 +29,7 @@
     "webpack-cli": "3.3.10"
   },
   "dependencies": {
-    "@dkocsis-emarsys/bamboo": "3.1.1",
+    "@dkocsis-emarsys/bamboo": "4.0.0",
     "axios": "0.19.2",
     "classlist-polyfill": "1.2.0",
     "custom-event": "1.0.1",

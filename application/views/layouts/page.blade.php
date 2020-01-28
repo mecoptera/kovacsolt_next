@@ -16,7 +16,7 @@
 
   <script>
     window.kovacsolt = {
-      baseUrl: '{{ base_url('') }}/',
+      baseUrl: '{{ base_url('') }}',
       iconUrl: '{{ base_url('assets/images/icons') }}/'
     };
   </script>
@@ -46,9 +46,7 @@
               {$user->name}
             </div>
           @endif
-          <k-cart-button data-count="{Webacked\Cart\Helpers::itemsCount()}" data-cart-url="{{ base_url('cart') }}" data-area-endpoint="{{ base_url('cart.area') }}">
-            <k-icon data-icon="cart" data-color="{{ isIndexPage() ? 'white' : 'text' }}" data-size="8"></k-icon>
-          </k-cart-button>
+
         </div>
       </nav>
     </header>
