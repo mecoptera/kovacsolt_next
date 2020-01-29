@@ -16,6 +16,16 @@ class Page extends MY_Controller {
     $this->slice->view('page/welcome', [ 'products' => $this->productModel->getAllFeatured() ]);
   }
 
+  public function contact() {
+    $this->load->helper('MY_form_helper');
+
+    $this->slice->view('page/contact');
+  }
+
+  public function privacy() {
+    $this->slice->view('page/privacy');
+  }
+
   public function about() {
     $this->slice->view('page/about');
   }

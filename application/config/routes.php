@@ -17,4 +17,6 @@ $route['panel/base_product_variant/(:num)'] = 'admin/base_product_variant/index/
 $route['panel/base_product_zone/(:num)'] = 'admin/base_product_zone/index/$1';
 $route['panel/product_variant/(:num)'] = 'admin/product_variant/index/$1';
 $route['panel/(.+)'] = 'admin/$1';
+$route['contact'] = 'page/contact';
+$route['privacy'] = 'page/privacy';
 $route['about'] = 'page/about';
