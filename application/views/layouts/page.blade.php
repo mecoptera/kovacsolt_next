@@ -46,7 +46,9 @@
               {$user->name}
             </div>
           @endif
-
+          <k-cart-button data-count="{{ cartItemsCount() }}" data-cart-url="{{ base_url('cart') }}" data-area-endpoint="cart/menu_button">
+            <k-icon data-icon="cart" data-color="{{ isIndexPage() ? 'white' : 'text' }}" data-size="8"></k-icon>
+          </k-cart-button>
         </div>
       </nav>
     </header>

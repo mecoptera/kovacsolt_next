@@ -13,6 +13,7 @@ class Migration_Create_cart_products extends CI_Migration {
       'unique_id' => array(
         'type' => 'VARCHAR',
         'constraint' => '32',
+        'unique' => true,
       ),
       'cart_id' => array(
         'type' => 'INT',

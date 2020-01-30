@@ -13,7 +13,7 @@ class Migration_Create_users extends CI_Migration {
       'email' => array(
         'type' => 'VARCHAR',
         'constraint' => '128',
-        'unique' => TRUE,
+        'unique' => true,
       ),
       'email_verified_at' => array(
         'type' => 'TIMESTAMP',

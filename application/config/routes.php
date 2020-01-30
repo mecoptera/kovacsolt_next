@@ -23,3 +23,5 @@ $route['privacy'] = 'page/privacy';
 $route['about'] = 'page/about';
 $route['product/(:num)'] = 'product/view/$1';
 $route['planner/variant/(.+)'] = 'planner/variant/$1';
+$route['cart'] = 'cart_controller/index';
+$route['cart(.+)'] = 'cart_controller$1';

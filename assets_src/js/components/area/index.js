@@ -7,12 +7,11 @@ export default class KArea extends Bamboo {
   }
 
   static get observedAttributes() {
-    return ['data-name', 'data-endpoint'];
+    return ['data-endpoint'];
   }
 
   static get boundProperties() {
     return [
-      { name: 'dataName', as: 'name' },
       { name: 'dataEndpoint', as: 'endpoint' }
     ];
   }
@@ -33,9 +32,12 @@ export default class KArea extends Bamboo {
   }
 
   _startAreaLoading() {
-    const name = this._state.get('name');
     const endpoint = this._state.get('endpoint');
 
-    axios.get(`${endpoint}/${name}`).then(response => this._templater.getContainer('area').innerHTML = response.data.content);
+    axios({
+      method: 'get',
+      url: endpoint,
+      baseURL: window.kovacsolt.baseUrl
+    }).then(response => this._templater.getContainer('area').innerHTML = response.data.content);
   }
 }

@@ -8,7 +8,7 @@
     display: none;
     min-width: 300px;
     position: absolute;
-    right: 4px;
+    right: 0;
     transform: translateY(100%);
     z-index: 2;
 
@@ -23,16 +23,14 @@
       content: '';
       filter: drop-shadow(0 0 4px rgba(var(--color-secondary-rgb), .1));
       position: absolute;
-      right: 4px;
-      top: -12px;
+      right: 8px;
+      top: -8px;
     }
   }
 
   &__panel {
     background: #fff;
     cursor: default;
-    outline: 2px solid #fff;
-    outline-offset: 2px;
     padding: 12px;
     position: relative;
   }

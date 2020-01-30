@@ -36,7 +36,7 @@ export default class KCartButton extends Bamboo {
       },
       {
         name: 'popup',
-        markup: html => html`<div class="q-cart-button__panel"><k-area data-endpoint="${this._state.get('areaEndpoint')}" data-name="cartButton"></k-area></div>`,
+        markup: html => html`<div class="q-cart-button__panel"><k-area data-endpoint="${this._state.get('areaEndpoint')}"></k-area></div>`,
         container: this._templater.parseHTML('<div class="q-cart-button__popup"></div>')
       }
     ];

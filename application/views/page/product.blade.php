@@ -1,3 +1,5 @@
+<?php $this->session->set_userdata('referred_from', current_url()); ?>
+
 @extends('layouts.page')
 
 @section('title', $product->name)
@@ -28,7 +30,9 @@
             <div class="u-mb-12">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A esse, tempore, cum voluptate laboriosam odio id ab quasi voluptas velit eius possimus nesciunt. Corporis commodi natus nam velit delectus harum.</div>
           @endif
 
-          <form method="post" action="{{ base_url('cart/add/' . $product->id) }}">
+          <form method="post" action="{{ base_url('cart/add') }}">
+            <input type="hidden" name="product_id" value="{{ $product->id }}">
+
             <div class="u-mb-2 u-uppercase u-font-bold">Méret</div>
 
             <k-radiobox data-name="extra_data[size]" data-value="xs" data-label="XS"></k-radiobox>
