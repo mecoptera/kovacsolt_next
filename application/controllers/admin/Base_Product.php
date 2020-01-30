@@ -15,11 +15,11 @@ class Base_Product extends MY_Controller {
   }
 
   public function index() {
-    $this->slice->view('panel/baseproducts', [ 'baseProducts' => $this->baseProductModel->getAll() ]);
+    $this->slice->view('panel/baseproducts', [ 'baseProducts' => $this->baseProductModel->_getAll() ]);
   }
 
   public function createPost() {
-    $this->baseProductModel->insert();
+    $this->baseProductModel->_insert();
 
     redirect('panel/base_product');
   }
@@ -31,16 +31,16 @@ class Base_Product extends MY_Controller {
     $this->load->model('base_product_zone_model', 'baseProductZoneModel');
 
     $this->slice->view('panel/baseproduct-edit', [
-      'baseProduct' => $this->baseProductModel->get($id),
+      'baseProduct' => $this->baseProductModel->_get($id),
       'baseProductViews' => $this->baseProductViewModel->getByBaseProductId($id),
       'baseProductColors' => $this->baseProductColorModel->getByBaseProductId($id),
-      'baseProductVariants' => $this->baseProductVariantModel->getByBaseProductId($id),
+      'baseProductVariants' => $this->baseProductVariantModel->getAllByBaseProductId($id),
       'baseProductZones' => $this->baseProductZoneModel->getByBaseProductId($id),
     ]);
   }
 
   public function editPost($id) {
-    $this->baseProductModel->update($id);
+    $this->baseProductModel->_update($id);
 
     redirect('panel/base_product/edit/' . $id);
   }

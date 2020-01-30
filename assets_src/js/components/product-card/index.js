@@ -53,18 +53,7 @@ export default class KProductCard extends Bamboo {
 
           const productImage = window.kovacsolt.baseUrl + 'media/variant/' + data.baseProductVariantId;
           const designImage = window.kovacsolt.baseUrl + 'media/design/' + data.productVariantDesignId;
-console.log(html`
-            <div class="c-product__product-layer">
-              <div class="c-product__image" style="${'background-image: url(' + productImage + ');'}"></div>
 
-              <div class="c-product__zone" style="${zoneStyle}">
-                <div class="c-product__design-full" style="${'background-image: url(' + designImage + ');'}"></div>
-                <img class="c-product__design" src="${designImage}" style="${designStyle}">
-              </div>
-            </div>
-
-            ${!hideInfo && data.discount ? html`<div class="c-product__discount" data-discount="${'-' + data.discount + '%'}"></div>` : html``}
-          `);
           return html`
             <div class="c-product__product-layer">
               <div class="c-product__image" style="${'background-image: url(' + productImage + ');'}"></div>

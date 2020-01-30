@@ -31,8 +31,8 @@
         <div class="q-menu__center">
           <k-menu class="q-menu__bar">
             <k-menu-item class="q-menu__link"><a class="q-menu__text" href="{{ base_url('') }}">Kezdőlap</a></k-menu-item>
-            <k-menu-item class="q-menu__link"><a class="q-menu__text" href="{{ base_url('products') }}">Termékek</a></k-menu-item>
-            <k-menu-item class="q-menu__link"><a class="q-menu__text" href="{{ base_url('page.planner.step1') }}">Tervező</a></k-menu-item>
+            <k-menu-item class="q-menu__link"><a class="q-menu__text" href="{{ base_url('product') }}">Termékek</a></k-menu-item>
+            <k-menu-item class="q-menu__link"><a class="q-menu__text" href="{{ base_url('planner/types') }}">Tervező</a></k-menu-item>
             <k-menu-item class="q-menu__link"><a class="q-menu__text" href="{{ base_url('contact') }}">Kapcsolat</a></k-menu-item>
             <k-menu-item class="q-menu__link"><a class="q-menu__text" href="{{ base_url('about') }}">Rólunk</a></k-menu-item>
           </k-menu>

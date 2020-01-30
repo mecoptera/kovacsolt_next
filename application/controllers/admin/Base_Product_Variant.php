@@ -47,4 +47,20 @@ class Base_Product_Variant extends MY_Controller {
 
     redirect('panel/base_product/edit/' . $baseProductId);
   }
+
+  public function default($id) {
+    $baseProductVariant = $this->baseProductVariantModel->get($id);
+
+    $this->baseProductVariantModel->default($id, $baseProductVariant->base_product_id);
+
+    redirect('panel/base_product/edit/' . $baseProductVariant->base_product_id);
+  }
+
+  public function delete($id) {
+    $baseProductVariant = $this->baseProductVariantModel->get($id);
+
+    $this->baseProductVariantModel->delete($id);
+
+    redirect('panel/base_product/edit/' . $baseProductVariant->base_product_id);
+  }
 }

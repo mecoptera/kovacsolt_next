@@ -201,6 +201,10 @@
                     <img src="{{ base_url('media/variant/' . $baseProductVariant->id) }}" style="width: 100px; height: 100px;">
                   </td>
                   <td>
+                    @if($baseProductVariant->default)
+                      <div><b>Default</b></div>
+                    @endif
+
                     <div>View: <b>{{ $baseProductVariant->base_product_view_name }}</b></div>
                     <div>Color: <b>{{ $baseProductVariant->base_product_color_name }}</b></div>
                     <div>Zone: <b>{{ $baseProductVariant->base_product_zone_id ? $baseProductVariant->base_product_zone_name : '---' }}</b></div>

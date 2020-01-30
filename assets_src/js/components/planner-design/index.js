@@ -67,7 +67,7 @@ export default class KPlannerDesign extends Bamboo {
       base_product_view_id: this._state.get('baseProduct.view'),
       base_product_color_id: this._state.get('baseProduct.color')
     }).then(response => {
-      this._state.set('baseProductVariantImage', response.data.baseProductVariantImage);
+      this._state.set('baseProductVariantImage', window.kovacsolt.baseUrl + 'media/variant/' + response.data.baseProductVariantId);
       this._state.set('zoneWidth', response.data.zoneWidth);
       this._state.set('zoneHeight', response.data.zoneHeight);
       this._state.set('zoneLeft', response.data.zoneLeft);

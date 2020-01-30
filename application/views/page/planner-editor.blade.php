@@ -4,30 +4,30 @@
 
 @section('content')
   <section class="l-container l-container--stretch u-px-0">
-    <form id="js-plan-form" method="post" action="{{ route('page.planner.save') }}" class="l-grid">
-      @csrf
-
-      <input type="hidden" name="base_product_variant_id" value="{{ $baseProduct->base_product_variant_default->id }}">
+    <form id="js-plan-form" method="post" action="{{ base_url('page.planner.save') }}" class="l-grid">
+      <input type="hidden" name="base_product_variant_id" value="{{ $baseProduct->base_product_variant_id }}">
 
       <div class="l-grid__col--8 u-relative">
         <k-planner-design
           id="js-planner-design"
           data-name="design"
-          data-zone-width="{{ $baseProduct->base_product_variant_default->base_product_zone->width }}"
-          data-zone-height="{{ $baseProduct->base_product_variant_default->base_product_zone->height }}"
-          data-zone-left="{{ $baseProduct->base_product_variant_default->base_product_zone->left }}"
-          data-zone-top="{{ $baseProduct->base_product_variant_default->base_product_zone->top }}"
-          data-base-product-id="{{ $baseProduct->base_product_variant_default->base_product_id }}"
-          data-base-product-view-id="{{ $baseProduct->base_product_variant_default->base_product_view_id }}"
-          data-base-product-color-id="{{ $baseProduct->base_product_variant_default->base_product_color_id }}"
-          data-endpoint="{{ route('page.planner.baseproductvariant') }}"
+          data-zone-width="{{ $baseProduct->base_product_zone_width }}"
+          data-zone-height="{{ $baseProduct->base_product_zone_height }}"
+          data-zone-left="{{ $baseProduct->base_product_zone_left }}"
+          data-zone-top="{{ $baseProduct->base_product_zone_top }}"
+          data-base-product-id="{{ $baseProduct->id }}"
+          data-base-product-view-id="{{ $baseProduct->base_product_variant_view_id }}"
+          data-base-product-color-id="{{ $baseProduct->base_product_variant_color_id }}"
+          data-endpoint="{{ base_url('page.planner.baseproductvariant') }}"
         ></k-planner-design>
       </div>
 
       <div class="l-grid__col--4 u-relative">
         <div class="q-planner-settings">
-          {{-- <k-tabs> --}}
-            {{-- <k-tab-content data-label="Tervezés"> --}}
+          @if(count($userProducts))
+          <k-tabs>
+            <k-tab-content data-label="Tervezés">
+          @endif
               <div class="u-p-8 u-hidden" id="js-planner-notification">
                 <k-notification data-status="error" data-name="design"></k-notification>
               </div>
@@ -39,7 +39,7 @@
                 <div class="u-ml-4 u-mb-4 u-uppercase u-font-bold">Nézet</div>
 
                 <div class="u-mb-12">
-                  <k-select class="u-py-0" id="js-select-view" data-name="view_id" data-value="{{ $baseProductViews[0]->id }}">
+                  <k-select class="u-py-0" id="js-select-view" data-name="view_id" data-value="{{ $baseProduct->base_product_variant_view_id }}">
                     @foreach ($baseProductViews as $baseProductView)
                       <k-select-option data-value="{{ $baseProductView->id }}">{{ $baseProductView->name }}</k-select-option>
                     @endforeach
@@ -55,7 +55,7 @@
                       <div>${content}</div>
                     </div>
                   </template>
-                  <k-select class="u-py-0" id="js-select-color" data-name="color_id" data-value="{{ $baseProductColors[0]->id }}">
+                  <k-select class="u-py-0" id="js-select-color" data-name="color_id" data-value="{{ $baseProduct->base_product_variant_color_id }}">
                     @foreach ($baseProductColors as $baseProductColor)
                       <k-select-option data-value="{{ $baseProductColor->id }}" data-extra="{{ $baseProductColor->value }}" data-template="#js-select-option-color">{{ $baseProductColor->name }}</k-select-option>
                     @endforeach
@@ -66,20 +66,20 @@
 
                 <div class="u-mb-12" id="js-planner-design-selector">
                   <div class="u-hidden">
-                    <input type="file" id="js-upload-input" name="fileInput" data-url="{{ route('page.planner.upload') }}">
+                    <input type="file" id="js-upload-input" name="fileInput" data-url="{{ base_url('page.planner.upload') }}">
                   </div>
 
                   <div class="u-flex u-justify-center">
-                    <button type="button" class="u-m-0 u-mr-8 c-button c-button--small js-design-modal-open" data-area="{{ route('page.planner.area') }}">Katalógus megnyitása</button>
+                    <button type="button" class="u-m-0 u-mr-8 c-button c-button--small js-design-modal-open" data-area="{{ base_url('page.planner.area') }}">Katalógus megnyitása</button>
 
-                    @if (Auth::guard('web')->check())
-                      <button type="button" class="u-m-0 c-button c-button--small c-button--outline js-upload-design" data-area="{{ route('page.planner.area') }}">Saját kép feltöltése</button>
+                    @if ($this->userModel->isLoggedIn())
+                      <button type="button" class="u-m-0 c-button c-button--small c-button--outline js-upload-design" data-area="{{ base_url('page.planner.area') }}">Saját kép feltöltése</button>
                     @else
                       <button type="button" disabled class="u-m-0 c-button c-button--small c-button--outline">Saját kép feltöltése</button>
                     @endif
                   </div>
 
-                  @if (!Auth::guard('web')->check())
+                  @if (!$this->userModel->isLoggedIn())
                     <p class="u-mx-4 u-mt-4 u-italic">Saját képet csak bejelentkezett felhasználó tud feltölteni</p>
                   @endif
                 </div>
@@ -96,9 +96,10 @@
                   <k-radiobox data-name="extra_data[size]" data-value="3xl" data-label="3XL"></k-radiobox>
                 </div>
               </div>
-            {{-- </k-tab-content> --}}
+          @if(count($userProducts))
+            </k-tab-content>
 
-{{--             <k-tab-content data-label="Elmentett tervek" data-disabled="{{ $userProducts ? 'true' : 'false' }}">
+            <k-tab-content data-label="Elmentett tervek" data-disabled="{{ $userProducts ? 'true' : 'false' }}">
               <div class="l-grid u-p-8 u-overflow-auto" style="max-height: 732px;">
                 @foreach($userProducts as $product)
                   <div class="l-grid__col--6">
@@ -106,11 +107,12 @@
                   </div>
                 @endforeach
               </div>
-            </k-tab-content> --}}
-          {{-- </k-tabs> --}}
+            </k-tab-content>
+          </k-tabs>
+          @endif
 
           <div class="u-mt-16 u-p-8 u-text-center">
-            <p class="u-mb-0">Nem adtunk elég teret a kreativitásodnak? <a href="{{ route('page.contact') }}">Vedd fel velünk a kapcsolatot</a> és segítünk megvalósítani!</p>
+            <p class="u-mb-0">Nem adtunk elég teret a kreativitásodnak? <a href="{{ base_url('page.contact') }}">Vedd fel velünk a kapcsolatot</a> és segítünk megvalósítani!</p>
           </div>
         </div>
       </div>
