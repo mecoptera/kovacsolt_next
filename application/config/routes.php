@@ -21,4 +21,4 @@ $route['media/([a-z]+)/(\d+)/([a-z]+)'] = 'media/index/$1/$2/$3';
 $route['contact'] = 'page/contact';
 $route['privacy'] = 'page/privacy';
 $route['about'] = 'page/about';
-$route['product/(:num)'] = 'product/index/$1';
+$route['product/(:num)'] = 'product/view/$1';
