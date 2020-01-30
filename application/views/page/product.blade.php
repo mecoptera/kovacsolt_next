@@ -17,7 +17,7 @@
           <div class="u-mb-12">
           @if ($product->discount)
             <div class="u-inline-block u-mr-4 u-text-xl u-font-bold u-line-through"><k-format data-value="{{ $product->price }}"></k-format> Ft</div>
-            <div class="u-inline-block u-text-color-brand u-text-2xl u-font-bold"><k-format data-value="{{ $product->discount_price }}"></k-format> Ft</div>
+            <div class="u-inline-block u-px-2 u-py-1 u-text-white u-text-2xl u-font-bold u-bg-color-brand"><k-format data-value="{{ $product->discount_price }}"></k-format> Ft</div>
           @else
             <div class="u-text-2xl u-font-bold"><k-format data-value="{{ $product->price }}" data-postfix="Ft"></k-format></div>
           @endif

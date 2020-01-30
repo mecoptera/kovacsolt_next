@@ -70,4 +70,18 @@ class Base_product_variant_model extends CI_Model {
         AND `base_product_variants`.`default` = TRUE
     ', [ $baseProductId ])->row();
   }
+
+  public function getByViewIdAndColorId($baseProductId, $baseProductViewId, $baseProductColorId) {
+    return $this->db->query('
+      SELECT `base_product_variants`.*, `base_product_zones`.`width` AS `base_product_zone_width`, `base_product_zones`.`height` AS `base_product_zone_height`, `base_product_zones`.`left` AS `base_product_zone_left`, `base_product_zones`.`top` AS `base_product_zone_top`
+      FROM `base_product_variants`
+      LEFT JOIN `base_product_views` ON `base_product_views`.`id` = `base_product_variants`.`base_product_view_id`
+      LEFT JOIN `base_product_colors` ON `base_product_colors`.`id` = `base_product_variants`.`base_product_color_id`
+      LEFT JOIN `base_product_zones` ON `base_product_zones`.`id` = `base_product_variants`.`base_product_zone_id`
+      WHERE
+        `base_product_variants`.`base_product_id` = ?
+        AND `base_product_variants`.`base_product_view_id` = ?
+        AND `base_product_variants`.`base_product_color_id` = ?
+    ', [ $baseProductId, $baseProductViewId, $baseProductColorId ])->row();
+  }
 }

@@ -62,16 +62,16 @@ export default class KPlannerDesign extends Bamboo {
   _loadBaseProductVariant() {
     if (!this._state.get('baseProduct.id') || !this._state.get('baseProduct.view') || !this._state.get('baseProduct.color') || !this._state.get('baseProduct.endpoint')) { return; }
 
-    axios.post(this._state.get('baseProduct.endpoint'), {
-      base_product_id: this._state.get('baseProduct.id'),
-      base_product_view_id: this._state.get('baseProduct.view'),
-      base_product_color_id: this._state.get('baseProduct.color')
+    axios({
+      method: 'get',
+      url: `planner/variant/${this._state.get('baseProduct.id')}/${this._state.get('baseProduct.view')}/${this._state.get('baseProduct.color')}`,
+      baseURL: window.kovacsolt.baseUrl
     }).then(response => {
-      this._state.set('baseProductVariantImage', window.kovacsolt.baseUrl + 'media/variant/' + response.data.baseProductVariantId);
-      this._state.set('zoneWidth', response.data.zoneWidth);
-      this._state.set('zoneHeight', response.data.zoneHeight);
-      this._state.set('zoneLeft', response.data.zoneLeft);
-      this._state.set('zoneTop', response.data.zoneTop);
+      this._state.set('baseProductVariantImage', 'media/variant/' + response.data.id);
+      this._state.set('zoneWidth', response.data.base_product_zone_width);
+      this._state.set('zoneHeight', response.data.base_product_zone_height);
+      this._state.set('zoneLeft', response.data.base_product_zone_left);
+      this._state.set('zoneTop', response.data.base_product_zone_top);
     });
   }
 }

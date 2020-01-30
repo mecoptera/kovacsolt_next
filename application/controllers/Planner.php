@@ -26,4 +26,10 @@ class Planner extends MY_Controller {
       'userProducts' => [],
     ]);
   }
+
+  public function variant($baseProductId, $baseProductViewId, $baseProductColorId) {
+    $baseProductVariant = $this->baseProductVariantModel->getByViewIdAndColorId($baseProductId, $baseProductViewId, $baseProductColorId);
+
+    return $this->output->json($baseProductVariant, 200);
+  }
 }

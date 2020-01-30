@@ -18,7 +18,7 @@
           data-base-product-id="{{ $baseProduct->id }}"
           data-base-product-view-id="{{ $baseProduct->base_product_variant_view_id }}"
           data-base-product-color-id="{{ $baseProduct->base_product_variant_color_id }}"
-          data-endpoint="{{ base_url('page.planner.baseproductvariant') }}"
+          data-endpoint="{{ base_url('planner/variant') }}"
         ></k-planner-design>
       </div>
 

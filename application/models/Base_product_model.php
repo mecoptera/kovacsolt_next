@@ -7,7 +7,7 @@ class Base_product_model extends CI_Model {
     return $this->db->query('
       SELECT
         `base_products`.`id`, `base_products`.`name`,
-        `base_product_variants`.`id` AS `base_product_variant_id`
+        `base_product_variants`.`id` AS `base_product_variant_id`,
         `base_product_zones`.`width` AS `base_product_zone_width`, `base_product_zones`.`height` AS `base_product_zone_height`, `base_product_zones`.`left` AS `base_product_zone_left`, `base_product_zones`.`top` AS `base_product_zone_top`,
         `base_products`.`name` AS `base_product_name`
       FROM `base_products`

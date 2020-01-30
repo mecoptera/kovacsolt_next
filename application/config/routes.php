@@ -22,3 +22,4 @@ $route['contact'] = 'page/contact';
 $route['privacy'] = 'page/privacy';
 $route['about'] = 'page/about';
 $route['product/(:num)'] = 'product/view/$1';
+$route['planner/variant/(.+)'] = 'planner/variant/$1';
