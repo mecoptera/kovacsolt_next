@@ -7,12 +7,6 @@ class Authentication extends MY_Controller {
     'Auth.isLoggedIn' => 'except::index|indexPost'
   ];
 
-  public function __construct() {
-    parent::__construct();
-
-    $this->load->library('slice');
-  }
-
   public function index() {
     if ($this->userModel->isLoggedIn()) {
       redirect('');

@@ -7,7 +7,6 @@ class Page extends MY_Controller {
     parent::__construct();
 
     $this->load->library('markdown');
-    $this->load->library('slice');
   }
 
   public function index() {

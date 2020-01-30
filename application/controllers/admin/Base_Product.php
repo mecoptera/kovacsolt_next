@@ -12,7 +12,6 @@ class Base_Product extends MY_Controller {
     $this->session->set_flashdata('login_success_redirect', 'panel/dashboard');
 
     $this->load->model('base_product_model', 'baseProductModel');
-    $this->load->library('slice');
   }
 
   public function index() {

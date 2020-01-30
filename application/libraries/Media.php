@@ -26,6 +26,8 @@ class Media {
       if (!mkdir($folder, 0777, true)) {
         die('Failed to create folders...');
       }
+    } else {
+      $this->deleteFiles($entityType, $entityId);
     }
 
     if (!$this->CI->upload->do_upload('image')) {
@@ -36,8 +38,12 @@ class Media {
   }
 
   public function delete($entityType, $entityId) {
+    $this->deleteFiles($entityType, $entityId);
+    rmdir($folder);
+  }
+
+  private function deleteFiles($entityType, $entityId) {
     $folder = FCPATH . 'uploads/' . $entityType . '/' . $entityId;
     array_map('unlink', glob($folder . '/*.*'));
-    rmdir($folder);
   }
 }

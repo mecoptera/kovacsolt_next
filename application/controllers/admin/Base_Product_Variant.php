@@ -12,7 +12,6 @@ class Base_Product_Variant extends MY_Controller {
     $this->session->set_flashdata('login_success_redirect', 'panel/dashboard');
 
     $this->load->model('base_product_variant_model', 'baseProductVariantModel');
-    $this->load->library('slice');
   }
 
   public function index($id) {
@@ -33,6 +32,9 @@ class Base_Product_Variant extends MY_Controller {
   public function indexPost($id) {
     $this->baseProductVariantModel->update($id);
     $baseProductVariant = $this->baseProductVariantModel->get($id);
+
+    $this->load->library('media');
+    $this->media->upload('variant', $id);
 
     redirect('panel/base_product/edit/' . $baseProductVariant->base_product_id);
   }

@@ -12,14 +12,13 @@ class Product extends MY_Controller {
     $this->session->set_flashdata('login_success_redirect', 'panel/dashboard');
 
     $this->load->model('product_model', 'productModel');
-    $this->load->library('slice');
   }
 
   public function index() {
     $this->load->model('base_product_model', 'baseProductModel');
 
     $this->slice->view('panel/products', [
-      'products' => $this->productModel->getAdmin(),
+      'products' => $this->productModel->_getAdmin(),
       'baseProducts' => $this->baseProductModel->getAll(),
     ]);
   }
@@ -30,10 +29,10 @@ class Product extends MY_Controller {
     $this->load->model('design_model', 'designModel');
     $this->load->model('product_variant_model', 'productVariantModel');
 
-    $product = $this->productModel->get($id);
+    $product = $this->productModel->_get($id);
 
     $this->slice->view('panel/product-edit', [
-      'product' => $this->productModel->get($id),
+      'product' => $this->productModel->_get($id),
       'baseProducts' => $this->baseProductModel->getAll(),
       'baseProductVariants' => $this->baseProductVariantModel->getByBaseProductId($product->base_product_id),
       'designs' => $this->designModel->getAdmin(),
@@ -42,13 +41,13 @@ class Product extends MY_Controller {
   }
 
   public function editPost($id) {
-    $this->productModel->update($id);
+    $this->productModel->_update($id);
 
     redirect('panel/product/edit/' . $id);
   }
 
   public function createPost() {
-    $this->productModel->insert(true);
+    $this->productModel->_insert(true);
 
     redirect('panel/product');
   }

@@ -12,7 +12,6 @@ class Product_Variant extends MY_Controller {
     $this->session->set_flashdata('login_success_redirect', 'panel/dashboard');
 
     $this->load->model('product_variant_model', 'productVariantModel');
-    $this->load->library('slice');
   }
 
   public function index($id) {
@@ -20,9 +19,9 @@ class Product_Variant extends MY_Controller {
   }
 
   public function indexPost($id) {
-    $this->productVariantModel->update($id);
-
     $productVariant = $this->productVariantModel->get($id);
+
+    $this->productVariantModel->update($id);
 
     redirect('panel/product/edit/' . $productVariant->product_id);
   }
@@ -32,5 +31,20 @@ class Product_Variant extends MY_Controller {
 
     redirect('panel/product/edit/' . $productId);
   }
-}
 
+  public function default($id) {
+    $productVariant = $this->productVariantModel->get($id);
+
+    $this->productVariantModel->default($id, $productVariant->product_id);
+
+    redirect('panel/product/edit/' . $productVariant->product_id);
+  }
+
+  public function delete($id) {
+    $productVariant = $this->productVariantModel->get($id);
+
+    $this->productVariantModel->delete($id);
+
+    redirect('panel/product/edit/' . $productVariant->product_id);
+  }
+}

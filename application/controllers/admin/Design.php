@@ -12,7 +12,6 @@ class Design extends MY_Controller {
     $this->session->set_flashdata('login_success_redirect', 'panel/dashboard');
 
     $this->load->model('design_model', 'designModel');
-    $this->load->library('slice');
   }
 
   public function index() {

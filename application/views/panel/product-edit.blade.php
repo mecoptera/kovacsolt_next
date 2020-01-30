@@ -118,12 +118,17 @@
                     </div>
                   </td>
                   <td>
+                    @if($productVariant->default)
+                      <div><b>Default</b></div>
+                    @endif
+
                     <div>View: <b>{{ $productVariant->base_product_view_name }}</b></div>
                     <div>Color: <b>{{ $productVariant->base_product_color_name }}</b></div>
                     <div>Design: <b>{{ $productVariant->design_name }}</b></div>
                   </td>
                   <td>
-                    <a href="{{ base_url('panel/product_variant/' . $productVariant->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
+                    <a class="mr-2" href="{{ base_url('panel/product_variant/default/' . $productVariant->id) }}"><i class="fas fa-fw fa-star"></i> Make default</a>
+                    <a class="mr-2" href="{{ base_url('panel/product_variant/' . $productVariant->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
                     <a href="{{ base_url('panel/product_variant/delete/' . $productVariant->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
                   </td>
                 </tr>

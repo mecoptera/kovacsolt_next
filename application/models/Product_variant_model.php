@@ -24,6 +24,15 @@ class Product_variant_model extends CI_Model {
     ]);
   }
 
+  public function default($id, $productId) {
+    $this->db->query('UPDATE `product_variants` SET `default` = false WHERE `product_id` = ?', [ $productId ]);
+    $this->db->query('UPDATE `product_variants` SET `default` = true WHERE `id` = ?', [ $id ]);
+  }
+
+  public function delete($id) {
+    $this->db->query('DELETE FROM `product_variants` WHERE `id` = ?', [ $id ]);
+  }
+
   public function get($id) {
     return $this->db->query('
       SELECT `product_variants`.*, `base_product_zones`.`width` AS `base_product_zone_width`, `base_product_zones`.`height` AS `base_product_zone_height`, `base_product_zones`.`left` AS `base_product_zone_left`, `base_product_zones`.`top` AS `base_product_zone_top`, `base_product_views`.`name` AS `base_product_view_name`, `base_product_colors`.`name` AS `base_product_color_name`, `designs`.`name` AS `design_name`

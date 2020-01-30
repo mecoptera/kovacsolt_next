@@ -10,8 +10,6 @@ class Panel extends MY_Controller {
 
     $this->session->set_flashdata('login_error_redirect', 'panel');
     $this->session->set_flashdata('login_success_redirect', 'panel/dashboard');
-
-    $this->load->library('slice');
   }
 
   public function index() {

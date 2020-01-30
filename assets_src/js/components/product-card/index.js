@@ -86,13 +86,13 @@ console.log(html`
         markup: html => {
           const data = this._state.get('detail');
           const hideInfo = this._state.get('hideInfo');
-          const priceClass = `c-product__price ${data.discount && 'c-product__price--discount'}`;
+          const priceClass = `c-product__price ${data.discount ? 'c-product__price--discount' : ''}`;
 
           return !hideInfo ? html`
             <div class="c-product__info">
               <div class="c-product__detail">
-                <div class="c-product__name">${data.name}</div>
                 <div class="c-product__type">${data.baseProductName}</div>
+                <div class="c-product__name">${data.name}</div>
               </div>
               <div class="${priceClass}">
                 <div class="c-product__price-original"><k-format data-value="${data.price}" data-postfix="Ft"></k-format></div>

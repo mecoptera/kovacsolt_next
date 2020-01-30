@@ -10,6 +10,7 @@ class MY_Controller extends CI_Controller {
     parent::__construct();
 
     $this->load->model('user_model', 'userModel');
+    $this->load->library('slice');
   }
 
   public function _remap($method, $params = []) {

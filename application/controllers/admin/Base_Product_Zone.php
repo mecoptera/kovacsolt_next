@@ -12,7 +12,6 @@ class Base_Product_Zone extends MY_Controller {
     $this->session->set_flashdata('login_success_redirect', 'panel/dashboard');
 
     $this->load->model('base_product_zone_model', 'baseProductZoneModel');
-    $this->load->library('slice');
   }
 
   public function index($id) {

@@ -29,6 +29,9 @@ class Migration_Create_products extends CI_Migration {
         'type' => 'VARCHAR',
         'constraint' => '255',
       ),
+      'description' => array(
+        'type' => 'TEXT',
+      ),
       'price' => array(
         'type' => 'INT',
         'unsigned' => true,
