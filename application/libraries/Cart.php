@@ -58,6 +58,16 @@ class Cart {
     return $this->items;
   }
 
+  public function getQuantity() {
+    $count = 0;
+
+    foreach ($this->items as $item) {
+      $count += $item['quantity'];
+    }
+
+    return $count;
+  }
+
   public function add($productId, $extraData) {
     $this->CI->load->model('product_model', 'productModel');
 
@@ -73,6 +83,27 @@ class Cart {
 
     $this->updateDatabase($uniqueId);
     $this->CI->session->set_userdata('cart', $this->items);
+  }
+
+  public function remove($uniqueId) {
+    $key = array_search($uniqueId, array_column($this->items, 'uniqueId'));
+    unset($this->items[$key]);
+
+    $this->updateDatabase($uniqueId);
+    $this->CI->session->set_userdata('cart', $this->items);
+  }
+
+  public function setQuantity($uniqueId, $quantity) {
+    $key = array_search($uniqueId, array_column($this->items, 'uniqueId'));
+
+    if (intval($quantity) === 0) {
+      $this->remove($uniqueId);
+    } else {
+      $this->items[$key]['quantity'] = $quantity;
+
+      $this->updateDatabase($uniqueId);
+      $this->CI->session->set_userdata('cart', $this->items);
+    }
   }
 
   private function updateDatabase($uniqueId) {

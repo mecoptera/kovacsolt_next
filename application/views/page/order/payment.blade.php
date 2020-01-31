@@ -1,4 +1,4 @@
-@extends('page.order')
+@extends('page.order._steps')
 
 @section('title', 'Rendelés leadása')
 

@@ -43,7 +43,7 @@
           </a>
           @if ($this->userModel->isLoggedIn())
             <div class="u-inline-block u-mr-8 {{ isIndexPage() ? 'u-text-white' : '' }}">
-              {$user->name}
+              {{ $this->session->userdata('user')->fullname }}
             </div>
           @endif
           <k-cart-button data-count="{{ cartItemsCount() }}" data-cart-url="{{ base_url('cart') }}" data-area-endpoint="cart/menu_button">

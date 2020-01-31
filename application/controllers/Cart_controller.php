@@ -14,6 +14,18 @@ class Cart_controller extends MY_Controller {
     $this->load->library('cart', [ 'singleton' => true ]);
   }
 
+  public function index() {
+    $this->slice->view('page/cart', [ 'cartItems' => $this->cart->get() ]);
+  }
+
+  public function indexPost() {
+    foreach($this->input->post('quantity') as $uniqueId => $quantity) {
+      $this->cart->setQuantity($uniqueId, $quantity);
+    }
+
+    return redirect('order');
+  }
+
   public function addPost() {
     $this->cart->add($this->input->post('product_id'), $this->input->post('extra_data'));
 
