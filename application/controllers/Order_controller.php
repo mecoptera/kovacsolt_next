@@ -16,10 +16,23 @@ class Order_controller extends MY_Controller {
 
   public function index() {
     if ($this->userModel->isLoggedIn()) {
-      redirect('order/billing');
+      return redirect('order/billing');
     } else {
-      redirect('order/login');
+      return redirect('order/login');
     }
+  }
+
+  public function login() {
+    if ($this->userModel->isLoggedIn()) {
+      return redirect('order/billing');
+    }
+
+    $this->session->set_userdata('login_error_redirect', 'order');
+    $this->session->set_userdata('login_success_redirect', 'order');
+
+    $this->load->helper('MY_form_helper');
+
+    $this->slice->view('page/order/profile', [ 'step' => 0, 'errors' => $this->session->flashdata('errors') ]);
   }
 
   public function billing() {
@@ -53,9 +66,9 @@ class Order_controller extends MY_Controller {
     if ($this->form_validation->run() === false) {
       $this->session->set_flashdata('validationErrors', $this->form_validation->error_array());
 
-      redirect(current_url());
+      return redirect(current_url());
     } else {
-      redirect('order/shipping');
+      return redirect('order/shipping');
     }
 
     // $validator = Validator::make($request->all(), [
@@ -85,9 +98,5 @@ class Order_controller extends MY_Controller {
 
   public function shipping() {
     $this->slice->view('page/order/billing', [ 'step' => 2, 'billingData' => $this->session->userdata('billingData') ]);
-  }
-
-  public function login() {
-    $this->slice->view('page/order/profile', []);
   }
 }

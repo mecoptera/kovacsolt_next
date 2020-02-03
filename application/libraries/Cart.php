@@ -15,34 +15,34 @@ class Cart {
     $this->CI->load->model('cart_model', 'cartModel');
     $this->CI->load->model('cart_product_model', 'cartProductModel');
 
+    $userCart = null;
+
     if ($this->CI->userModel->isLoggedIn()) {
       $this->userId = $this->CI->session->userdata('user')->id;
       $userCart = $this->CI->cartModel->getByUserId($this->userId);
+    }
 
-      if ($userCart !== null) {
-        $this->cartId = $userCart->id;
+    if ($userCart !== null) {
+      $this->cartId = $userCart->id;
+    } elseif ($this->userId !== null) {
+      $this->cartId = $this->CI->cartModel->create($this->userId);
+    }
+
+    if ($this->CI->session->userdata('cart') !== null) {
+      $this->items = $this->CI->session->userdata('cart');
+    } elseif ($this->userId !== null) {
+      $cartItems = $this->CI->cartProductModel->getAllByCartId($this->cartId);
+
+      foreach ($cartItems as $cartItem) {
+        $this->items[$cartItem->unique_id] = [
+          'uniqueId' => $cartItem->unique_id,
+          'product' => $cartItem->product,
+          'extraData' => json_decode($cartItem->extra_data, true),
+          'quantity' => $cartItem->quantity,
+        ];
       }
 
-      if ($this->userId !== null && $userCart === null) {
-        $this->cartId = $this->CI->cartModel->create($this->userId);
-      }
-
-      if ($this->CI->session->userdata('cart') !== null) {
-        $this->items = $this->CI->session->userdata('cart');
-      } elseif ($this->userId !== null) {
-        $cartItems = $this->CI->cartProductModel->getAllByCartId($this->cartId);
-
-        foreach ($cartItems as $cartItem) {
-          $this->items[$cartItem->unique_id] = [
-            'uniqueId' => $cartItem->unique_id,
-            'product' => $cartItem->product,
-            'extraData' => json_decode($cartItem->extra_data, true),
-            'quantity' => $cartItem->quantity,
-          ];
-        }
-
-        $this->CI->session->set_userdata('cart', $this->items);
-      }
+      $this->CI->session->set_userdata('cart', $this->items);
     }
   }
 
@@ -72,17 +72,22 @@ class Cart {
     $this->CI->load->model('product_model', 'productModel');
 
     $product = $this->CI->productModel->get($productId);
-    $uniqueId = md5(uniqid());
+    $existingCartItem = $this->getCartItemByIdAndData($productId, $extraData);
+    $uniqueId = $existingCartItem ? $existingCartItem['uniqueId'] : md5(uniqid());
 
-    $this->items[] = [
-      'uniqueId' => $uniqueId,
-      'product' => $product,
-      'extraData' => $extraData,
-      'quantity' => 1
-    ];
+    if ($existingCartItem) {
+      $this->setQuantity($existingCartItem['uniqueId'], $existingCartItem['quantity'] + 1);
+    } else {
+      $this->items[] = [
+        'uniqueId' => $uniqueId,
+        'product' => $product,
+        'extraData' => $extraData,
+        'quantity' => 1
+      ];
 
-    $this->updateDatabase($uniqueId);
-    $this->CI->session->set_userdata('cart', $this->items);
+      $this->updateDatabase($uniqueId);
+      $this->CI->session->set_userdata('cart', $this->items);
+    }
   }
 
   public function remove($uniqueId) {
@@ -116,5 +121,11 @@ class Cart {
     } else {
       $this->CI->cartProductModel->deleteByUniqueId($this->cartId, $uniqueId);
     }
+  }
+
+  private function getCartItemByIdAndData($productId, $extraData) {
+    return array_filter($this->items, function($value, $key) use ($productId, $extraData) {
+      return $value['product']->id === $productId && $value['extraData'] == $extraData;
+    }, ARRAY_FILTER_USE_BOTH)[0];
   }
 }

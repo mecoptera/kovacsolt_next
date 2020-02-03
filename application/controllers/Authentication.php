@@ -9,18 +9,18 @@ class Authentication extends MY_Controller {
 
   public function index() {
     if ($this->userModel->isLoggedIn()) {
-      redirect('');
+      return redirect('');
     }
 
-    $this->session->set_flashdata('login_error_redirect', 'authentication');
-    $this->session->set_flashdata('login_success_redirect', '');
+    $this->session->set_userdata('login_error_redirect', 'authentication');
+    $this->session->set_userdata('login_success_redirect', '');
 
     return $this->slice->view('login');
   }
 
-  protected function indexPost(...$params) {
-    $redirectError = $this->session->flashdata('login_error_redirect') ? $this->session->flashdata('login_error_redirect') : 'authentication';
-    $redirectSuccess = $this->session->flashdata('login_success_redirect') ? $this->session->flashdata('login_success_redirect') : '';
+  protected function indexPost() {
+    $redirectError = $this->session->userdata('login_error_redirect') ? $this->session->userdata('login_error_redirect') : 'authentication';
+    $redirectSuccess = $this->session->userdata('login_success_redirect') ? $this->session->userdata('login_success_redirect') : '';
 
     $user = $this->userModel->getByEmail($this->input->post('email'));
 
