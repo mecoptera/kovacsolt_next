@@ -9,9 +9,9 @@
             </td>
             <td class="c-table__cell">{{ $cartItem['product']->name }}</td>
             <td class="c-table__cell">
-              <div>
+              <div class="u-flex u-items-center">
                 <span class="{{ $cartItem['product']->discount ? 'u-line-through u-text-xs' : 'u-font-bold' }}"><k-format data-value="{{ $cartItem['product']->price }}" data-postfix="Ft"></k-format></span>
-                {{ $cartItem['product']->discount ? '<div class="u-inline-block u-px-2 u-py-1 u-text-white u-font-bold u-bg-color-brand"><k-format data-value="' . $cartItem['product']->discount_price . '" data-postfix="Ft"></k-format></div>' : '' }}
+                {{ $cartItem['product']->discount ? '<div class="u-inline-block u-ml-2 u-px-2 u-py-1 u-text-white u-font-bold u-bg-color-brand"><k-format data-value="' . $cartItem['product']->discount_price . '" data-postfix="Ft"></k-format></div>' : '' }}
               </div>
             </td>
             <td class="c-table__cell">{{ $cartItem['quantity'] }}db</td>

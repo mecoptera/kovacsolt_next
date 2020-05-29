@@ -49,7 +49,7 @@ export default class KProductCard extends Bamboo {
           const designStyle = this._state.get('hover') ? '' : `width: ${data.productVariantDesignWidth}%; left: ${data.productVariantDesignLeft}%; top: ${data.productVariantDesignTop}%;`;
 
           this.classList.toggle('c-product--hover', !!this._state.get('hover'));
-          this.classList.toggle('c-product--hide-info', hideInfo);
+          this.classList.toggle('c-product--hide-info', !!hideInfo);
 
           const productImage = window.kovacsolt.baseUrl + 'media/variant/' + data.baseProductVariantId;
           const designImage = window.kovacsolt.baseUrl + 'media/design/' + data.productVariantDesignId;
@@ -85,7 +85,7 @@ export default class KProductCard extends Bamboo {
               </div>
               <div class="${priceClass}">
                 <div class="c-product__price-original"><k-format data-value="${data.price}" data-postfix="Ft"></k-format></div>
-                ${data.discount ? html`<k-format data-value="${data.discountPrice}" data-postfix="Ft"></k-format>` : html``}
+                ${data.discount ? html`<div class="c-product__price-discount"><k-format data-value="${data.discountPrice}" data-postfix="Ft"></k-format></div>` : html``}
               </div>
             </div>
 
@@ -99,7 +99,7 @@ export default class KProductCard extends Bamboo {
             </div>` : html``}
           ` : html``;
         },
-        container: this._templater.parseHTML('<div></div>'),
+        container: this._templater.parseHTML('<div class="c-product__info-container"></div>'),
         autoAppend: true
       }
     ];

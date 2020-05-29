@@ -31,14 +31,14 @@
         <div class="q-menu__center">
           <k-menu class="q-menu__bar">
             <k-menu-item class="q-menu__link"><a class="q-menu__text" href="{{ base_url('') }}">Kezdőlap</a></k-menu-item>
-            <k-menu-item class="q-menu__link"><a class="q-menu__text" href="{{ base_url('product') }}">Termékek</a></k-menu-item>
+            <k-menu-item class="q-menu__link"><a class="q-menu__text" href="{{ base_url('products/0') }}">Termékek</a></k-menu-item>
             <k-menu-item class="q-menu__link"><a class="q-menu__text" href="{{ base_url('planner/types') }}">Tervező</a></k-menu-item>
             <k-menu-item class="q-menu__link"><a class="q-menu__text" href="{{ base_url('contact') }}">Kapcsolat</a></k-menu-item>
             <k-menu-item class="q-menu__link"><a class="q-menu__text" href="{{ base_url('about') }}">Rólunk</a></k-menu-item>
           </k-menu>
         </div>
         <div class="q-menu__right">
-          <a href="{{ base_url('user.profile') }}" class="u-mr-4">
+          <a href="{{ base_url('login') }}" class="u-mr-4">
             <k-icon data-icon="person" data-color="{{ isIndexPage() ? 'white' : 'text' }}" data-size="8"></k-icon>
           </a>
           @if ($this->userModel->isLoggedIn())
@@ -63,23 +63,23 @@
           <div class="q-footer__category">
             <b class="q-footer__title">OLDALTÉRKÉP</b>
             <ul class="q-footer__list">
-              <li><a class="q-footer__link" href="{{ base_url('/') }}">Kezdőlap</a></li>
-              <li><a class="q-footer__link" href="{{ base_url('/references') }}">Referenciák</a></li>
-              <li><a class="q-footer__link" href="{{ base_url('/about') }}">Rólunk</a></li>
-              <li><a class="q-footer__link" href="{{ base_url('/contact') }}">Kapcsolat</a></li>
+              <li><a class="c-link q-footer__link" href="{{ base_url('/') }}">Kezdőlap</a></li>
+              <li><a class="c-link q-footer__link" href="{{ base_url('/references') }}">Referenciák</a></li>
+              <li><a class="c-link q-footer__link" href="{{ base_url('/about') }}">Rólunk</a></li>
+              <li><a class="c-link q-footer__link" href="{{ base_url('/contact') }}">Kapcsolat</a></li>
             </ul>
           </div>
           <div class="q-footer__category">
             <b class="q-footer__title">ADATVÉDELEM</b>
             <ul class="q-footer__list">
-              <li><a class="q-footer__link" href="{{ base_url('/privacy') }}">Adatvédelmi Nyilatkozat</a></li>
+              <li><a class="c-link q-footer__link" href="{{ base_url('/privacy') }}">Adatvédelmi Nyilatkozat</a></li>
             </ul>
           </div>
           <div class="q-footer__category">
             <b class="q-footer__title">ELÉRHETŐSÉGEK</b>
             <ul class="q-footer__list">
-              <li><a class="q-footer__link" href="mailto:hello@kovacsoltpolo.hu">hello@kovacsoltpolo.hu</a></li>
-              <li><a class="q-footer__link" href="tel:+36 12 345 6789">+36 12 345 6789</a></li>
+              <li><a class="c-link q-footer__link" href="mailto:hello@kovacsoltpolo.hu">hello@kovacsoltpolo.hu</a></li>
+              <li><a class="c-link q-footer__link" href="tel:+36 12 345 6789">+36 12 345 6789</a></li>
             </ul>
           </div>
         </div>

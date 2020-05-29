@@ -18,6 +18,8 @@ class Order_controller extends MY_Controller {
     if ($this->userModel->isLoggedIn()) {
       return redirect('order/billing');
     } else {
+      $this->session->set_flashdata('errors', $this->session->flashdata('errors'));
+      $this->session->set_flashdata('old', $this->session->flashdata('old'));
       return redirect('order/login');
     }
   }
@@ -31,12 +33,11 @@ class Order_controller extends MY_Controller {
     $this->session->set_userdata('login_success_redirect', 'order');
 
     $this->load->helper('MY_form_helper');
-
-    $this->slice->view('page/order/profile', [ 'step' => 0, 'errors' => $this->session->flashdata('errors') ]);
+    $this->slice->view('page.order.profile', ['step' => 0, 'errors' => $this->session->flashdata('errors')]);
   }
 
   public function billing() {
-    $this->slice->view('page/order/billing', [
+    $this->slice->view('page.order.billing', [
       'step' => 1,
       'billingData' => $this->session->userdata('order.billingData'),
       'errors' => $this->session->flashdata('validationErrors'),
@@ -49,7 +50,7 @@ class Order_controller extends MY_Controller {
     $this->form_validation->set_error_delimiters('', '');
 
     $this->form_validation->set_rules('name', null, 'required', [ 'required' => 'Kötelező kitölteni' ]);
-    $this->form_validation->set_rules('zip', null, 'required|is_natural|max_length', [
+    $this->form_validation->set_rules('zip', null, 'required|is_natural|max_length[4]', [
       'required' => 'Kötelező kitölteni',
       'is_natural' => 'Csak számokat tartalmazhat',
       'max_length' => 'Maximum 4 számjegy',
@@ -70,30 +71,6 @@ class Order_controller extends MY_Controller {
     } else {
       return redirect('order/shipping');
     }
-
-    // $validator = Validator::make($request->all(), [
-    //   'name' => 'required',
-    //   'zip' => 'required|digits:4',
-    //   'city' => 'required',
-    //   'address' => 'required',
-    //   'email' => 'required|email',
-    // ], [
-    //   'name.required' => 'Kötelező kitölteni',
-    //   'zip.required' => 'Kötelező kitölteni',
-    //   'zip.digits' => 'Maximum 4 számjegy',
-    //   'city.required' => 'Kötelező kitölteni',
-    //   'address.required' => 'Kötelező kitölteni',
-    //   'email.required' => 'Kötelező kitölteni',
-    //   'email.email' => 'Nem megfelelő formátum'
-    // ]);
-
-    // $request->session()->put('billingData', $request->all());
-
-    // if ($validator->fails()) {
-    //   return redirect()->back()->withErrors($validator);
-    // }
-
-    // return redirect(route('order.shipping'));
   }
 
   public function shipping() {

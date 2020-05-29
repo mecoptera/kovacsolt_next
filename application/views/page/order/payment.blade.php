@@ -9,8 +9,6 @@
 
       <div class="l-grid">
         <form class="l-form l-grid__col--6 l-grid__col--offset-3 u-flex u-flex-col" method="post" action="{{ route('order.payment') }}">
-          @csrf
-
           <k-select
             data-name="payment_method"
             data-label="Fizetési mód"

@@ -18,9 +18,13 @@ $route['panel/(.+)'] = 'admin/$1';
 $route['media/([a-z]+)/(\d+)'] = 'media/index/$1/$2';
 $route['media/([a-z]+)/(\d+)/([a-z]+)'] = 'media/index/$1/$2/$3';
 
+$route['login'] = 'authentication/index';
+$route['registration'] = 'authentication/registration';
+
 $route['contact'] = 'page/contact';
 $route['privacy'] = 'page/privacy';
 $route['about'] = 'page/about';
+$route['products/(:num)'] = 'product/index/$1';
 $route['product/(:num)'] = 'product/view/$1';
 $route['planner/variant/(.+)'] = 'planner/variant/$1';
 $route['cart'] = 'cart_controller/index';

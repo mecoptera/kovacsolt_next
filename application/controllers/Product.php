@@ -9,7 +9,7 @@ class Product extends MY_Controller {
     $this->load->model('product_model', 'productModel');
   }
 
-  public function index() {
+  public function index($categoryId) {
     $this->slice->view('page/products', [ 'products' => $this->productModel->getAll() ]);
   }
 

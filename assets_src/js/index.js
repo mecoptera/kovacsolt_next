@@ -190,7 +190,7 @@ customElements.define('k-format', KFormat);
           if (data.validation) {
             Object.keys(data.validation).forEach(key => {
               const errorElement = formElement.querySelector(`.q-planner-settings [data-name="${key}"]`);
-              errorElement.dataMessage = data.validation[key][0];
+              errorElement.dataMessage = data.validation[key];
 
               document.querySelector('#js-planner-notification').classList.remove('u-hidden');
             });

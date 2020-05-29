@@ -124,8 +124,14 @@ class Cart {
   }
 
   private function getCartItemByIdAndData($productId, $extraData) {
-    return array_filter($this->items, function($value, $key) use ($productId, $extraData) {
+    if (count($this->items) === 0) {
+      return false;
+    }
+
+    $foundItem = array_filter($this->items, function($value, $key) use ($productId, $extraData) {
       return $value['product']->id === $productId && $value['extraData'] == $extraData;
-    }, ARRAY_FILTER_USE_BOTH)[0];
+    }, ARRAY_FILTER_USE_BOTH);
+
+    return count($foundItem) > 0 ? $foundItem[0] : false;
   }
 }

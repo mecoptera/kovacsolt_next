@@ -12,12 +12,17 @@
     display: flex;
     flex: 0 1 auto;
     height: 48px;
-    padding-left: 8px;
+    padding: 0 40px 0 8px;
+    position: relative;
     transition: border .2s, color .2s;
     width: 100%;
 
     &:focus {
       outline: 0;
+    }
+
+    &--inline {
+      border-bottom-width: 0;
     }
 
     .c-select--hover & {
@@ -54,6 +59,13 @@
       color: var(--color-form-element);
       font-weight: normal;
     }
+  }
+
+  &__indicator {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   &__label {
@@ -111,7 +123,7 @@
     cursor: pointer;
     display: flex;
     height: 48px;
-    padding-left: 24px;
+    padding: 0 24px;
     position: relative;
 
     @include hover {

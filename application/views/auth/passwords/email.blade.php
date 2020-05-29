@@ -9,7 +9,7 @@
         <h1 class="c-panel__title">Új jelszó küldése</h1>
 
         <div class="l-grid">
-          <form class="u-mx-auto l-grid__col--6" method="post" action="{{ route('password.email') }}">
+          <form class="u-mx-auto l-grid__col--6" method="post" action="{{ base_url('authentication/password') }}">
             @csrf
 
             @if (session('status'))

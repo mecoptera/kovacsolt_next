@@ -36,7 +36,7 @@
             <k-checkbox
               data-name="remember"
             >
-              <template data-label><div>Megértettem és elfogadom az <a href="{{ base_url('privacy') }}" target="_blank">Adatkezelési tájékoztató</a>ban leírtakat</div></template>
+              <template data-label><div>Megértettem és elfogadom az <a class="c-link" href="{{ base_url('privacy') }}" target="_blank">Adatkezelési tájékoztató</a>ban leírtakat</div></template>
             </k-checkbox>
 
             <div class="l-form__field u-align-center">

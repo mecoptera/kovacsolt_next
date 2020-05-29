@@ -27,12 +27,13 @@ export default class KSelect extends Bamboo {
 
   static get stateOptions() {
     return {
+      inline: { type: 'boolean' },
       disabled: { type: 'boolean' }
     };
   }
 
   static get observedAttributes() {
-    return ['data-name', 'data-value', 'data-placeholder', 'data-label', 'data-helper', 'data-disabled', 'data-error'];
+    return ['data-name', 'data-value', 'data-placeholder', 'data-label', 'data-helper', 'data-inline', 'data-disabled', 'data-error'];
   }
 
   static get boundProperties() {
@@ -42,6 +43,7 @@ export default class KSelect extends Bamboo {
       { name: 'dataPlaceholder', as: 'placeholder' },
       { name: 'dataLabel', as: 'label' },
       { name: 'dataHelper', as: 'helper' },
+      { name: 'dataInline', as: 'inline' },
       { name: 'dataDisabled', as: 'disabled' },
       { name: 'dataError', as: 'error' }
     ];
@@ -72,11 +74,15 @@ export default class KSelect extends Bamboo {
           this.classList.toggle('c-select--filled', this._state.get('value') !== null || false);
           this.classList.toggle('c-select--error', this._state.get('error') || false);
 
+          const openerClass = this._state.get('inline') ? 'c-select__opener c-select__opener--inline' : 'c-select__opener';
+          const indicatorIcon = this._state.get('isOpen') ? 'triangle-up' : 'triangle-down';
+
           return html`
             <input type="hidden" name="${this._state.get('name')}" value="${this._state.get('value')}">
             ${this._state.get('label') ? html`<label class="c-select__label" data-handler="label" onclick="${this}">${this._state.get('label')}</label>` : ''}
-            <div class="c-select__opener" tabindex="0" data-handler="opener" onmouseenter="${this}" onmouseleave="${this}" onfocus="${this}" onblur="${this}" onclick="${this}" onkeypress="${this}" onkeydown="${this}">
+            <div class="${openerClass}" tabindex="0" data-handler="opener" onmouseenter="${this}" onmouseleave="${this}" onfocus="${this}" onblur="${this}" onclick="${this}" onkeypress="${this}" onkeydown="${this}">
               <div class="u-pointer-events-none">${(this._state.get('markup') ? this._state.get('markup')() : false) || this._state.get('placeholder')}</div>
+              <k-icon data-icon="${indicatorIcon}" data-color="inherit" data-size="8" class="c-select__indicator"></k-icon>
             </div>
 
             ${!this._state.get('error') && this._state.get('helper') ? html`<div class="c-input__helper">${this._state.get('helper')}</div>` : ''}

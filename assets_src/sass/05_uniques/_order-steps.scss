@@ -2,7 +2,7 @@
   counter-reset: step;
   display: flex;
   justify-content: space-between;
-  margin: calc(var(--grid-gap) * 4) 0;
+  margin: 0 0 calc(var(--grid-gap) * 4);
 
   &__step {
     align-items: center;
@@ -11,7 +11,7 @@
     flex: 1 0 auto;
     flex-direction: column;
     flex-wrap: wrap;
-    font-size: 12px;
+    font-size: 14px;
     justify-content: flex-start;
     position: relative;
     text-align: center;

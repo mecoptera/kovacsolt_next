@@ -4,7 +4,7 @@
 
 @section('content')
   <section class="l-container l-container--stretch u-px-0">
-    <form id="js-plan-form" method="post" action="{{ base_url('page.planner.save') }}" class="l-grid">
+    <form id="js-plan-form" method="post" action="{{ base_url('planner/save') }}" class="l-grid">
       <input type="hidden" name="base_product_variant_id" value="{{ $baseProduct->base_product_variant_id }}">
 
       <div class="l-grid__col--8 u-relative">
@@ -32,7 +32,9 @@
                 <k-notification data-status="error" data-name="design"></k-notification>
               </div>
 
-              <div class="u-p-8"><button class="c-button"><span class="c-icon c-icon--small c-icon--white c-icon--cart"></span>Hozzáadás kosárhoz</button></div>
+              <div class="u-p-8">
+                <button class="c-button"><span class="c-icon c-icon--small c-icon--white c-icon--cart"></span>Hozzáadás kosárhoz</button>
+              </div>
 
               <div class="q-planner-settings__title">Beállítások</div>
               <div class="q-planner-settings__content u-p-8">
@@ -70,10 +72,10 @@
                   </div>
 
                   <div class="u-flex u-justify-center">
-                    <button type="button" class="u-m-0 u-mr-8 c-button c-button--small js-design-modal-open" data-area="{{ base_url('page.planner.area') }}">Katalógus megnyitása</button>
+                    <button type="button" class="u-m-0 u-mr-8 c-button c-button--small js-design-modal-open" data-area="{{ base_url('planner/designs') }}">Katalógus megnyitása</button>
 
                     @if ($this->userModel->isLoggedIn())
-                      <button type="button" class="u-m-0 c-button c-button--small c-button--outline js-upload-design" data-area="{{ base_url('page.planner.area') }}">Saját kép feltöltése</button>
+                      <button type="button" class="u-m-0 c-button c-button--small c-button--outline js-upload-design" data-area="{{ base_url('planner/designs') }}">Saját kép feltöltése</button>
                     @else
                       <button type="button" disabled class="u-m-0 c-button c-button--small c-button--outline">Saját kép feltöltése</button>
                     @endif

@@ -5,13 +5,16 @@
   width: 100%;
 
   &__field {
-    height: 48px;
+    align-items: center;
+    display: flex;
+    position: relative;
   }
 
   &__label {
     align-items: center;
     cursor: pointer;
     display: flex;
+    min-height: 48px;
     position: relative;
     user-select: none;
 

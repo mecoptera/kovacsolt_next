@@ -59,6 +59,7 @@
 
   &__text {
     color: var(--color-text-body);
+    font-size: 18px;
     text-decoration: none;
 
     @include hover {

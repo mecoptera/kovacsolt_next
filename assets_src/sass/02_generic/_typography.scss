@@ -54,12 +54,11 @@ p {
 }
 
 a {
-  color: var(--color-primary);
-  text-decoration: underline;
-  transition: color .2s;
+  color: var(--color-text-body);
+  text-decoration: none;
 
   @include hover {
-    color: var(--color-primary-dark);
+    color: var(--color-text-body);
   }
 }
 

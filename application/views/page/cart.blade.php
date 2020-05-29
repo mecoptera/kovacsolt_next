@@ -29,18 +29,18 @@
                       <td class="c-table__cell c-table__cell--large">
                         <span class="u-font-bold u-uppercase">{{ $cartItem['product']->name }}</span>
 
-                        <div class="u-mt-4 u-pt-4 u-border-t u-border-color-form u-text-sm">
+                        <div class="u-mt-2 u-pt-2 u-border-t u-border-color-form u-text-sm">
                           @if (isset($cartItem['extraData']['size']))
                             <div>Méret: <b>{{ strtoupper($cartItem['extraData']['size']) }}</b></div>
                           @endif
                         </div>
                       </td>
                       <td class="c-table__cell c-table__cell--medium">
-                        <div>
+                        <div class="u-flex u-items-center">
                           <span class="{{ $cartItem['product']->discount ? 'u-line-through u-text-xs' : 'u-font-bold' }}">
                             <k-format data-value="{{ $cartItem['product']->price }}"></k-format> Ft
                           </span>
-                          {{ $cartItem['product']->discount ? '<div class="u-font-bold u-text-color-brand"><k-format data-value="' . $cartItem['product']->discount_price . '"></k-format> Ft</div>' : '' }}
+                          {{ $cartItem['product']->discount ? '<div class="u-inline-block u-ml-2 u-px-2 u-py-1 u-text-white u-font-bold u-bg-color-brand"><k-format data-value="' . $cartItem['product']->discount_price . '"></k-format> Ft</div>' : '' }}
                         </div>
                       </td>
                       <td class="c-table__cell">
@@ -52,16 +52,15 @@
               </table>
 
               <div class="l-form__field u-text-right">
-                <div class="l-grid u-p-4 u-bg-color-background-primary">
-                  <div class="l-grid__col--2 l-grid__col--offset-8">Összesen:</div>
-                  <div class="l-grid__col--2"><b><k-format  id="js-price"></k-format> Ft</b></div>
+                <div class="u-p-4 u-bg-color-background-primary">
+                  Összesen: <b><k-format  id="js-price"></k-format> Ft</b>
                 </div>
               </div>
             </div>
           </div>
 
           <div class="l-form__field u-text-center">
-            <a href="{{ base_url('product') }}" class="c-button c-button--outline u-mr-8">Vásárlás folytatása</a>
+            <a href="{{ base_url('products/0') }}" class="c-button c-button--outline u-mr-8">Vásárlás folytatása</a>
             <button class="c-button">Tovább a pénztárhoz</button>
           </div>
         </form>

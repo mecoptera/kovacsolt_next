@@ -172,21 +172,6 @@
 
   &__error {
     color: var(--color-primary);
-    padding-left: 32px;
-    position: relative;
-
-    &:before {
-      background: url('../images/icons/error.svg');
-      background-position: center;
-      background-size: cover;
-      content: '';
-      display: inline-block;
-      height: 16px;
-      left: 8px;
-      position: absolute;
-      top: -2px;
-      width: 16px;
-    }
   }
 }
 

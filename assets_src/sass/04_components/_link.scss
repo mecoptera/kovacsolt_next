@@ -1,0 +1,9 @@
+.c-link {
+  color: var(--color-primary);
+  text-decoration: underline;
+  transition: color .2s;
+
+  @include hover {
+    color: var(--color-primary-dark);
+  }
+}

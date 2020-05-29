@@ -7,7 +7,7 @@
         <h1 class="c-panel__title">Regisztráció</h1>
 
         <div class="l-grid">
-          <form class="u-mx-auto l-grid__col--6" method="post" action="{{ route('user.register') }}">
+          <form class="u-mx-auto l-grid__col--6" method="post" action="{{ base_url('registration') }}">
             @csrf
 
             <k-input
@@ -45,7 +45,7 @@
             </k-input>
 
             <k-checkbox data-name="remember">
-              <template data-label>Megértettem és elfogadom az&nbsp;<a href="{{ route('page.privacy') }}" target="_blank">Adatkezelési tájékoztatóban</a>&nbsp;leírtakat</template>
+              <template data-label>Megértettem és elfogadom az&nbsp;<a href="{{ base_url('privacy') }}" target="_blank">Adatkezelési tájékoztatóban</a>&nbsp;leírtakat</template>
             </k-checkbox>
 
             <div class="u-mt-8 u-text-center">
@@ -62,7 +62,7 @@
           <div class="q-login-helper__text">Rendelkezel már felhasználói fiókkal?</div>
 
           <div class="q-login-helper__action">
-            <a class="c-button c-button--primary" href="{{ route('user.login') }}">Bejelentkezés</a>
+            <a class="c-button c-button--primary" href="{{ base_url('login') }}">Bejelentkezés</a>
           </div>
         </div>
       </div>
