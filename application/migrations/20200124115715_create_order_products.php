@@ -21,6 +21,10 @@ class Migration_Create_order_products extends CI_Migration {
       'extra_data' => array(
         'type' => 'LONGTEXT',
       ),
+      'price' => array(
+        'type' => 'INT',
+        'unsigned' => true,
+      ),
       'quantity' => array(
         'type' => 'INT',
         'unsigned' => true,

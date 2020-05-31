@@ -21,8 +21,30 @@
               </tr>
             </thead>
             <tbody class="c-table__body">
-              @foreach($cart as $item)
-                @component('cart::components.product', [ 'item' => $item ]) @endcomponent
+              @foreach($cartItems as $cartItem)
+                <tr class="c-table__row js-product" data-price="{{ $cartItem['product']->discount ? $cartItem['product']->discount_price : $cartItem['product']->price }}">
+                  <td class="c-table__cell">
+                    <k-product-card class="u-w-48 u-h-48" data-detail="{{ htmlspecialchars(json_encode($cartItem['product']), ENT_QUOTES, 'UTF-8') }}" data-hide-info></k-product-card>
+                  </td>
+                  <td class="c-table__cell c-table__cell--large">
+                    <span class="u-font-bold u-uppercase">{{ $cartItem['product']->name }}</span>
+
+                    <div class="u-mt-2 u-pt-2 u-border-t u-border-color-form u-text-sm">
+                      @if (isset($cartItem['extraData']['size']))
+                        <div>Méret: <b>{{ strtoupper($cartItem['extraData']['size']) }}</b></div>
+                      @endif
+                    </div>
+                  </td>
+                  <td class="c-table__cell c-table__cell--medium">
+                    <div class="u-flex u-items-center">
+                      <span class="{{ $cartItem['product']->discount ? 'u-line-through u-text-xs' : 'u-font-bold' }}">
+                        <k-format data-value="{{ $cartItem['product']->price }}"></k-format> Ft
+                      </span>
+                      {{ $cartItem['product']->discount ? '<div class="u-inline-block u-ml-2 u-px-2 u-py-1 u-text-white u-font-bold u-bg-color-brand"><k-format data-value="' . $cartItem['product']->discount_price . '"></k-format> Ft</div>' : '' }}
+                    </div>
+                  </td>
+                  <td class="c-table__cell u-text-right">{{ $cartItem['quantity'] }}</td>
+                </tr>
               @endforeach
             </tbody>
           </table>
@@ -75,10 +97,10 @@
 
           <div class="l-grid">
             <div class="l-grid__col--6 u-p-3 u-text-right"><b>Átvételi mód:</b></div>
-            <div class="l-grid__col--6 u-p-3">{{ $shippingData['shipping_method_text'] }}</div>
+            <div class="l-grid__col--6 u-p-3">{{ $shippingMethodText }}</div>
 
             <div class="l-grid__col--6 u-p-3 u-text-right"><b>Fizetési mód:</b></div>
-            <div class="l-grid__col--6 u-p-3">{{ $paymentData['payment_method_text'] }}</div>
+            <div class="l-grid__col--6 u-p-3">{{ $paymentMethodText }}</div>
 
             <div class="l-grid__col--6 u-p-3 u-text-right"><b>Név:</b></div>
             <div class="l-grid__col--6 u-p-3">{{ $shippingData['name'] }}</div>
@@ -106,9 +128,7 @@
 
       <div class="l-grid">
         <div class="l-grid__col--6 l-grid__col--offset-3">
-          <form class="l-form" method="post" action="{{ route('order.finalize') }}">
-            @csrf
-
+          <form class="l-form" method="post" action="{{ base_url('order/finalize') }}">
             <k-textarea
               data-name="comment"
               data-label="Egyéb megjegyzés"

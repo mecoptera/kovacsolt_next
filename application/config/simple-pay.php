@@ -28,8 +28,8 @@
 
 return [
   //HUF
-  'HUF_MERCHANT' => "",            //merchant account ID (HUF)
-  'HUF_SECRET_KEY' => "",          //secret key for account ID (HUF)
+  'HUF_MERCHANT' => "PUBLICTESTHUF",            //merchant account ID (HUF)
+  'HUF_SECRET_KEY' => "FxDa5w314kLlNseq2sKuVwaqZshZT5d6",          //secret key for account ID (HUF)
 
   //EUR
   'EUR_MERCHANT' => "",            //merchant account ID (EUR)
@@ -42,7 +42,11 @@ return [
   'SANDBOX' => true,
 
   //common return URL
-  'URL' => 'http://' . env('APP_URL') . '/back.php',
+  'URL' => base_url(),
+  'URL_SUCCESS' => base_url() . 'order/success',
+  'URL_FAIL' => base_url() . 'order/error',
+  'URL_CANCEL' => base_url() . 'order/error',
+  'URL_TIMEOUT' => base_url() . 'order/error',
 
   //optional uniq URL for events
   /*

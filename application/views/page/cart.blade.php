@@ -53,7 +53,7 @@
 
               <div class="l-form__field u-text-right">
                 <div class="u-p-4 u-bg-color-background-primary">
-                  Összesen: <b><k-format  id="js-price"></k-format> Ft</b>
+                  Összesen: <b><k-format id="js-price"></k-format> Ft</b>
                 </div>
               </div>
             </div>

@@ -58,7 +58,7 @@ class Cart {
     return $this->items;
   }
 
-  public function getQuantity() {
+  public function quantity() {
     $count = 0;
 
     foreach ($this->items as $item) {
@@ -66,6 +66,16 @@ class Cart {
     }
 
     return $count;
+  }
+
+  public function price() {
+    $price = 0;
+
+    foreach ($this->items as $item) {
+      $price += $item['product']->price * (1 - $item['product']->discount / 100) * $item['quantity'];
+    }
+
+    return $price;
   }
 
   public function add($productId, $extraData) {
@@ -98,6 +108,12 @@ class Cart {
     $this->CI->session->set_userdata('cart', $this->items);
   }
 
+  public function empty() {
+    $this->items = [];
+    $this->emptyDatabase();
+    $this->CI->session->set_userdata('cart', $this->items);
+  }
+
   public function setQuantity($uniqueId, $quantity) {
     $key = array_search($uniqueId, array_column($this->items, 'uniqueId'));
 
@@ -121,6 +137,13 @@ class Cart {
     } else {
       $this->CI->cartProductModel->deleteByUniqueId($this->cartId, $uniqueId);
     }
+  }
+
+  private function emptyDatabase() {
+    if (!$this->userId) { return; }
+
+    $this->CI->cartProductModel->deleteByCartId($this->cartId);
+    $this->CI->cartModel->deleteById($this->cartId);
   }
 
   private function getCartItemByIdAndData($productId, $extraData) {

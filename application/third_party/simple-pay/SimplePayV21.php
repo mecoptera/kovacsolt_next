@@ -1,11 +1,7 @@
 <?php
 
-namespace Webacked\SimplePay;
-
-use Exception;
-
 /**
- *  Copyright (C) 2019 OTP Mobil Kft.
+ *  Copyright (C) 2020 OTP Mobil Kft.
  *
  *  PHP version 7
  *
@@ -25,7 +21,7 @@ use Exception;
  * @category  SDK
  * @package   SimplePayV2
  * @author    SimplePay IT Support <itsupport@otpmobil.com>
- * @copyright 2019 OTP Mobil Kft.
+ * @copyright 2020 OTP Mobil Kft.
  * @license   http://www.gnu.org/licenses/gpl-3.0.html  GNU GENERAL PUBLIC LICENSE (GPL V3.0)
  * @link      http://simplepartner.hu/online_fizetesi_szolgaltatas.html
  */
@@ -50,7 +46,7 @@ class Base
     public $config = [];
     protected $headers = [];
     protected $hashAlgo = 'sha384';
-    public $sdkVersion = 'SimplePay_PHP_SDK_2.0.8_190924';
+    public $sdkVersion = 'SimplePay_PHP_SDK_2.0.9_200130';
     protected $logSeparator = '|';
     protected $logContent = [];
     protected $debugMessage = [];
@@ -80,8 +76,10 @@ class Base
         $this->logContent['runMode'] = strtoupper($this->currentInterface);
         $ver = (float)phpversion();
         $this->logContent['PHP'] = $ver;
-        if ($ver < 7.0) {
-            $this->phpVersion = 5;
+        if (is_numeric($ver)) {
+            if ($ver < 7.0) {
+                $this->phpVersion = 5;
+            }
         }
     }
 
@@ -364,8 +362,13 @@ class Base
         }
 
         $this->config['logPath'] = 'log';
-        if ($this->config['SANDBOX']) {
+        if (isset($this->config['LOG_PATH'])) {
             $this->config['logPath'] = $this->config['LOG_PATH'];
+        }
+
+        $this->config['autoChallenge'] = false;
+        if (isset($this->config['AUTOCHALLENGE'])) {
+            $this->config['autoChallenge'] = $this->config['AUTOCHALLENGE'];
         }
     }
 
@@ -400,14 +403,14 @@ class Base
         $this->prepare();
         $transaction = [];
 
-        $this->logContent['callState2'] = 'RUN';
+        $this->logContent['callState2'] = 'REQUEST';
         $this->logContent['sendApiUrl'] = $this->config['apiUrl'];
         $this->logContent['sendContent'] = $this->content;
         $this->logContent['sendSignature'] = $this->config['computedHash'];
 
         $commRresult = $this->runCommunication($this->config['apiUrl'], $this->content, $this->headers);
 
-        $this->logContent['callState3'] = 'RESPONSE';
+        $this->logContent['callState3'] = 'RESULT';
 
         //call result
         $result = explode("\r\n", $commRresult);
@@ -647,7 +650,6 @@ class SimplePayIpn extends Base
 
         $this->logTransactionId = $this->ipnContent['transactionId'];
         $this->logOrderRef = $this->ipnContent['orderRef'];
-        $this->writeLog(['validationResult' => $this->validationResult]);
 
         foreach ($this->ipnContent as $contentKey => $contentValue) {
             $this->logContent[$contentKey] = $contentValue;
@@ -724,8 +726,7 @@ class SimplePayQuery extends Base
     protected $returnData = [];
     protected $transactionBase = [
         'salt' => '',
-        'merchant' => '',
-        'currency' => ''
+        'merchant' => ''
     ];
 
     /**
@@ -1118,10 +1119,6 @@ trait Logger
 
         if ($write) {
             $flat = $this->getFlatArray($log);
-            if (isset($flat['cardSecret'])) {
-                unset($flat['cardSecret']);
-            }
-
             $logText = '';
             foreach ($flat as $key => $value) {
                 $logText .= $this->logOrderRef . $this->logSeparator;
@@ -1129,14 +1126,46 @@ trait Logger
                 $logText .= $this->currentInterface . $this->logSeparator;
                 $logText .= $date . $this->logSeparator;
                 $logText .= $key . $this->logSeparator;
-                $logText .= $value . "\n";
+                $logText .= $this->contentFilter($key, $value) . "\n";
             }
-
             $this->logToFile($logFile, $logText);
             unset($log, $flat, $logText);
             return true;
         }
         return false;
+    }
+
+    /**
+     * Remove card data from log content
+     *
+     * @param string $key   Log data key
+     * @param string $value Log data value
+     *
+     * @return string  $logValue New log value
+     */
+    protected function contentFilter($key = '', $value = '')
+    {
+        $logValue = $value;
+        $filtered = '***';
+        if (in_array($key, ['content', 'sendContent'])) {
+            $contentData = $this->convertToArray(json_decode($value));
+            if (isset($contentData['cardData'])) {
+                foreach (array_keys($contentData['cardData']) as $dataKey) {
+                    $contentData['cardData'][$dataKey] = $filtered;
+                }
+            }
+            if (isset($contentData['cardSecret'])) {
+                $contentData['cardSecret'] = $filtered;
+            }
+            $logValue = json_encode($contentData);
+        }
+        if (strpos($key, 'cardData') !== false) {
+            $logValue = $filtered;
+        }
+        if ($key === 'cardSecret') {
+            $logValue = $filtered;
+        }
+        return $logValue;
     }
 
     /**
@@ -1161,3 +1190,37 @@ trait Logger
 
 }
 
+
+/**
+ * Strong Customer Authentication (SCA) -- 3DSecure
+ *
+ * @category SDK
+ * @package  SimplePayV21_SDK
+ * @author   SimplePay IT Support <itsupport@otpmobil.com>
+ * @license  http://www.gnu.org/licenses/gpl-3.0.html  GNU GENERAL PUBLIC LICENSE (GPL V3.0)
+ * @link     http://simplepartner.hu/online_fizetesi_szolgaltatas.html
+ */
+trait Sca
+{
+
+    /**
+     * StartChallenge
+     *
+     * @param array $v2Result Result of API call
+     *
+     * @return boolean        Success of redirection
+     */
+    public function challenge($v2Result = [])
+    {
+        if (isset($v2Result['redirectUrl'])) {
+            $this->returnData['paymentUrl'] = $v2Result['redirectUrl'];
+            $this->getHtmlForm();
+            $this->writeLog(['3DSCheckResult' => 'Card issuer bank wants to identify cardholder (challenge)', '3DSChallengeUrl' => $v2Result['redirectUrl']]);
+            print $this->returnData['form'];
+            return true;
+        }
+        $this->writeLog(['3DSCheckResult' => 'Card issuer bank wants to identify cardholder (challenge)', '3DSChallengeUrl_ERROR' => 'Missing redirect URL']);
+        return false;
+    }
+
+}

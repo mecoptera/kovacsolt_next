@@ -17,4 +17,8 @@ class Cart_model extends CI_Model {
 
     return $this->db->insert_id();
   }
+
+  public function deleteById($cartId) {
+    $this->db->query('DELETE FROM `carts` WHERE `id` = ?', [ $cartId ]);
+  }
 }

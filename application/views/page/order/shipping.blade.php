@@ -8,26 +8,27 @@
       <h1 class="c-panel__title">Szállítási adatok</h1>
 
       <div class="l-grid">
-        <form class="l-form l-grid__col--6 l-grid__col--offset-3 u-flex u-flex-col" method="post" action="{{ route('order.shipping') }}">
-          @csrf
-
+        <form class="l-form l-grid__col--6 l-grid__col--offset-3 u-flex u-flex-col" method="post" action="{{ base_url('order/shipping') }}">
+          <template id="js-select-option-shipping">
+              ${content} (<k-format data-value="${extra}" data-postfix="Ft"></k-format>)
+            </div>
+          </template>
           <k-select
             data-name="shipping_method"
             data-label="Átvétel módja"
             data-placeholder="Válassz átvételi módot"
             @if (isset($shippingData['shipping_method']))data-value="{{ $shippingData['shipping_method'] }}"@endif
           >
-            <k-select-option data-value="0">Személyes átvétel (Ingyenes)</k-select-option>
-            <k-select-option data-value="1">Postai átvétel (800 Ft)</k-select-option>
-            <k-select-option data-value="2">Házhozszállítás (1 200 Ft)</k-select-option>
-            <k-select-option data-value="3">Átvétel csomagponton (800 Ft)</k-select-option>
+          @foreach($shippingMethods as $shippingMethod)
+            <k-select-option data-value="{{ $shippingMethod['key'] }}" data-template="#js-select-option-shipping" data-extra="{{ $shippingMethod['price'] !== 0 ? $shippingMethod['price'] : 'Ingyenes' }}">{{ $shippingMethod['value'] }}</k-select-option>
+          @endforeach
           </k-select>
 
           <k-input
             data-name="name"
             data-label="Név"
             @if (isset($shippingData['name']))data-value="{{ $shippingData['name'] }}"@endif
-            @error('name')data-error="{{ $message }}"@enderror
+            @error('name')data-error="{{ $errors['name'] }}"@enderror
           ></k-input>
 
           <k-input
@@ -35,7 +36,7 @@
             data-label="Irányítószám"
             data-placeholder="Példa: 1123"
             @if (isset($shippingData['zip']))data-value="{{ $shippingData['zip'] }}"@endif
-            @error('zip')data-error="{{ $message }}"@enderror
+            @error('zip')data-error="{{ $errors['zip'] }}"@enderror
           ></k-input>
 
           <k-input
@@ -43,7 +44,7 @@
             data-label="Város"
             data-placeholder="Példa: Budapest"
             @if (isset($shippingData['city']))data-value="{{ $shippingData['city'] }}"@endif
-            @error('city')data-error="{{ $message }}"@enderror
+            @error('city')data-error="{{ $errors['city'] }}"@enderror
           ></k-input>
 
           <k-input
@@ -51,14 +52,14 @@
             data-label="Cím"
             data-placeholder="Példa: Ferenc tér 32. 4/10"
             @if (isset($shippingData['address']))data-value="{{ $shippingData['address'] }}"@endif
-            @error('address')data-error="{{ $message }}"@enderror
+            @error('address')data-error="{{ $errors['address'] }}"@enderror
           ></k-input>
 
           <k-input
             data-name="email"
             data-label="E-mail cím"
             @if (isset($shippingData['email']))data-value="{{ $shippingData['email'] }}"@endif
-            @error('email')data-error="{{ $message }}"@enderror
+            @error('email')data-error="{{ $errors['email'] }}"@enderror
           ></k-input>
 
           <k-input

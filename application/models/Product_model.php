@@ -29,12 +29,14 @@ class Product_model extends CI_Model {
         CAST(`products`.`price` * (100 - `products`.`discount`) / 100 AS UNSIGNED) AS `discount_price`,
         `base_product_variants`.`id` AS `base_product_variant_id`,
         `base_product_zones`.`width` AS `base_product_zone_width`, `base_product_zones`.`height` AS `base_product_zone_height`, `base_product_zones`.`left` AS `base_product_zone_left`, `base_product_zones`.`top` AS `base_product_zone_top`,
+        `base_product_colors`.`name` AS `base_product_color_name`,
         `product_variants`.`design_id` AS `product_variant_design_id`, `product_variants`.`design_width` AS `product_variant_design_width`, `product_variants`.`design_left` AS `product_variant_design_left`, `product_variants`.`design_top` AS `product_variant_design_top`,
         `base_products`.`name` AS `base_product_name`
       FROM `products`
       LEFT JOIN `product_variants` ON `product_variants`.`product_id` = `products`.`id`
       LEFT JOIN `base_product_variants` ON `base_product_variants`.`id` = `product_variants`.`base_product_variant_id`
       LEFT JOIN `base_product_zones` ON `base_product_zones`.`id` = `base_product_variants`.`base_product_zone_id`
+      LEFT JOIN `base_product_colors` ON `base_product_colors`.`id` = `base_product_variants`.`base_product_color_id`
       LEFT JOIN `base_products` ON `base_products`.`id` = `products`.`base_product_id`
       WHERE `products`.`id` = ?
         AND `product_variants`.`default` = TRUE

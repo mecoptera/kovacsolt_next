@@ -25,11 +25,11 @@
         <tbody>
           @foreach($orders as $order)
             <tr>
-              <td>{{ $order->status_label }}</td>
+              <td>{{ $order->status }}</td>
               <td>{{ $order->updated_at }}</td>
               <td>
-                <a href="{{ route('panel.orders.edit', $order->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
-                <a href="{{ route('panel.orders.delete', $order->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
+                <a href="{{ base_url('panel/order/edit/' . $order->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
+                <a href="{{ base_url('panel/order/delete/' . $order->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
               </td>
             </tr>
           @endforeach

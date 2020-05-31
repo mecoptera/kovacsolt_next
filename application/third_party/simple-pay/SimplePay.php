@@ -1,16 +1,13 @@
 <?php
 
-namespace Webacked\SimplePay;
-
-use Exception;
-use Illuminate\Support\Facades\Config;
-use Webacked\Cart\Facades\Cart;
-
 require_once 'SimplePayV21.php';
 
 class SimplePay {
-  function test($order) {
-    $config = Config::get('simple-pay');
+  protected static $CI;
+
+  public static function test($order, $cartItems, $price) {
+    self::$CI = &get_instance();
+    $config = require_once APPPATH . 'config/simple-pay.php';
 
     // new SimplePayStart instance
     $trx = new SimplePayStart;
@@ -19,16 +16,15 @@ class SimplePay {
 
     $billingData = json_decode($order->billing_data, true);
     $shippingData = json_decode($order->shipping_data, true);
-    $cart = Cart::get();
     $timeoutInSec = 600;
 
-    foreach ($cart as $item) {
+    foreach ($cartItems as $cartItem) {
       $trx->addItems(array(
-        'ref' => $item['product']->id,
-        'title' => $item['product']->name,
-        'description' => $item['product']->id,
-        'amount' => $item['quantity'],
-        'price' => $item['product']->discountPrice,
+        'ref' => $cartItem['product']->id,
+        'title' => $cartItem['product']->name,
+        'description' => $cartItem['product']->id,
+        'amount' => $cartItem['quantity'],
+        'price' => $cartItem['product']->price * (1 - $cartItem['product']->discount / 100),
         'tax' => 0
       ));
     }
@@ -37,7 +33,7 @@ class SimplePay {
 
     //add transaction data
     $trx->addData('currency', 'HUF');
-    $trx->addData('total', Cart::price());
+    $trx->addData('total', $price);
     $trx->addData('orderRef', $order->order_id);
     $trx->addData('customer', 'v2 START Tester');
     $trx->addData('customerEmail', $billingData['email']);

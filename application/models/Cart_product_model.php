@@ -29,4 +29,8 @@ class Cart_product_model extends CI_Model {
   public function deleteByUniqueId($uniqueId) {
     $this->db->query('DELETE FROM `cart_products` WHERE `unique_id` = ?', [ $uniqueId ]);
   }
+
+  public function deleteByCartId($cartId) {
+    $this->db->query('DELETE FROM `cart_products` WHERE `cart_id` = ?', [ $cartId ]);
+  }
 }

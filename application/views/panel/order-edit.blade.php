@@ -18,16 +18,16 @@
         <div class="card-body">
           <div><b>{{ $orderProduct->product->name }}</b></div>
 
-          <div style="position: relative; padding-bottom: 100%; width: 100%; background-position: center; background-repeat: no-repeat; background-size: contain; background-image: url('{{ url($orderProduct->product->product_variant_default->base_product_variant->getFirstMediaUrl('base_product_variant', 'thumb')) }}')">
-            <div style="position: absolute; width: {{ $orderProduct->product->product_variant_default->base_product_variant->base_product_zone->width }}%; height: {{ $orderProduct->product->product_variant_default->base_product_variant->base_product_zone->height }}%; left: {{ $orderProduct->product->product_variant_default->base_product_variant->base_product_zone->left }}%; top: {{ $orderProduct->product->product_variant_default->base_product_variant->base_product_zone->top }}%;">
-              <img src="{{ url($orderProduct->product->product_variant_default->design_image['thumb']) }}" style="position: absolute; width: {{ $orderProduct->product->product_variant_default->design_width }}%; left: {{ $orderProduct->product->product_variant_default->design_left }}%; top: {{ $orderProduct->product->product_variant_default->design_top }}%;">
+          <div style="position: relative; padding-bottom: calc(100% - 32px); margin: 16px auto; width: calc(100% - 32px); background-position: center; background-repeat: no-repeat; background-size: contain; background-image: url('{{ base_url('media/variant/' . $orderProduct->product->base_product_variant_id) }}')">
+            <div style="position: absolute; width: {{ $orderProduct->product->base_product_zone_width }}%; height: {{ $orderProduct->product->base_product_zone_height }}%; left: {{ $orderProduct->product->base_product_zone_left }}%; top: {{ $orderProduct->product->base_product_zone_top }}%;">
+              <img src="{{ base_url('media/design/' . $orderProduct->product->product_variant_design_id) }}" style="position: absolute; width: {{ $orderProduct->product->product_variant_design_width }}%; left: {{ $orderProduct->product->product_variant_design_left }}%; top: {{ $orderProduct->product->product_variant_design_top }}%;">
             </div>
           </div>
 
           <div>Termék: <b>{{ $orderProduct->product->base_product_name }}</b></div>
-          <div>Szín: <b>{{ $orderProduct->product->product_variant_default->base_product_variant->base_product_color->name }}</b></div>
+          <div>Szín: <b>{{ $orderProduct->product->base_product_color_name }}</b></div>
           <div>Darab: <b>{{ $orderProduct->quantity }}</b></div>
-          <div><a href="{{ url($orderProduct->product->product_variant_default->design_image['original']) }}">Minta letöltése</a></div>
+          <div><a href="{{ base_url('media/design/' . $orderProduct->product->product_variant_design_id) }}">Minta letöltése</a></div>
         </div>
       </div>
     </div>
@@ -48,15 +48,15 @@
           <tbody>
             <tr>
               <td>Termékek</td>
-              <td>{{ number_format($order->product_price, 0, ',', ' ') }} Ft</td>
+              <td>{{ number_format($cartPrice, 0, ',', ' ') }} Ft</td>
             </tr>
             <tr>
               <td>Szállítás</td>
-              <td>{{ number_format($order->shipping_price, 0, ',', ' ') }} Ft</td>
+              <td>{{ number_format($shippingPrice, 0, ',', ' ') }} Ft</td>
             </tr>
             <tr>
               <td><b>Összesen</b></td>
-              <td><b>{{ number_format($order->total_price, 0, ',', ' ') }} Ft</b></td>
+              <td><b>{{ number_format($totalPrice, 0, ',', ' ') }} Ft</b></td>
             </tr>
           </tbody>
         </table>
@@ -75,11 +75,11 @@
           <tbody>
             <tr>
               <td><b>Átvételi mód</b></td>
-              <td>{{ $shippingData['shipping_method_text'] }}</td>
+              <td>{{ $shippingMethodText }}</td>
             </tr>
             <tr>
               <td><b>Fizetési mód</b></td>
-              <td>{{ $paymentData['payment_method_text'] }}</td>
+              <td>{{ $paymentMethodText }}</td>
             </tr>
             <tr>
               <td><b>Név</b></td>

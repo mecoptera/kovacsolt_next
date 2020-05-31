@@ -6,5 +6,5 @@ function cartItemsCount() {
   $CI = &get_instance();
   $CI->load->library('cart', [ 'singleton' => true ]);
 
-  return $CI->cart->getQuantity();
+  return $CI->cart->quantity();
 }
