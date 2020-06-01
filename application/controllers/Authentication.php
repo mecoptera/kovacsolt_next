@@ -53,7 +53,7 @@ class Authentication extends MY_Controller {
     if ($this->input->post('ajax')) {
       return $this->output->json([ 'message' => $authVerified ], 200);
     } else {
-      return redirect($redirectSuccess);
+      return redirect($this->userModel->isAdmin() ? 'panel/dashboard' : $redirectSuccess);
     }
   }
 

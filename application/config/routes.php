@@ -19,6 +19,7 @@ $route['media/([a-z]+)/(\d+)'] = 'media/index/$1/$2';
 $route['media/([a-z]+)/(\d+)/([a-z]+)'] = 'media/index/$1/$2/$3';
 
 $route['login'] = 'authentication/index';
+$route['logout'] = 'authentication/logout';
 $route['registration'] = 'authentication/registration';
 
 $route['contact'] = 'page/contact';

@@ -15,6 +15,10 @@ class User_model extends CI_Model {
     return $this->session->userdata('user') ? true : false;
   }
 
+  public function isAdmin() {
+    return $this->session->userdata('user')->admin ? true : false;
+  }
+
   public function logout() {
     $this->session->unset_userdata('user');
   }

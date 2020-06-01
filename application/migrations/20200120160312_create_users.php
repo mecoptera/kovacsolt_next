@@ -27,6 +27,12 @@ class Migration_Create_users extends CI_Migration {
         'type' => 'VARCHAR',
         'constraint' => '128',
       ),
+      'admin' => array(
+        'type' => 'TINYINT',
+        'constraint' => '1',
+        'unsigned' => true,
+        'default' => 0,
+      ),
     ));
     $this->dbforge->add_key('id', true);
     $this->dbforge->create_table('users');

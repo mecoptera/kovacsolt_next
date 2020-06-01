@@ -3,13 +3,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Base_Product_Variant extends MY_Controller {
-  protected $middlewares = [ 'Auth.isLoggedIn' => '' ];
+  protected $middlewares = [ 'Auth.isLoggedInAsAdmin' => '' ];
 
   public function __construct() {
     parent::__construct();
-
-    $this->session->set_flashdata('login_error_redirect', 'panel');
-    $this->session->set_flashdata('login_success_redirect', 'panel/dashboard');
 
     $this->load->model('base_product_variant_model', 'baseProductVariantModel');
   }

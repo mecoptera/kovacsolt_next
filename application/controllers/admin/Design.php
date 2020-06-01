@@ -3,13 +3,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Design extends MY_Controller {
-  protected $middlewares = [ 'Auth.isLoggedIn' => '' ];
+  protected $middlewares = [ 'Auth.isLoggedInAsAdmin' => '' ];
 
   public function __construct() {
     parent::__construct();
-
-    $this->session->set_flashdata('login_error_redirect', 'panel');
-    $this->session->set_flashdata('login_success_redirect', 'panel/dashboard');
 
     $this->load->model('design_model', 'designModel');
   }

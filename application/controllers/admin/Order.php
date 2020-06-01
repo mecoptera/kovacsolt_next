@@ -16,7 +16,7 @@ class Order extends MY_Controller {
     ['key' => 'delivery', 'value' => 'Utánvétellel futárnak', 'available_for' => ['delivery']]
   ];
 
-  protected $middlewares = [ 'Auth.isLoggedIn' => '' ];
+  protected $middlewares = [ 'Auth.isLoggedInAsAdmin' => '' ];
 
   public function index() {
     $orders = $this->db->query('SELECT * FROM `orders`')->result();

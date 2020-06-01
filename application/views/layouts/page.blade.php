@@ -38,14 +38,20 @@
           </k-menu>
         </div>
         <div class="q-menu__right">
+        @if ($this->userModel->isLoggedIn())
+          <a href="{{ base_url('profile') }}" class="u-flex u-items-center u-mr-4">
+        @else
           <a href="{{ base_url('login') }}" class="u-mr-4">
+        @endif
             <k-icon data-icon="person" data-color="{{ isIndexPage() ? 'white' : 'text' }}" data-size="8"></k-icon>
+            
+            @if ($this->userModel->isLoggedIn())
+              <span class="u-inline-block u-mx-4 {{ isIndexPage() ? 'u-text-white' : '' }}">
+                {{ $this->session->userdata('user')->fullname }}
+              </span>
+            @endif
           </a>
-          @if ($this->userModel->isLoggedIn())
-            <div class="u-inline-block u-mr-8 {{ isIndexPage() ? 'u-text-white' : '' }}">
-              {{ $this->session->userdata('user')->fullname }}
-            </div>
-          @endif
+
           <k-cart-button data-count="{{ cartItemsCount() }}" data-cart-url="{{ base_url('cart') }}" data-area-endpoint="cart/menu_button">
             <k-icon data-icon="cart" data-color="{{ isIndexPage() ? 'white' : 'text' }}" data-size="8"></k-icon>
           </k-cart-button>
