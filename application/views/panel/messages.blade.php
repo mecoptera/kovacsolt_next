@@ -8,7 +8,7 @@
 
 @section('content')
 <div class="d-sm-flex align-items-center mt-4 mb-4">
-  <h1 class="h3 mb-0 text-gray-800">Rendelések</h1>
+  <h1 class="h3 mb-0 text-gray-800">Üzenetek</h1>
 </div>
 
 <div class="card shadow mb-4">
@@ -17,19 +17,23 @@
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
+            <th>E-mail cím</th>
+            <th>Név</th>
+            <th>Üzenet</th>
             <th>Állapot</th>
-            <th>Utoljára módosítva</th>
             <th>Műveletek</th>
           </tr>
         </thead>
         <tbody>
-          @foreach($orders as $order)
+          @foreach($messages as $message)
             <tr>
-              <td>{{ $order->status }}</td>
-              <td>{{ $order->updated_at }}</td>
+              <td>{{ $message->email }}</td>
+              <td>{{ $message->name }}</td>
+              <td>{{ strlen($message->message) > 99 ? substr($message->message, 0, 96) . '...' : $message->message }}</td>
+              <td>{{ $message->status }}</td>
               <td>
-                <a href="{{ base_url('admin/order/edit/' . $order->id) }}"><i class="fas fa-fw fa-pen"></i> Szerkesztés</a>
-                <a href="{{ base_url('admin/order/delete/' . $order->id) }}"><i class="fas fa-fw fa-trash"></i> Törlés</a>
+                <a href="{{ base_url('admin/message/edit/' . $message->id) }}"><i class="fas fa-fw fa-pen"></i> Szerkesztés</a>
+                <a href="{{ base_url('admin/message/delete/' . $message->id) }}"><i class="fas fa-fw fa-trash"></i> Törlés</a>
               </td>
             </tr>
           @endforeach

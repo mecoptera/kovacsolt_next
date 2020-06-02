@@ -16,31 +16,29 @@
               data-name="name"
               data-label="Név"
               data-value="{{ old('name') }}"
-              @error('name')data-error @enderror
+              @error('name')data-error="{{ $errors['name'] }}"@enderror
             ></k-input>
 
             <k-input
               data-name="email"
               data-label="E-mail cím"
               data-value="{{ old('email') }}"
-              @error('email')data-error @enderror
+              @error('email')data-error="{{ $errors['email'] }}"@enderror
             ></k-input>
 
             <k-textarea
               data-name="message"
               data-label="Üzenet"
               data-value="{{ old('message') }}"
-              @error('message')data-error @enderror
+              @error('message')data-error="{{ $errors['message'] }}"@enderror
             ></k-textarea>
 
-            <k-checkbox
-              data-name="remember"
-            >
+            <k-checkbox data-name="accept" @error('accept')data-error="{{ $errors['accept'] }}"@enderror>
               <template data-label><div>Megértettem és elfogadom az <a class="c-link" href="{{ base_url('privacy') }}" target="_blank">Adatkezelési tájékoztató</a>ban leírtakat</div></template>
             </k-checkbox>
 
             <div class="l-form__field u-align-center">
-              <a href="javascript:void(0)" class="c-button">Küldés</a>
+              <input type="submit" class="c-button" value="Küldés">
             </div>
           </form>
         </div>

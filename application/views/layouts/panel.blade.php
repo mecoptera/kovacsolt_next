@@ -41,13 +41,18 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ base_url('admin/product') }}">
-          <i class="fas fa-fw fa-tshirt"></i>
+          <i class="fas fa-fw fa-paint-brush"></i>
           <span>Dizájnolt termékek</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ base_url('admin/order') }}">
-          <i class="fas fa-fw fa-tshirt"></i>
+          <i class="fas fa-fw fa-shopping-bag"></i>
           <span>Rendelések</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ base_url('admin/message') }}">
+          <i class="fas fa-fw fa-envelope"></i>
+          <span>Üzenetek</span></a>
       </li>
     </ul>
   @endif

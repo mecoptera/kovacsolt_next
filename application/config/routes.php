@@ -20,7 +20,7 @@ $route['login'] = 'authentication/index';
 $route['logout'] = 'authentication/logout';
 $route['registration'] = 'authentication/registration';
 
-$route['contact'] = 'page/contact';
+$route['contact'] = 'message/index';
 $route['privacy'] = 'page/privacy';
 $route['about'] = 'page/about';
 $route['products/(:num)'] = 'product/index/$1';
