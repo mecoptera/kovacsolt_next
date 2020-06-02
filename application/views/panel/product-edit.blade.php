@@ -25,7 +25,7 @@
             <label for="base_product">Termék:</label>
             <select class="custom-select" id="base_product" name="base_product">
               @foreach($baseProducts as $baseProduct)
-                <option value="{{ $baseProduct->id }}">{{ $baseProduct->name }}</option>
+                <option value="{{ $baseProduct->id }}" {{ $product->base_product_id === $baseProduct->id ? 'selected' : ''}}>{{ $baseProduct->name }}</option>
               @endforeach
             </select>
           </div>

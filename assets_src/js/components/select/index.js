@@ -120,6 +120,10 @@ export default class KSelect extends Bamboo {
     return this._state.get('value');
   }
 
+  get form() {
+    return this.querySelector('input[type="hidden"]').form;
+  }
+
   _openerMouseEnterHandler() {
     this._state.set('isHovered', true);
   }

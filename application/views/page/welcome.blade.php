@@ -51,7 +51,7 @@
   </div>
 
   <div class="u-m-16 u-text-center">
-    <a href="{{ base_url('page.products') }}" class="c-button">Összes termék megtekintése</a>
+    <a href="{{ base_url('products/1') }}" class="c-button">Összes termék megtekintése</a>
   </div>
 </div>
 

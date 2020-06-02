@@ -51,6 +51,15 @@ customElements.define('k-icon', KIcon);
 customElements.define('k-format', KFormat);
 
 (() => {
+  if (!document.querySelector('#js-select-product-sort_by')) { return; }
+
+  const selectElement = document.querySelector('#js-select-product-sort_by');
+  selectElement.addEventListener('change', event => {
+    selectElement.form.submit();
+  });
+})();
+
+(() => {
   if (!document.querySelector('[_namespace="cart-index"]')) { return; }
 
   const priceElement = document.querySelector('[_namespace="cart-index"] #js-price');
@@ -196,7 +205,7 @@ customElements.define('k-format', KFormat);
             });
           }
         }
-      }).catch(response=> {
+      }).catch(response => {
         console.log('error', response);
       });
 
