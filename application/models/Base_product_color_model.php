@@ -23,10 +23,14 @@ class Base_product_color_model extends CI_Model {
   }
 
   public function get($id) {
-    return $this->db->query('SELECT * FROM `base_product_colors` WHERE `id` = ?', [ $id ])->row();
+    return $this->db->query('SELECT * FROM `base_product_colors` WHERE `id` = ?', [$id])->row();
   }
 
   public function getByBaseProductId($baseProductId) {
-    return $this->db->query('SELECT * FROM `base_product_colors` WHERE `base_product_id` = ?', [ $baseProductId ])->result();
-  } 
+    return $this->db->query('SELECT * FROM `base_product_colors` WHERE `base_product_id` = ?', [$baseProductId])->result();
+  }
+
+  public function delete($id) {
+    $this->db->query('DELETE FROM `base_product_colors` WHERE `id` = ?', [$id]);
+  }
 }

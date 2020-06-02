@@ -19,12 +19,20 @@ class Base_Product_View extends MY_Controller {
     $this->baseProductViewModel->update($id);
     $baseProductView = $this->baseProductViewModel->get($id);
 
-    redirect('panel/base_product/edit/' . $baseProductView->base_product_id);
+    redirect('admin/base_product/edit/' . $baseProductView->base_product_id);
   }
 
   public function createPost($baseProductId) {
     $this->baseProductViewModel->insert($baseProductId);
 
-    redirect('panel/base_product/edit/' . $baseProductId);
+    redirect('admin/base_product/edit/' . $baseProductId);
+  }
+
+  public function delete($id) {
+    $baseProductView = $this->baseProductViewModel->get($id);
+
+    $this->baseProductViewModel->delete($id);
+
+    redirect('admin/base_product/edit/' . $baseProductView->base_product_id);
   }
 }

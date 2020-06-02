@@ -18,7 +18,7 @@ class Base_Product extends MY_Controller {
   public function createPost() {
     $this->baseProductModel->_insert();
 
-    redirect('panel/base_product');
+    redirect('admin/base_product');
   }
 
   public function edit($id) {
@@ -39,6 +39,6 @@ class Base_Product extends MY_Controller {
   public function editPost($id) {
     $this->baseProductModel->_update($id);
 
-    redirect('panel/base_product/edit/' . $id);
+    redirect('admin/base_product/edit/' . $id);
   }
 }

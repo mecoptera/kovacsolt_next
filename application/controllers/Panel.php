@@ -9,11 +9,7 @@ class Panel extends MY_Controller {
     if (!$this->userModel->isAdmin()) {
       return redirect('');
     } else { 
-      return redirect('panel/dashboard');
+      return redirect('admin/dashboard');
     }
-  }
-
-  public function dashboard() {
-    $this->slice->view('panel/dashboard');
   }
 }

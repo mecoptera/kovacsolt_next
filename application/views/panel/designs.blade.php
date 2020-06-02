@@ -4,23 +4,23 @@
 
 @section('content')
 <div class="d-sm-flex align-items-center mb-4 mt-4">
-  <h1 class="h3 mb-0 text-gray-800">Upload designs</h1>
+  <h1 class="h3 mb-0 text-gray-800">Minták feltöltése</h1>
 </div>
 
 <div class="row">
   <div class="col-lg-12">
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form id="design-upload-form" method="post" action="{{ base_url('panel/design/upload') }}" enctype="multipart/form-data">
+        <form id="design-upload-form" method="post" action="{{ base_url('admin/design/upload') }}" enctype="multipart/form-data">
           <input type="file" name="image" class="d-none custom-file-input" id="inputGroupFile" multiple>
 
           <div class="input-group">
             <div class="input-group-prepend">
-              <label for="inputGroupFile" class="btn btn-outline-primary">Browse</label>
+              <label for="inputGroupFile" class="btn btn-outline-primary">Tallózás</label>
             </div>
-            <input type="text" name="name" placeholder="Name" class="form-control form-control-user">
+            <input type="text" name="name" placeholder="Név" class="form-control form-control-user">
             <div class="input-group-append">
-              <button class="btn btn-primary mb-2">Upload</button>
+              <button class="btn btn-primary mb-2">Feltöltés</button>
             </div>
           </div>
         </form>
@@ -30,7 +30,7 @@
 </div>
 
 <div class="d-sm-flex align-items-center mb-4">
-  <h1 class="h3 mb-0 text-gray-800">List designs</h1>
+  <h1 class="h3 mb-0 text-gray-800">Minták listája</h1>
 </div>
 
 <div class="row">
@@ -44,7 +44,7 @@
               <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" x-placement="bottom-end">
-              <a class="dropdown-item" href="{{ base_url('panel/design/delete/' . $design->id) }}">Delete</a>
+              <a class="dropdown-item" href="{{ base_url('admin/design/delete/' . $design->id) }}">Törlés</a>
             </div>
           </div>
         </div>
@@ -52,11 +52,11 @@
         <div class="card-body d-flex flex-column align-items-center justify-content-between">
           <div style="background-image: url({{ base_url('media/design/' . $design->id) }}); background-size: contain; background-repeat: no-repeat; background-position: center; width: 200px; height: 200px;" class="mb-4"></div>
 
-          <form method="post" action="{{ base_url('panel/design/rename/' . $design->id) }}" class="form-inline">
+          <form method="post" action="{{ base_url('admin/design/rename/' . $design->id) }}" class="form-inline">
             <div class="form-group mx-sm-3">
-              <input type="text" name="name" value="{{ $design->name }}" placeholder="Name" class="form-control">
+              <input type="text" name="name" value="{{ $design->name }}" placeholder="Név" class="form-control">
             </div>
-            <input type="submit" class="btn btn-primary" value="Save">
+            <input type="submit" class="btn btn-primary" value="Mentés">
           </form>
         </div>
       </div>

@@ -8,21 +8,21 @@
 
 @section('content')
 <div class="d-sm-flex align-items-center mb-4 mt-4">
-  <h1 class="h3 mb-0 text-gray-800">Create product</h1>
+  <h1 class="h3 mb-0 text-gray-800">Dizájnolt termék készítése</h1>
 </div>
 
 <div class="row">
   <div class="col-lg-12">
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form method="post" action="{{ base_url('panel/product/create') }}">
+        <form method="post" action="{{ base_url('admin/product/create') }}">
           <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" name="name" placeholder="Name" class="form-control">
+            <label for="name">Név:</label>
+            <input type="text" name="name" placeholder="Név" class="form-control">
           </div>
 
           <div class="form-group">
-            <label for="base_product_id">Base product:</label>
+            <label for="base_product_id">Termék:</label>
             <select class="custom-select" id="base_product_id" name="base_product_id">
               @foreach($baseProducts as $baseProduct)
                 <option value="{{ $baseProduct->id }}">{{ $baseProduct->name }}</option>
@@ -30,7 +30,7 @@
             </select>
           </div>
 
-          <input type="submit" class="btn btn-primary" value="Create">
+          <input type="submit" class="btn btn-primary" value="Létrehozás">
         </form>
       </div>
     </div>
@@ -38,7 +38,7 @@
 </div>
 
 <div class="d-sm-flex align-items-center mb-4">
-  <h1 class="h3 mb-0 text-gray-800">List</h1>
+  <h1 class="h3 mb-0 text-gray-800">Dizájnolt termékek listája</h1>
 </div>
 
 <div class="card shadow mb-4">
@@ -47,9 +47,9 @@
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Updated</th>
-            <th>Actions</th>
+            <th>Név</th>
+            <th>Utoljára módosítva</th>
+            <th>Műveletek</th>
           </tr>
         </thead>
         <tbody>
@@ -58,8 +58,8 @@
               <td>{{ $product->name }}</td>
               <td>{{ $product->updated_at }}</td>
               <td>
-                <a href="{{ base_url('panel/product/edit/' . $product->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
-                <a href="{{ base_url('panel/product/delete/' . $product->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
+                <a href="{{ base_url('admin/product/edit/' . $product->id) }}"><i class="fas fa-fw fa-pen"></i> Szerkesztés</a>
+                <a href="{{ base_url('admin/product/delete/' . $product->id) }}"><i class="fas fa-fw fa-trash"></i> Törlés</a>
               </td>
             </tr>
           @endforeach
@@ -76,6 +76,7 @@
 <script>
 $(document).ready(function() {
   $('#dataTable').DataTable({
+    language: dataTableTranslations,
     order: [],
     columnDefs: [
       {

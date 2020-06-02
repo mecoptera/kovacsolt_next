@@ -60,12 +60,12 @@
     <h2 class="c-panel__title u-text-white">Feliratkozás hírlevélre</h2>
     <p>Amennyiben a későbbiekben szeretnél értesülni a legújabb akciókról, ne habozz, add meg a címed lent.</p>
 
-    <form class="q-contact__form l-form l-grid__col--6">
+    <form class="q-contact__form l-form l-grid__col--6" method="post" action="{{ base_url('subscription') }}">
       <div class="q-contact__email">
-        <k-input data-label="E-mail cím" data-light></k-input>
+        <k-input data-label="E-mail cím" data-light data-name="email"></k-input>
       </div>
 
-      <a href="javascript:void(0)" class="c-button c-button--outline c-button--light">Feliratkozás</a>
+      <button class="c-button c-button--outline c-button--light">Feliratkozás</a>
     </form>
   </div>
 </div>

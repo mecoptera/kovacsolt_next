@@ -28,8 +28,8 @@
               <td>{{ $order->status }}</td>
               <td>{{ $order->updated_at }}</td>
               <td>
-                <a href="{{ base_url('panel/order/edit/' . $order->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
-                <a href="{{ base_url('panel/order/delete/' . $order->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
+                <a href="{{ base_url('admin/order/edit/' . $order->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
+                <a href="{{ base_url('admin/order/delete/' . $order->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
               </td>
             </tr>
           @endforeach

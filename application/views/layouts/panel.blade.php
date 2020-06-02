@@ -25,29 +25,29 @@
       <hr class="sidebar-divider my-0">
 
       <li class="nav-item">
-        <a class="nav-link" href="{{ base_url('panel/dashboard') }}">
+        <a class="nav-link" href="{{ base_url('admin/dashboard') }}">
           <i class="fas fa-fw fa-home"></i>
-          <span>Dashboard</span></a>
+          <span>Kezdőooldal</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ base_url('panel/design') }}">
+        <a class="nav-link" href="{{ base_url('admin/design') }}">
           <i class="fas fa-fw fa-icons"></i>
-          <span>Designs</span></a>
+          <span>Minták</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ base_url('panel/base_product') }}">
+        <a class="nav-link" href="{{ base_url('admin/base_product') }}">
           <i class="fas fa-fw fa-tshirt"></i>
-          <span>Base Products</span></a>
+          <span>Termékek</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ base_url('panel/product') }}">
+        <a class="nav-link" href="{{ base_url('admin/product') }}">
           <i class="fas fa-fw fa-tshirt"></i>
-          <span>Designed Products</span></a>
+          <span>Dizájnolt termékek</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ base_url('panel/order') }}">
+        <a class="nav-link" href="{{ base_url('admin/order') }}">
           <i class="fas fa-fw fa-tshirt"></i>
-          <span>Orders</span></a>
+          <span>Rendelések</span></a>
       </li>
     </ul>
   @endif
@@ -70,7 +70,48 @@
 
   <!-- Custom scripts for all pages-->
   <script src="{{ asset('admin/sb-admin-2.min.js') }}"></script>
-
+  <script>
+    const dataTableTranslations = {
+      'sEmptyTable': 'Nincs rendelkezésre álló adat',
+      'sInfo': 'Találatok: _START_ - _END_ Összesen: _TOTAL_',
+      'sInfoEmpty': '0 találat',
+      'sInfoFiltered': '(_MAX_ összes rekord közül szűrve)',
+      'sInfoPostFix': '',
+      'sInfoThousands': ' ',
+      'sLengthMenu': '_MENU_ találat oldalanként',
+      'sLoadingRecords': 'Betöltés...',
+      'sProcessing': 'Feldolgozás...',
+      'sSearch': 'Keresés:',
+      'sZeroRecords': 'Nincs a keresésnek megfelelő találat',
+      'oPaginate': {
+        'sFirst': 'Első',
+        'sPrevious': 'Előző',
+        'sNext': 'Következő',
+        'sLast': 'Utolsó'
+      },
+      'oAria': {
+        'sSortAscending': ': aktiválja a növekvő rendezéshez',
+        'sSortDescending': ': aktiválja a csökkenő rendezéshez'
+      },
+      'select': {
+       'rows': {
+          '_': '%d sor kiválasztva',
+          '0': '',
+          '1': '1 sor kiválasztva'
+        }
+      },
+      'buttons': {
+        'print': 'Nyomtatás',
+        'colvis': 'Oszlopok',
+        'copy': 'Másolás',
+        'copyTitle': 'Vágólapra másolás',
+        'copySuccess': {
+          '_': '%d sor másolva',
+          '1': '1 sor másolva'
+        }
+      }
+    };
+  </script>
   @yield('footer')
 </body>
 </html>

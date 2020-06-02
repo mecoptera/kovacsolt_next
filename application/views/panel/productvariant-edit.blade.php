@@ -4,30 +4,30 @@
 
 @section('content')
 <div class="d-sm-flex align-items-center mb-4 mt-4">
-  <h1 class="h3 mb-0 text-gray-800">Edit product variant</h1>
+  <h1 class="h3 mb-0 text-gray-800">Változat szerkesztése</h1>
 </div>
 
 <div class="row">
   <div class="col-lg-6">
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form method="post" action="{{ base_url('panel/product_variant/' . $productVariant->id) }}">
+        <form method="post" action="{{ base_url('admin/product_variant/' . $productVariant->id) }}">
           <div class="form-group">
-            <label for="design_width">Width:</label>
-            <input type="number" step="any" name="design_width" id="design_width" placeholder="Design width" class="form-control" value="{{ $productVariant->design_width }}" max="100" min="0">
+            <label for="design_width">Szélesség:</label>
+            <input type="number" step="any" name="design_width" id="design_width" placeholder="Szélesség" class="form-control" value="{{ $productVariant->design_width }}" max="100" min="0">
           </div>
 
           <div class="form-group">
-            <label for="design_left">Left:</label>
-            <input type="number" name="design_left" id="design_left" placeholder="Design left" class="form-control" value="{{ $productVariant->design_left }}" max="100" min="0">
+            <label for="design_left">Balról:</label>
+            <input type="number" name="design_left" id="design_left" placeholder="Balról" class="form-control" value="{{ $productVariant->design_left }}" max="100" min="0">
           </div>
 
           <div class="form-group">
-            <label for="design_top">Top:</label>
-            <input type="number" name="design_top" id="design_top" placeholder="Design top" class="form-control" value="{{ $productVariant->design_top }}" max="100" min="0">
+            <label for="design_top">Fentről:</label>
+            <input type="number" name="design_top" id="design_top" placeholder="Fentről" class="form-control" value="{{ $productVariant->design_top }}" max="100" min="0">
           </div>
 
-          <input type="submit" class="btn btn-primary float-right" value="Save">
+          <input type="submit" class="btn btn-primary float-right" value="Mentés">
         </form>
       </div>
     </div>

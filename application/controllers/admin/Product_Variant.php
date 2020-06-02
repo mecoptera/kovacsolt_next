@@ -20,13 +20,13 @@ class Product_Variant extends MY_Controller {
 
     $this->productVariantModel->update($id);
 
-    redirect('panel/product/edit/' . $productVariant->product_id);
+    redirect('admin/product/edit/' . $productVariant->product_id);
   }
 
   public function createPost($productId) {
     $this->productVariantModel->insert($productId);
 
-    redirect('panel/product/edit/' . $productId);
+    redirect('admin/product/edit/' . $productId);
   }
 
   public function default($id) {
@@ -34,7 +34,7 @@ class Product_Variant extends MY_Controller {
 
     $this->productVariantModel->default($id, $productVariant->product_id);
 
-    redirect('panel/product/edit/' . $productVariant->product_id);
+    redirect('admin/product/edit/' . $productVariant->product_id);
   }
 
   public function delete($id) {
@@ -42,6 +42,6 @@ class Product_Variant extends MY_Controller {
 
     $this->productVariantModel->delete($id);
 
-    redirect('panel/product/edit/' . $productVariant->product_id);
+    redirect('admin/product/edit/' . $productVariant->product_id);
   }
 }

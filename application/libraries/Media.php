@@ -31,9 +31,7 @@ class Media {
     }
 
     if (!$this->CI->upload->do_upload('image')) {
-      $error = [ 'error' => $this->CI->upload->display_errors() ];
-
-      die($error);
+      die($this->CI->upload->display_errors());
     }
   }
 

@@ -35,16 +35,16 @@ class Base_product_variant_model extends CI_Model {
   }
 
   public function default($id, $baseProductId) {
-    $this->db->query('UPDATE `base_product_variants` SET `default` = false WHERE `base_product_id` = ?', [ $baseProductId ]);
-    $this->db->query('UPDATE `base_product_variants` SET `default` = true WHERE `id` = ?', [ $id ]);
+    $this->db->query('UPDATE `base_product_variants` SET `default` = false WHERE `base_product_id` = ?', [$baseProductId]);
+    $this->db->query('UPDATE `base_product_variants` SET `default` = true WHERE `id` = ?', [$id]);
   }
 
   public function delete($id) {
-    $this->db->query('DELETE FROM `base_product_variants` WHERE `id` = ?', [ $id ]);
+    $this->db->query('DELETE FROM `base_product_variants` WHERE `id` = ?', [$id]);
   }
 
   public function get($id) {
-    return $this->db->query('SELECT * FROM `base_product_variants` WHERE `id` = ?', [ $id ])->row();
+    return $this->db->query('SELECT * FROM `base_product_variants` WHERE `id` = ?', [$id])->row();
   }
 
   public function getAllByBaseProductId($baseProductId) {
@@ -55,7 +55,7 @@ class Base_product_variant_model extends CI_Model {
       LEFT JOIN `base_product_colors` ON `base_product_colors`.`id` = `base_product_variants`.`base_product_color_id`
       LEFT JOIN `base_product_zones` ON `base_product_zones`.`id` = `base_product_variants`.`base_product_zone_id`
       WHERE `base_product_variants`.`base_product_id` = ?
-    ', [ $baseProductId ])->result();
+    ', [$baseProductId])->result();
   }
 
   public function getByBaseProductId($baseProductId) {
@@ -68,7 +68,7 @@ class Base_product_variant_model extends CI_Model {
       WHERE
         `base_product_variants`.`base_product_id` = ?
         AND `base_product_variants`.`default` = TRUE
-    ', [ $baseProductId ])->row();
+    ', [$baseProductId])->row();
   }
 
   public function getByViewIdAndColorId($baseProductId, $baseProductViewId, $baseProductColorId) {
@@ -82,6 +82,6 @@ class Base_product_variant_model extends CI_Model {
         `base_product_variants`.`base_product_id` = ?
         AND `base_product_variants`.`base_product_view_id` = ?
         AND `base_product_variants`.`base_product_color_id` = ?
-    ', [ $baseProductId, $baseProductViewId, $baseProductColorId ])->row();
+    ', [$baseProductId, $baseProductViewId, $baseProductColorId])->row();
   }
 }

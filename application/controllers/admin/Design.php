@@ -21,13 +21,13 @@ class Design extends MY_Controller {
     $this->load->library('media');
     $this->media->upload('design', $designId);
 
-    redirect('panel/design');
+    redirect('admin/design');
   }
 
   public function renamePost($id) {
     $this->designModel->rename($id);
 
-    redirect('panel/design');
+    redirect('admin/design');
   }
 
   public function delete($id) {
@@ -36,6 +36,6 @@ class Design extends MY_Controller {
     $this->load->library('media');
     $this->media->delete('design', $id);
 
-    redirect('panel/design');
+    redirect('admin/design');
   }
 }

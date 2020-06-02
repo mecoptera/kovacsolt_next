@@ -18,7 +18,7 @@ class Base_Product_Zone extends MY_Controller {
 
     $this->slice->view('panel/baseproductzone-edit', [
       'baseProductZone' => $this->baseProductZoneModel->get($id),
-      'baseProductVariants' => $this->baseProductVariantModel->getByBaseProductId($baseProductZone->base_product_id),
+      'baseProductVariants' => $this->baseProductVariantModel->getAllByBaseProductId($baseProductZone->base_product_id),
     ]);
   }
 
@@ -32,12 +32,20 @@ class Base_Product_Zone extends MY_Controller {
 
     $baseProductZone = $this->baseProductZoneModel->get($id);
 
-    redirect('panel/base_product/edit/' . $baseProductZone->base_product_id);
+    redirect('admin/base_product/edit/' . $baseProductZone->base_product_id);
   }
 
   public function createPost($baseProductId) {
     $this->baseProductZoneModel->insert($baseProductId);
 
-    redirect('panel/base_product/edit/' . $baseProductId);
+    redirect('admin/base_product/edit/' . $baseProductId);
+  }
+
+  public function delete($id) {
+    $baseProductZone = $this->baseProductZoneModel->get($id);
+
+    $this->baseProductZoneModel->delete($id);
+
+    redirect('admin/base_product/edit/' . $baseProductZone->base_product_id);
   }
 }

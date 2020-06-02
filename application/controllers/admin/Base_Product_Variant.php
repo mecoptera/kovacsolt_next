@@ -31,18 +31,24 @@ class Base_Product_Variant extends MY_Controller {
     $baseProductVariant = $this->baseProductVariantModel->get($id);
 
     $this->load->library('media');
-    $this->media->upload('variant', $id);
 
-    redirect('panel/base_product/edit/' . $baseProductVariant->base_product_id);
+    if (!empty($_FILES['image']['name'])) {
+      $this->media->upload('variant', $id);
+    }
+
+    redirect('admin/base_product/edit/' . $baseProductVariant->base_product_id);
   }
 
   public function createPost($baseProductId) {
     $baseProductVariantId = $this->baseProductVariantModel->insert($baseProductId);
 
     $this->load->library('media');
-    $this->media->upload('variant', $baseProductVariantId);
 
-    redirect('panel/base_product/edit/' . $baseProductId);
+    if (!empty($_FILES['image']['name'])) {
+      $this->media->upload('variant', $baseProductVariantId);
+    }
+
+    redirect('admin/base_product/edit/' . $baseProductId);
   }
 
   public function default($id) {
@@ -50,7 +56,7 @@ class Base_Product_Variant extends MY_Controller {
 
     $this->baseProductVariantModel->default($id, $baseProductVariant->base_product_id);
 
-    redirect('panel/base_product/edit/' . $baseProductVariant->base_product_id);
+    redirect('admin/base_product/edit/' . $baseProductVariant->base_product_id);
   }
 
   public function delete($id) {
@@ -58,6 +64,6 @@ class Base_Product_Variant extends MY_Controller {
 
     $this->baseProductVariantModel->delete($id);
 
-    redirect('panel/base_product/edit/' . $baseProductVariant->base_product_id);
+    redirect('admin/base_product/edit/' . $baseProductVariant->base_product_id);
   }
 }

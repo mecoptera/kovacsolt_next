@@ -31,7 +31,7 @@ class Product extends MY_Controller {
     $this->slice->view('panel/product-edit', [
       'product' => $this->productModel->_get($id),
       'baseProducts' => $this->baseProductModel->getAll(),
-      'baseProductVariants' => $this->baseProductVariantModel->getByBaseProductId($product->base_product_id),
+      'baseProductVariants' => $this->baseProductVariantModel->getAllByBaseProductId($product->base_product_id),
       'designs' => $this->designModel->getAdmin(),
       'productVariants' => $this->productVariantModel->getByProductId($id),
     ]);
@@ -40,12 +40,12 @@ class Product extends MY_Controller {
   public function editPost($id) {
     $this->productModel->_update($id);
 
-    redirect('panel/product/edit/' . $id);
+    redirect('admin/product/edit/' . $id);
   }
 
   public function createPost() {
     $this->productModel->_insert(true);
 
-    redirect('panel/product');
+    redirect('admin/product');
   }
 }

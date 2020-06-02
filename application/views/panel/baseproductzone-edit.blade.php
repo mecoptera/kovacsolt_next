@@ -4,21 +4,21 @@
 
 @section('content')
 <div class="d-sm-flex align-items-center mb-4 mt-4">
-  <h1 class="h3 mb-0 text-gray-800">Edit product zone</h1>
+  <h1 class="h3 mb-0 text-gray-800">Zóna szerkesztése</h1>
 </div>
 
 <div class="row">
   <div class="col-lg-6">
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form method="post" action="{{ base_url('panel/base_product_zone/' . $baseProductZone->id) }}">
+        <form method="post" action="{{ base_url('admin/base_product_zone/' . $baseProductZone->id) }}">
           <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" placeholder="Name" class="form-control" value="{{ $baseProductZone ? $baseProductZone->name : '' }}">
+            <label for="name">Név:</label>
+            <input type="text" name="name" id="name" placeholder="Név" class="form-control" value="{{ $baseProductZone ? $baseProductZone->name : '' }}">
           </div>
 
           <div class="form-group">
-            <label for="base_product_variant_id">Variants to attach:</label>
+            <label for="base_product_variant_id">Változatokhoz csatolás:</label>
             <select class="custom-select" name="base_product_variant_id[]" id="base_product_variant_id" multiple>
               @foreach($baseProductVariants as $baseProductVariant)
                 <option value="{{ $baseProductVariant->id }}"  {{ $baseProductVariant->base_product_zone_id === $baseProductZone->id ? 'selected' : '' }}>
@@ -29,26 +29,26 @@
           </div>
 
           <div class="form-group">
-            <label for="width">Width:</label>
-            <input type="number" step="any" name="width" id="width" placeholder="Zone width" class="form-control" value="{{ $baseProductZone ? $baseProductZone->width : 0 }}" max="100" min="0">
+            <label for="left">Balról:</label>
+            <input type="number" name="left" id="left" placeholder="Balról" class="form-control" value="{{ $baseProductZone ? $baseProductZone->left : 0 }}" max="100" min="0">
           </div>
 
           <div class="form-group">
-            <label for="height">Height:</label>
-            <input type="number" name="height" id="height" placeholder="Zone height" class="form-control" value="{{ $baseProductZone ? $baseProductZone->height : 0 }}" max="100" min="0">
+            <label for="top">Fentről:</label>
+            <input type="number" name="top" id="top" placeholder="Fentről" class="form-control" value="{{ $baseProductZone ? $baseProductZone->top : 0 }}" max="100" min="0">
           </div>
 
           <div class="form-group">
-            <label for="left">Left:</label>
-            <input type="number" name="left" id="left" placeholder="Zone left" class="form-control" value="{{ $baseProductZone ? $baseProductZone->left : 0 }}" max="100" min="0">
+            <label for="width">Szélesség:</label>
+            <input type="number" step="any" name="width" id="width" placeholder="Szélesség" class="form-control" value="{{ $baseProductZone ? $baseProductZone->width : 0 }}" max="100" min="0">
           </div>
 
           <div class="form-group">
-            <label for="top">Top:</label>
-            <input type="number" name="top" id="top" placeholder="Zone top" class="form-control" value="{{ $baseProductZone ? $baseProductZone->top : 0 }}" max="100" min="0">
+            <label for="height">Magasság:</label>
+            <input type="number" name="height" id="height" placeholder="Magasság" class="form-control" value="{{ $baseProductZone ? $baseProductZone->height : 0 }}" max="100" min="0">
           </div>
 
-          <input type="submit" class="btn btn-primary float-right" value="Save">
+          <input type="submit" class="btn btn-primary float-right" value="Mentés">
         </form>
       </div>
     </div>
@@ -58,7 +58,7 @@
     <div class="card shadow mb-4">
       <div class="card-body">
         <div class="form-group">
-          <label for="zone-image-select">Zone background:</label>
+          <label for="zone-image-select">Zóna háttere:</label>
           <select class="custom-select" id="zone-image-select">
             @foreach($baseProductVariants as $baseProductVariant)
               <option value="{{ base_url('media/variant/' . $baseProductVariant->id) }}" {{ $baseProductVariant->base_product_zone_id === $baseProductZone->id ? 'selected' : '' }}>

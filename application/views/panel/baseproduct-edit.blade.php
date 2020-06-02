@@ -10,18 +10,18 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="d-sm-flex align-items-center mb-4 mt-4">
-      <h1 class="h3 mb-0 text-gray-800">Edit product</h1>
+      <h1 class="h3 mb-0 text-gray-800">Termék szerkesztése</h1>
     </div>
 
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form method="post" action="{{ base_url('panel/base_product/edit/' . $baseProduct->id) }}">
+        <form method="post" action="{{ base_url('admin/base_product/edit/' . $baseProduct->id) }}">
           <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" placeholder="Name" class="form-control" value="{{ $baseProduct->name }}">
+            <label for="name">Név:</label>
+            <input type="text" name="name" id="name" placeholder="Név" class="form-control" value="{{ $baseProduct->name }}">
           </div>
 
-          <input type="submit" class="btn btn-primary float-right" value="Save">
+          <input type="submit" class="btn btn-primary float-right" value="Mentés">
         </form>
       </div>
     </div>
@@ -31,18 +31,18 @@
 <div class="row">
   <div class="col-lg-6">
     <div class="d-sm-flex align-items-center mb-4 mt-4">
-      <h1 class="h3 mb-0 text-gray-800">Add view</h1>
+      <h1 class="h3 mb-0 text-gray-800">Nézet hozzáadása</h1>
     </div>
 
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form method="post" action="{{ base_url('panel/base_product_view/create/' . $baseProduct->id) }}">
+        <form method="post" action="{{ base_url('admin/base_product_view/create/' . $baseProduct->id) }}">
           <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" placeholder="Name" class="form-control">
+            <label for="name">Név:</label>
+            <input type="text" name="name" id="name" placeholder="Név" class="form-control">
           </div>
 
-          <input type="submit" class="btn btn-primary float-right" value="Add">
+          <input type="submit" class="btn btn-primary float-right" value="Hozzáadás">
         </form>
       </div>
     </div>
@@ -50,7 +50,7 @@
 
   <div class="col-lg-6">
     <div class="d-sm-flex align-items-center mb-4 mt-4">
-      <h1 class="h3 mb-0 text-gray-800">Views</h1>
+      <h1 class="h3 mb-0 text-gray-800">Nézetek</h1>
     </div>
 
     <div class="card shadow mb-4">
@@ -59,8 +59,8 @@
           <table class="table table-bordered" id="dataTableViews" width="100%" cellspacing="0">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Actions</th>
+                <th>Név</th>
+                <th>Műveletek</th>
               </tr>
             </thead>
             <tbody>
@@ -68,8 +68,8 @@
                 <tr>
                   <td>{{ $baseProductView->name }}</td>
                   <td>
-                    <a href="{{ base_url('panel/base_product_view/' . $baseProductView->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
-                    <a href="{{ base_url('panel/base_product_view/delete' . $baseProductView->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
+                    <a href="{{ base_url('admin/base_product_view/' . $baseProductView->id) }}"><i class="fas fa-fw fa-pen"></i> Szerkesztés</a>
+                    <a href="{{ base_url('admin/base_product_view/delete/' . $baseProductView->id) }}"><i class="fas fa-fw fa-trash"></i> Törlés</a>
                   </td>
                 </tr>
               @endforeach
@@ -84,22 +84,22 @@
 <div class="row">
   <div class="col-lg-6">
     <div class="d-sm-flex align-items-center mb-4 mt-4">
-      <h1 class="h3 mb-0 text-gray-800">Add color</h1>
+      <h1 class="h3 mb-0 text-gray-800">Szín hozzáadása</h1>
     </div>
 
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form method="post" action="{{ base_url('panel/base_product_color/create/' . $baseProduct->id) }}">
+        <form method="post" action="{{ base_url('admin/base_product_color/create/' . $baseProduct->id) }}">
           <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" placeholder="Name" class="form-control">
+            <label for="name">Név:</label>
+            <input type="text" name="name" id="name" placeholder="Név" class="form-control">
           </div>
           <div class="form-group">
-            <label for="value">Value:</label>
-            <input type="color" name="value" id="value" placeholder="Value" class="form-control" style="width: 128px;">
+            <label for="value">Érték:</label>
+            <input type="color" name="value" id="value" placeholder="Érték" class="form-control" style="width: 128px;">
           </div>
 
-          <input type="submit" class="btn btn-primary float-right" value="Add">
+          <input type="submit" class="btn btn-primary float-right" value="Hozzáadás">
         </form>
       </div>
     </div>
@@ -107,7 +107,7 @@
 
   <div class="col-lg-6">
     <div class="d-sm-flex align-items-center mb-4 mt-4">
-      <h1 class="h3 mb-0 text-gray-800">Colors</h1>
+      <h1 class="h3 mb-0 text-gray-800">Színek</h1>
     </div>
 
     <div class="card shadow mb-4">
@@ -116,10 +116,10 @@
           <table class="table table-bordered" id="dataTableColors" width="100%" cellspacing="0">
             <thead>
               <tr>
-                <th>Color</th>
-                <th>Name</th>
-                <th>Value</th>
-                <th>Actions</th>
+                <th>Szín</th>
+                <th>Név</th>
+                <th>Érték</th>
+                <th>Műveletek</th>
               </tr>
             </thead>
             <tbody>
@@ -129,8 +129,8 @@
                   <td>{{ $baseProductColor->name }}</td>
                   <td>{{ $baseProductColor->value }}</td>
                   <td>
-                    <a href="{{ base_url('panel/base_product_color/' . $baseProductColor->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
-                    <a href="{{ base_url('panel/base_product_color/delete/' . $baseProductColor->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
+                    <a href="{{ base_url('admin/base_product_color/' . $baseProductColor->id) }}"><i class="fas fa-fw fa-pen"></i> Szerkesztés</a>
+                    <a href="{{ base_url('admin/base_product_color/delete/' . $baseProductColor->id) }}"><i class="fas fa-fw fa-trash"></i> Törlés</a>
                   </td>
                 </tr>
               @endforeach
@@ -145,14 +145,14 @@
 <div class="row">
   <div class="col-lg-6">
     <div class="d-sm-flex align-items-center mb-4 mt-4">
-      <h1 class="h3 mb-0 text-gray-800">Add variant</h1>
+      <h1 class="h3 mb-0 text-gray-800">Változat hozzáadása</h1>
     </div>
 
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form method="post" action="{{ base_url('panel/base_product_variant/create/' . $baseProduct->id) }}" enctype="multipart/form-data">
+        <form method="post" action="{{ base_url('admin/base_product_variant/create/' . $baseProduct->id) }}" enctype="multipart/form-data">
           <div class="form-group">
-            <label for="base_product_view_id">View:</label>
+            <label for="base_product_view_id">Nézet:</label>
             <select class="custom-select" id="base_product_view_id" name="base_product_view_id">
               @foreach($baseProductViews as $baseProductView)
                 <option value="{{ $baseProductView->id }}">{{ $baseProductView->name }}</option>
@@ -160,7 +160,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="base_product_color_id">Color:</label>
+            <label for="base_product_color_id">Szín:</label>
             <select class="custom-select" id="base_product_color_id" name="base_product_color_id">
               @foreach($baseProductColors as $baseProductColor)
                 <option value="{{ $baseProductColor->id }}">{{ $baseProductColor->name }}</option>
@@ -168,11 +168,11 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="image">Image:</label>
+            <label for="image">Kép:</label>
             <input type="file" name="image" class="form-control" id="image">
           </div>
 
-          <input type="submit" class="btn btn-primary float-right" value="Add">
+          <input type="submit" class="btn btn-primary float-right" value="Hozzáadás">
         </form>
       </div>
     </div>
@@ -180,7 +180,7 @@
 
   <div class="col-lg-6">
     <div class="d-sm-flex align-items-center mb-4 mt-4">
-      <h1 class="h3 mb-0 text-gray-800">Variants</h1>
+      <h1 class="h3 mb-0 text-gray-800">Változatok</h1>
     </div>
 
     <div class="card shadow mb-4">
@@ -189,9 +189,9 @@
           <table class="table table-bordered" id="dataTableVariants" width="100%" cellspacing="0">
             <thead>
               <tr>
-                <th>Image</th>
-                <th>Variant</th>
-                <th>Actions</th>
+                <th>Kép</th>
+                <th>Változat</th>
+                <th>Műveletek</th>
               </tr>
             </thead>
             <tbody>
@@ -202,16 +202,17 @@
                   </td>
                   <td>
                     @if($baseProductVariant->default)
-                      <div><b>Default</b></div>
+                      <div><b>Alapértelmezett</b></div>
                     @endif
 
-                    <div>View: <b>{{ $baseProductVariant->base_product_view_name }}</b></div>
-                    <div>Color: <b>{{ $baseProductVariant->base_product_color_name }}</b></div>
-                    <div>Zone: <b>{{ $baseProductVariant->base_product_zone_id ? $baseProductVariant->base_product_zone_name : '---' }}</b></div>
+                    <div>Nézet: <b>{{ $baseProductVariant->base_product_view_name }}</b></div>
+                    <div>Szín: <b>{{ $baseProductVariant->base_product_color_name }}</b></div>
+                    <div>Zóna: <b>{{ $baseProductVariant->base_product_zone_id ? $baseProductVariant->base_product_zone_name : '---' }}</b></div>
                   </td>
                   <td>
-                    <a href="{{ base_url('panel/base_product_variant/' . $baseProductVariant->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
-                    <a href="{{ base_url('panel/base_product_variant/delete/' . $baseProductVariant->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
+                    <a href="{{ base_url('admin/base_product_variant/default/' . $baseProductVariant->id) }}"><i class="fas fa-fw fa-star"></i> Alapértelmezett</a>
+                    <a href="{{ base_url('admin/base_product_variant/' . $baseProductVariant->id) }}"><i class="fas fa-fw fa-pen"></i> Szerkesztés</a>
+                    <a href="{{ base_url('admin/base_product_variant/delete/' . $baseProductVariant->id) }}"><i class="fas fa-fw fa-trash"></i> Törlés</a>
                   </td>
                 </tr>
               @endforeach
@@ -227,18 +228,18 @@
 <div class="row">
   <div class="col-lg-6">
     <div class="d-sm-flex align-items-center mb-4 mt-4">
-      <h1 class="h3 mb-0 text-gray-800">Add zone</h1>
+      <h1 class="h3 mb-0 text-gray-800">Zóna hozzáadása</h1>
     </div>
 
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form method="post" action="{{ base_url('panel/base_product_zone/create/' . $baseProduct->id) }}">
+        <form method="post" action="{{ base_url('admin/base_product_zone/create/' . $baseProduct->id) }}">
           <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" placeholder="Name" class="form-control">
+            <label for="name">Név:</label>
+            <input type="text" name="name" id="name" placeholder="Név" class="form-control">
           </div>
 
-          <input type="submit" class="btn btn-primary float-right" value="Add">
+          <input type="submit" class="btn btn-primary float-right" value="Hozzáadás">
         </form>
       </div>
     </div>
@@ -246,7 +247,7 @@
 
   <div class="col-lg-6">
     <div class="d-sm-flex align-items-center mb-4 mt-4">
-      <h1 class="h3 mb-0 text-gray-800">Zones</h1>
+      <h1 class="h3 mb-0 text-gray-800">Zónák</h1>
     </div>
 
     <div class="card shadow mb-4">
@@ -255,8 +256,8 @@
           <table class="table table-bordered" id="dataTableZones" width="100%" cellspacing="0">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Actions</th>
+                <th>Név</th>
+                <th>Műveletek</th>
               </tr>
             </thead>
             <tbody>
@@ -264,8 +265,8 @@
                 <tr>
                   <td>{{ $baseProductZone->name }}</td>
                   <td>
-                    <a href="{{ base_url('panel/base_product_zone/' . $baseProductZone->id) }}"><i class="fas fa-fw fa-pen"></i> Edit</a>
-                    <a href="{{ base_url('panel/base_product_zone/delete/' . $baseProductZone->id) }}"><i class="fas fa-fw fa-trash"></i> Delete</a>
+                    <a href="{{ base_url('admin/base_product_zone/' . $baseProductZone->id) }}"><i class="fas fa-fw fa-pen"></i> Szerkesztés</a>
+                    <a href="{{ base_url('admin/base_product_zone/delete/' . $baseProductZone->id) }}"><i class="fas fa-fw fa-trash"></i> Törlés</a>
                   </td>
                 </tr>
               @endforeach
@@ -284,6 +285,7 @@
 <script>
 $(document).ready(function() {
   $('#dataTableColors').DataTable({
+    language: dataTableTranslations,
     order: [],
     columnDefs: [
       {
@@ -294,6 +296,7 @@ $(document).ready(function() {
   });
 
   $('#dataTableViews').DataTable({
+    language: dataTableTranslations,
     order: [],
     columnDefs: [
       {
@@ -304,6 +307,7 @@ $(document).ready(function() {
   });
 
   $('#dataTableVariants').DataTable({
+    language: dataTableTranslations,
     order: [],
     columnDefs: [
       {
@@ -314,6 +318,7 @@ $(document).ready(function() {
   });
 
   $('#dataTableZones').DataTable({
+    language: dataTableTranslations,
     order: [],
     columnDefs: [
       {
