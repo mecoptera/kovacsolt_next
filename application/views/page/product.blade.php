@@ -13,7 +13,7 @@
     <div class="l-grid__col--5">
       <div class="c-panel" style="min-height: 100%;">
         <div class="c-panel__content">
-          <div class="u-mb-2 u-uppercase u-text-xs u-text-color-form">{{ $product->base_product_name }}</div>
+          <div class="u-mb-2 u-uppercase u-text-color-form">{{ $product->base_product_name }}</div>
           <div class="u-mb-4 u-uppercase u-text-4xl u-font-bold">{{ $product->name }}</div>
 
           <div class="u-mb-12">
@@ -27,7 +27,7 @@
           
           @if ($product->description)
             <div class="u-mb-2 u-uppercase u-font-bold">Termék leírása</div>
-            <div class="u-mb-12">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A esse, tempore, cum voluptate laboriosam odio id ab quasi voluptas velit eius possimus nesciunt. Corporis commodi natus nam velit delectus harum.</div>
+            <div class="u-mb-12">{{ $product->description }}</div>
           @endif
 
           <form method="post" action="{{ base_url('cart/add') }}">

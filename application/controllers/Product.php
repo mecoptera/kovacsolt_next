@@ -11,7 +11,7 @@ class Product extends MY_Controller {
   }
 
   public function index($activeCategoryId) {
-    $sortBy = $this->input->get('sort_by') ? $this->input->get('sort_by') : 'new_asc';
+    $sortBy = $this->input->get('sort_by') ? $this->input->get('sort_by') : 'new';
 
     $this->slice->view('page/products', [
       'categories' => $this->productCategoryModel->buildTree($activeCategoryId),

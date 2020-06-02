@@ -22,6 +22,11 @@
           </div>
 
           <div class="form-group">
+            <label for="name">Leírás:</label>
+            <textarea type="text" name="description" id="description" placeholder="Leírás" class="form-control">{{ $product->description }}</textarea>
+          </div>
+
+          <div class="form-group">
             <label for="base_product">Termék:</label>
             <select class="custom-select" id="base_product" name="base_product">
               @foreach($baseProducts as $baseProduct)
