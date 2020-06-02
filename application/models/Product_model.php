@@ -19,6 +19,7 @@ class Product_model extends CI_Model {
       LEFT JOIN `base_products` ON `base_products`.`id` = `products`.`base_product_id`
       WHERE `products`.`show_on_welcome` = TRUE
         AND `product_variants`.`default` = TRUE
+      ORDER BY `products`.`updated_at` DESC
     ')->result();
   }
 
@@ -59,6 +60,7 @@ class Product_model extends CI_Model {
       LEFT JOIN `base_products` ON `base_products`.`id` = `products`.`base_product_id`
       WHERE `products`.`is_public` = TRUE
         AND `product_variants`.`default` = TRUE
+      ORDER BY `products`.`updated_at` DESC
     ')->result();
   }
 
