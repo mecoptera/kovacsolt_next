@@ -18,7 +18,7 @@
         <form method="post" action="{{ current_url() }}">
           <div class="form-group">
             <label for="name">Név:</label>
-            <input type="text" name="name" id="name" placeholder="Name" class="form-control" value="{{ $product->name }}">
+            <input type="text" name="name" id="name" placeholder="Név" class="form-control" value="{{ $product->name }}">
           </div>
 
           <div class="form-group">
@@ -32,7 +32,12 @@
 
           <div class="form-group">
             <label for="price">Ár:</label>
-            <input type="number" name="price" id="price" placeholder="Price" class="form-control" value="{{ $product->price }}">
+            <input type="number" name="price" id="price" placeholder="Ár" class="form-control" value="{{ $product->price }}">
+          </div>
+
+          <div class="form-group">
+            <label for="price">Kedvezmény:</label>
+            <input type="number" name="discount" id="price" placeholder="Kedvezmény" class="form-control" value="{{ $product->discount }}" max="100" min="0">
           </div>
 
           <div class="form-group">
