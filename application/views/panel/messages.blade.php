@@ -29,7 +29,7 @@
             <tr>
               <td>{{ $message->email }}</td>
               <td>{{ $message->name }}</td>
-              <td>{{ strlen($message->message) > 99 ? substr($message->message, 0, 96) . '...' : $message->message }}</td>
+              <td>{{ mb_strlen($message->message) > 99 ? mb_substr($message->message, 0, 96) . '...' : $message->message }}</td>
               <td>{{ $message->status }}</td>
               <td>
                 <a href="{{ base_url('admin/message/edit/' . $message->id) }}"><i class="fas fa-fw fa-pen"></i> Szerkesztés</a>

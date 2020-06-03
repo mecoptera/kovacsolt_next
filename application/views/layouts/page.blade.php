@@ -47,7 +47,7 @@
             
             @if ($this->userModel->isLoggedIn())
               <span class="u-inline-block u-mx-2 u-text-xs u-uppercase u-font-bold {{ isIndexPage() ? 'u-text-white' : '' }}">
-                {{ $this->session->userdata('user')->fullname }}
+                {{ mb_substr($this->session->userdata('user')->fullname, 0, 24) }}
               </span>
             @endif
           </a>
