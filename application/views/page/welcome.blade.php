@@ -26,9 +26,9 @@
         <div class="q-welcome__copyright">© {{ date('Y') }} Kovácsolt Póló</div>
 
         <div class="q-welcome__social">
-          <a href="{{ base_url('page.planner.step1') }}"><k-icon data-icon="twitter" data-color="white" data-size="8"></k-icon></a>
-          <a href="{{ base_url('page.planner.step1') }}"><k-icon data-icon="facebook" data-color="white" data-size="8"></k-icon></a>
-          <a href="{{ base_url('page.planner.step1') }}"><k-icon data-icon="instagram" data-color="white" data-size="8"></k-icon></a>
+          <a class="q-welcome__social-button" href="{{ base_url('page.planner.step1') }}"><k-icon data-icon="twitter" data-color="white" data-size="8"></k-icon></a>
+          <a class="q-welcome__social-button" href="{{ base_url('page.planner.step1') }}"><k-icon data-icon="facebook" data-color="white" data-size="8"></k-icon></a>
+          <a class="q-welcome__social-button" href="{{ base_url('page.planner.step1') }}"><k-icon data-icon="instagram" data-color="white" data-size="8"></k-icon></a>
         </div>
 
         <div class="q-welcome__phone">Tel.: +36 12 345 6789</div>

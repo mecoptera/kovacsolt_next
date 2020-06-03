@@ -71,4 +71,14 @@
     justify-content: space-between;
     width: 100%;
   }
+
+  &__social-button {
+    display: inline-block;
+    padding: 8px;
+    transition: background .2s;
+
+    @include hover {
+      background: rgba(#fff, .1);
+    }
+  }
 }
