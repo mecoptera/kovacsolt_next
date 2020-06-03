@@ -6,7 +6,7 @@
 <div class="l-container l-container--stretch q-welcome">
   <div class="l-container q-welcome__container">
     <div class="q-welcome__headline">
-      <div class="q-welcome__plan u-my-8"></div>
+      <div class="q-welcome__plan">Tervezd meg</div>
       <div class="q-welcome__sub">Készítsd el egyedi pólód nálunk</div>
     </div>
 
@@ -15,10 +15,10 @@
         <div class="q-welcome__about">
           <?php echo $this->markdown->parse_file(APPPATH . 'views_md/welcome-header.md'); ?>
 
-          <a href="{{ base_url('page.planner.step1') }}" class="c-button c-button--link">Tudj meg többet</a>
+          <a href="{{ base_url('about') }}" class="c-button c-button--link c-button--inverse">Tudj meg többet rólunk</a>
         </div>
         <div class="q-welcome__planner">
-          <a href="{{ base_url('page.planner.step1') }}" class="c-button c-button--arrow">Tervező megnyitása</a>
+          <a href="{{ base_url('planner/types') }}" class="c-button c-button--arrow">Tervező megnyitása</a>
         </div>
       </div>
 

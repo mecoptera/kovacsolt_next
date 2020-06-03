@@ -59,8 +59,10 @@
     padding: 16px;
     text-decoration: none;
     text-transform: uppercase;
+    transition: background .2s;
 
     @include hover {
+      background: rgba(#fff, .1);
       color: var(--color-text-body);
     }
 
@@ -70,6 +72,15 @@
       @include hover {
         color: #fff;
       }
+    }
+  }
+
+  &__link-button {
+    padding: 8px;
+    transition: background .2s;
+
+    @include hover {
+      background: rgba(#fff, .1);
     }
   }
 }

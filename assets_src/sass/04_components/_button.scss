@@ -96,6 +96,10 @@
         color: var(--color-primary);
       }
     }
+
+    &.c-button--inverse {
+      color: var(--color-text-body-inverse);
+    }
   }
 
   &--arrow {
@@ -109,7 +113,7 @@
 
     @include hover {
       &:not([disabled]) {
-        background-color: transparent;
+        background: rgba(#fff, .1);
         color: var(--color-text-body-inverse);
       }
     }

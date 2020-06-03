@@ -39,9 +39,9 @@
         </div>
         <div class="q-menu__right">
         @if ($this->userModel->isLoggedIn())
-          <a href="{{ base_url('profile') }}" class="u-flex u-items-center u-mr-4">
+          <a href="{{ base_url('profile') }}" class="q-menu__link-button u-flex u-items-center">
         @else
-          <a href="{{ base_url('login') }}" class="u-mr-4">
+          <a href="{{ base_url('login') }}" class="q-menu__link-button ">
         @endif
             <k-icon data-icon="person" data-color="{{ isIndexPage() ? 'white' : 'text' }}" data-size="8"></k-icon>
             
@@ -52,7 +52,7 @@
             @endif
           </a>
 
-          <k-cart-button data-count="{{ cartItemsCount() }}" data-cart-url="{{ base_url('cart') }}" data-area-endpoint="cart/menu_button">
+          <k-cart-button data-count="{{ cartItemsCount() }}" data-cart-url="{{ base_url('cart') }}" data-area-endpoint="cart/menu_button" class="q-menu__link-button ">
             <k-icon data-icon="cart" data-color="{{ isIndexPage() ? 'white' : 'text' }}" data-size="8"></k-icon>
           </k-cart-button>
         </div>
