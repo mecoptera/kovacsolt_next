@@ -5,8 +5,6 @@ $route['default_controller'] = 'page';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-// $route['authentication/(.+)'] = 'authentication/index/$1';
-
 $route['media/([a-z]+)/(\d+)'] = 'media/index/$1/$2';
 $route['media/([a-z]+)/(\d+)/([a-z]+)'] = 'media/index/$1/$2/$3';
 

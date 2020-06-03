@@ -13,7 +13,7 @@ class Product extends MY_Controller {
   public function index($activeCategoryId) {
     $sortBy = $this->input->get('sort_by') ? $this->input->get('sort_by') : 'new';
 
-    $this->slice->view('page/products', [
+    $this->slice->view('page.products', [
       'categories' => $this->productCategoryModel->buildTree($activeCategoryId),
       'activeCategoryId' => $activeCategoryId,
       'sortBy' => $sortBy,
@@ -22,6 +22,6 @@ class Product extends MY_Controller {
   }
 
   public function view($id) {
-    $this->slice->view('page/product', ['product' => $this->productModel->get($id)]);
+    $this->slice->view('page.product', ['product' => $this->productModel->get($id)]);
   }
 }

@@ -9,34 +9,28 @@
         <h1 class="c-panel__title">Fiók beállításai</h1>
 
         <div class="u-absolute" style="top: 16px; right: 16px;">
-          <a class="c-button c-button--outline c-button--small" href="{{ route('user.logout') }}">Kijelentkezés</a>
+          <a class="c-button c-button--outline c-button--small" href="{{ base_url('logout') }}">Kijelentkezés</a>
         </div>
 
-        <form class="l-form" method="post" action="{{ route('user.profile.save') }}">
-          @csrf
-
+        <form class="l-form" method="post" action="{{ current_url() }}">
           <div class="l-grid">
             <div class="l-grid__col--6 l-grid__col--offset-3">
-              @if(session()->has('success'))
-                <k-notification data-status="success">{{ session()->get('success') }}</k-notification>
-              @endif
-              @if(session()->has('error'))
-                <k-notification data-status="error">{{ session()->get('error') }}</k-notification>
-              @endif
+            @if($this->session->flashdata('success'))
+              <k-notification data-status="success" class="u-mb-16">A változtatások sikeresen mentésre kerültek a rendszerben</k-notification>
+            @endif
 
               <div>
                 <k-input
-                  data-name="name"
+                  data-name="fullname"
                   data-label="Név"
-                  @if (isset($userData['name']))data-value="{{ $userData['name'] }}"@endif
-                  @error('name')data-error="{{ $message }}"@enderror
+                  data-value="{{ $user->fullname }}"
                 ></k-input>
               </div>
 
               <div>
                 <k-input
                   data-label="E-mail cím"
-                  data-value="{{ $userData['email'] }}"
+                  data-value="{{ $user->email }}"
                   data-disabled
                 ></k-input>
               </div>
@@ -45,13 +39,12 @@
                 <k-input
                   data-name="phone"
                   data-label="Telefonszám"
-                  @if (isset($userData['phone']))data-value="{{ $userData['phone'] }}"@endif
-                  @error('phone')data-error="{{ $message }}"@enderror
+                  data-value="{{ $user->phone }}"
                 ></k-input>
               </div>
 
               <div class="l-form__field">
-                <a href="{{ route('user.password.reset') }}">Jelszó megváltoztatása</a>
+                <a href="{{ base_url('user.password.reset') }}" class="c-link">Jelszó megváltoztatása</a>
                 <div class="u-helper">E-mailt fogunk küldeni, melyben egy linket találsz a jelszó megváltoztatásához</div>
               </div>
 
@@ -65,4 +58,3 @@
     </div>
   </div>
 @endsection
-

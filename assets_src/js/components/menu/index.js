@@ -26,8 +26,8 @@ export default class KMenu extends Bamboo {
     collection.get().forEach(child => {
       if (!child.state.active) { return; }
 
-      this._marker.style.width = `${child.state.width}px`;
-      this._marker.style.transform = `translateX(${child.state.left}px)`;
+      this._marker.style.width = `${child.state.width - 32}px`;
+      this._marker.style.transform = `translateX(${child.state.left + 16}px)`;
     });
   }
 

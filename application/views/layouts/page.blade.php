@@ -46,7 +46,7 @@
             <k-icon data-icon="person" data-color="{{ isIndexPage() ? 'white' : 'text' }}" data-size="8"></k-icon>
             
             @if ($this->userModel->isLoggedIn())
-              <span class="u-inline-block u-mx-4 {{ isIndexPage() ? 'u-text-white' : '' }}">
+              <span class="u-inline-block u-mx-2 u-text-xs u-uppercase u-font-bold {{ isIndexPage() ? 'u-text-white' : '' }}">
                 {{ $this->session->userdata('user')->fullname }}
               </span>
             @endif

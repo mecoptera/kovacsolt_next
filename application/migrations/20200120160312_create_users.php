@@ -27,6 +27,10 @@ class Migration_Create_users extends CI_Migration {
         'type' => 'VARCHAR',
         'constraint' => '128',
       ),
+      'phone' => array(
+        'type' => 'VARCHAR',
+        'constraint' => '16',
+      ),
       'admin' => array(
         'type' => 'TINYINT',
         'constraint' => '1',
