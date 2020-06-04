@@ -50,6 +50,8 @@ class Order_controller extends MY_Controller {
   }
 
   public function billing() {
+    $this->load->helper('MY_form_helper');
+
     $this->slice->view('page.order.billing', [
       'step' => 1,
       'billingData' => $this->session->userdata('order.billingData'),
@@ -98,32 +100,29 @@ class Order_controller extends MY_Controller {
   public function shippingPost() {
     $this->load->library('form_validation');
 
-    $this->form_validation->set_error_delimiters('', '');
-
-    $this->session->set_userdata('order.billingData', $this->input->post());
-
     if ($this->input->post('shipping_method') === 'delivery') {
-      $this->form_validation->set_rules('name', null, 'required', [ 'required' => 'Kötelező kitölteni' ]);
+      $this->form_validation->set_error_delimiters('', '');
+
+      $this->form_validation->set_rules('name', null, 'required', ['required' => 'Kötelező kitölteni']);
       $this->form_validation->set_rules('zip', null, 'required|is_natural|max_length[4]', [
         'required' => 'Kötelező kitölteni',
         'is_natural' => 'Csak számokat tartalmazhat',
         'max_length' => 'Maximum 4 számjegy',
       ]);
-      $this->form_validation->set_rules('city', null, 'required', [ 'required' => 'Kötelező kitölteni' ]);
-      $this->form_validation->set_rules('address', null, 'required', [ 'required' => 'Kötelező kitölteni' ]);
+      $this->form_validation->set_rules('city', null, 'required', ['required' => 'Kötelező kitölteni']);
+      $this->form_validation->set_rules('address', null, 'required', ['required' => 'Kötelező kitölteni']);
       $this->form_validation->set_rules('email', null, 'required|valid_email', [
         'required' => 'Kötelező kitölteni',
         'valid_email' => 'Nem megfelelő e-mail formátum',
       ]);
+
+      if ($this->form_validation->run() === false) {
+        $this->session->set_flashdata('validationErrors', $this->form_validation->error_array());
+        return redirect(current_url());
+      }
     }
 
     $this->session->set_userdata('order.shippingData', $this->input->post());
-
-    if ($this->form_validation->run() === false) {
-      $this->session->set_flashdata('validationErrors', $this->form_validation->error_array());
-
-      return redirect(current_url());
-    }
 
     return redirect('order/payment');
   }
@@ -220,7 +219,7 @@ class Order_controller extends MY_Controller {
     foreach($cartItems as $item) {
       $this->db->query('
         INSERT INTO `order_products` (`order_id`, `product_id`, `extra_data`, `price`, `quantity`, `status`, `created_at`, `updated_at`)
-        VALUES (?, ?, ?, ?, ?, ?, ?)', [
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [
           $orderId,
           $item['product']->id,
           json_encode($item['extraData']),

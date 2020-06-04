@@ -12,7 +12,7 @@
         <div class="u-text-5xl">{{ $orderId }}</div>
 
         <div class="u-mt-12">
-          <a class="c-button" href="{{ base_url('page/welcome') }}">Vissza a főoldalra</a>
+          <a class="c-button" href="{{ base_url('') }}">Vissza a főoldalra</a>
         </div>
       </div>
     </div>

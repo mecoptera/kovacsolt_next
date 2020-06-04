@@ -6,6 +6,8 @@ class Product_category_model extends CI_Model {
   public function buildTree($activeCategoryId) {
     $categories = $this->db->query('SELECT * FROM `product_categories`')->result();
 
+    if (count($categories) === 0) { return []; }
+
     $children = [];
 
     foreach($categories as $category) {
