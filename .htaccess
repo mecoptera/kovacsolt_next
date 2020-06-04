@@ -4,7 +4,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php/$1 [L]
 RewriteRule ^(.babelrc) - [F,L,NC]
 RewriteRule ^(.browserslistrc) - [F,L,NC]
-RewriteRule ^(.env.development) - [F,L,NC]
+RewriteRule ^(.env) - [F,L,NC]
 RewriteRule ^(.env.example) - [F,L,NC]
 RewriteRule ^(.gitignore) - [F,L,NC]
 RewriteRule ^(docker-compose.yml) - [F,L,NC]
