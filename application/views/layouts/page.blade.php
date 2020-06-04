@@ -13,6 +13,7 @@
 
   <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,700&display=swap&subset=latin-ext" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/tailwind.css') }}">
 
   <script>
     window.kovacsolt = {
@@ -70,7 +71,8 @@
             <b class="q-footer__title">OLDALTÉRKÉP</b>
             <ul class="q-footer__list">
               <li><a class="c-link q-footer__link" href="{{ base_url('/') }}">Kezdőlap</a></li>
-              <li><a class="c-link q-footer__link" href="{{ base_url('/references') }}">Referenciák</a></li>
+              <li><a class="c-link q-footer__link" href="{{ base_url('/products/1') }}">Termékek</a></li>
+              <li><a class="c-link q-footer__link" href="{{ base_url('/planner/types') }}">Tervező</a></li>
               <li><a class="c-link q-footer__link" href="{{ base_url('/about') }}">Rólunk</a></li>
               <li><a class="c-link q-footer__link" href="{{ base_url('/contact') }}">Kapcsolat</a></li>
             </ul>

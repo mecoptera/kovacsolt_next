@@ -50,6 +50,7 @@ export default class KInput extends Bamboo {
     return [
       {
         name: 'input',
+        useShadow: false,
         markup: html => {
           const inputType = this._state.get('type') === 'password' && this._state.get('showPassword') ? 'text' : (this._state.get('type') || 'text');
           const isReadOnly = this._state.get('preparing') ? 'readonly' : null;
@@ -73,11 +74,12 @@ export default class KInput extends Bamboo {
             ${this._state.get('error') ? html`<div class="c-input__error">${this._state.get('error')}</div>` : ''}
           `;
         },
-        container: document.createElement('div'),
+        root: document.createElement('div'),
         autoAppend: true
       },
       {
         name: 'helper',
+        useShadow: false,
         markup: this.querySelector('[data-helper]')
       }
     ];

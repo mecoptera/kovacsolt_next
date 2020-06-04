@@ -15,7 +15,7 @@ export default class KSelect extends Bamboo {
     this._outsideClickHandler = this._outsideClickHandler.bind(this);
   }
 
-  static get defaultState() {
+  static get initialState() {
     return {
       name: '',
       value: null,
@@ -67,6 +67,7 @@ export default class KSelect extends Bamboo {
     return [
       {
         name: 'select',
+        useShadow: false,
         markup: html => {
           this.classList.toggle('c-select--hover', !this._state.get('disabled') && !this._state.get('isFocused') && this._state.get('isHovered') || false);
           this.classList.toggle('c-select--focus', !this._state.get('disabled') && (this._state.get('isOpen') || this._state.get('isFocused')) || false);
@@ -90,16 +91,18 @@ export default class KSelect extends Bamboo {
             ${this._state.get('error') ? html`<div class="c-select__error">${this._state.get('error')}</div>` : ''}
           `;
         },
-        container: document.createElement('div'),
+        root: document.createElement('div'),
         autoAppend: true
       },
       {
         name: 'popup',
+        useShadow: false,
         markup: popupTemplate,
-        container: document.createElement('div')
+        root: document.createElement('div')
       },
       {
         name: 'helper',
+        useShadow: false,
         markup: this.querySelector('[data-helper]')
       }
     ];
@@ -185,12 +188,12 @@ export default class KSelect extends Bamboo {
     if (value) {
       document.addEventListener('click', this._outsideClickHandler);
 
-      document.body.appendChild(this._templater.getContainer('popup'));
-      new PopperJs(this._templater.getContainer('select'), this._templater.getContainer('popup'));
+      document.body.appendChild(this._templater.getRoot('popup'));
+      new PopperJs(this._templater.getRoot('select'), this._templater.getRoot('popup'));
     } else {
       document.removeEventListener('click', this._outsideClickHandler);
 
-      document.body.removeChild(this._templater.getContainer('popup'));
+      document.body.removeChild(this._templater.getRoot('popup'));
     }
   }
 

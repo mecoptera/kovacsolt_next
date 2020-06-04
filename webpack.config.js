@@ -8,7 +8,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
   watch: process.env.WATCH === 'true',
   watchOptions: { ignored: ['vendor', 'node_modules'] },
-  entry: { main: './assets_src/js/index.js' },
+  entry: {
+    main: './assets_src/js/index.js',
+    tailwind: './assets_src/sass/tailwind.scss'
+  },
   output: {
     path: path.resolve(__dirname, './assets'),
     filename: 'js/main.js'
@@ -38,11 +41,13 @@ module.exports = {
     new Dotenv(),
     new webpack.ProgressPlugin(),
     new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: ['css', 'images', 'js'] }),
-    new CopyWebpackPlugin([
-      { from: './assets_src/admin', to: 'admin' },
-      { from: './assets_src/images', to: 'images' },
-      { from: './assets_src/*.*', flatten: true, ignore: ['index.js'] }
-    ], { copyUnmodified: true }),
-    new MiniCssExtractPlugin({ filename: 'css/main.css' })
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: './assets_src/admin', to: 'admin' },
+        { from: './assets_src/images', to: 'images' },
+        { from: './assets_src/*.*', flatten: true, globOptions: { ignore: ['index.js']} }
+      ]
+    }),
+    new MiniCssExtractPlugin({ filename: 'css/[name].css', chunkFilename: 'css/[name].css' })
   ]
 };

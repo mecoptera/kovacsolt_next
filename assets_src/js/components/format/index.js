@@ -13,7 +13,12 @@ export default class KFormat extends Bamboo {
   }
 
   get template() {
-    return html => html`${this._format(this._state.get('value'))}${this._state.get('postfix') && !isNaN(this._state.get('value')) ? ' ' + this._state.get('postfix') : ''}`;
+    return [{
+      name: 'input',
+      useShadow: false,
+      markup: html => html`${this._format(this._state.get('value'))}${this._state.get('postfix') && !isNaN(this._state.get('value')) ? ' ' + this._state.get('postfix') : ''}`,
+      root: this
+    }];
   }
 
   _format(value) {

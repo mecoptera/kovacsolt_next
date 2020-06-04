@@ -41,6 +41,7 @@ export default class KProductCard extends Bamboo {
     return [
       {
         name: 'card',
+        useShadow: false,
         markup: html => {
           const data = this._state.get('detail');
           const hideInfo = this._state.get('hideInfo');
@@ -67,11 +68,12 @@ export default class KProductCard extends Bamboo {
             ${!hideInfo && data.discount ? html`<div class="c-product__discount" data-discount="${'-' + data.discount + '%'}"></div>` : html``}
           `;
         },
-        container: this._templater.parseHTML('<div class="c-product__container"></div>'),
+        root: this._templater.parseHTML('<div class="c-product__container"></div>'),
         autoAppend: true
       },
       {
         name: 'info',
+        useShadow: false,
         markup: html => {
           const data = this._state.get('detail');
           const hideInfo = this._state.get('hideInfo');
@@ -99,7 +101,7 @@ export default class KProductCard extends Bamboo {
             </div>` : html``}
           ` : html``;
         },
-        container: this._templater.parseHTML('<div class="c-product__info-container"></div>'),
+        root: this._templater.parseHTML('<div class="c-product__info-container"></div>'),
         autoAppend: true
       }
     ];

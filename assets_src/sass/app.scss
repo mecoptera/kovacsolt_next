@@ -1,5 +1,4 @@
 @tailwind base;
-@tailwind components;
 
 @import '01_variables/color';
 @import '01_variables/grid';
@@ -52,5 +51,3 @@
 @import '06_vendors/tingle';
 
 @import '99_utilities/helper';
-
-@tailwind utilities;

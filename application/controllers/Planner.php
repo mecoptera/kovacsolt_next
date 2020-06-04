@@ -21,8 +21,8 @@ class Planner extends MY_Controller {
 
     $this->slice->view('page.planner-editor', [
       'baseProduct' => $this->baseProductModel->get($baseProductId),
-      'baseProductViews' => $this->baseProductViewModel->getByBaseProductId($baseProductVariant->base_product_view_id),
-      'baseProductColors' => $this->baseProductColorModel->getByBaseProductId($baseProductVariant->base_product_view_id),
+      'baseProductViews' => $this->baseProductViewModel->getByBaseProductId($baseProductVariant->base_product_id),
+      'baseProductColors' => $this->baseProductColorModel->getByBaseProductId($baseProductVariant->base_product_id),
       'userProducts' => [],
     ]);
   }
@@ -71,16 +71,16 @@ class Planner extends MY_Controller {
     $this->db->query('INSERT INTO `product_variants` (`product_id`, `base_product_variant_id`, `design_id`, `design_width`, `design_left`, `design_top`, `default`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [
       $productId,
       $baseProductVariant->id,
-      $this->input->post('design')[0]['id'],
-      $this->input->post('design')[0]['width'],
-      $this->input->post('design')[0]['left'],
-      $this->input->post('design')[0]['top'],
+      $this->input->post('design')['id'],
+      $this->input->post('design')['width'],
+      $this->input->post('design')['left'],
+      $this->input->post('design')['top'],
       1,
       date('Y-m-d H:i:s'),
       date('Y-m-d H:i:s')
     ]);
 
-    $this->db->query('UPDATE `designs` SET `temporary` = 0 WHERE `id` = ?', [$this->input->post('design')[0]['id']]);
+    $this->db->query('UPDATE `designs` SET `temporary` = 0 WHERE `id` = ?', [$this->input->post('design')['id']]);
 
     $this->load->library('cart', [ 'singleton' => true ]);
     $this->cart->add($productId, $this->input->post('extra_data'));

@@ -44,6 +44,7 @@ export default class KCheckbox extends Bamboo {
     return [
       {
         name: 'checkbox',
+        useShadow: false,
         markup: html => {
           this.classList.toggle('c-checkbox--hover', !this._state.get('disabled') && !this._state.get('isFocused') && this._state.get('isHovered') || false);
           this.classList.toggle('c-checkbox--focus', !this._state.get('disabled') && this._state.get('isFocused') || false);
@@ -60,7 +61,7 @@ export default class KCheckbox extends Bamboo {
             ${this._state.get('error') ? html`<div class="c-checkbox__error">${this._state.get('error')}</div>` : ''}
           `;
         },
-        container: document.createElement('div'),
+        root: document.createElement('div'),
         autoAppend: true
       },
       {

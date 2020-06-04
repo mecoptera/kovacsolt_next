@@ -43,6 +43,7 @@ export default class KRadiobox extends Bamboo {
     return [
       {
         name: 'radiobox',
+        useShadow: false,
         markup: html => {
           this.classList.toggle('c-radiobox--hover', !this._state.get('disabled') && !this._state.get('isFocused') && this._state.get('isHovered') || false);
           this.classList.toggle('c-radiobox--focus', !this._state.get('disabled') && this._state.get('isFocused') || false);
@@ -55,11 +56,12 @@ export default class KRadiobox extends Bamboo {
             </label>
           `;
         },
-        container: document.createElement('div'),
+        root: document.createElement('div'),
         autoAppend: true
       },
       {
         name: 'label',
+        useShadow: false,
         markup: this.querySelector('[data-label]')
       }
     ];

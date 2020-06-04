@@ -18,6 +18,7 @@ export default class KTabs extends Bamboo {
     return [
       {
         name: 'content',
+        useShadow: false,
         markup: html => {
           return html`<div class="c-tabs__tab-container">${this._state.get('tabs') ?
             this._state.get('tabs').map((tab, index) => {
@@ -27,7 +28,7 @@ export default class KTabs extends Bamboo {
             }) : ''
           }</div>`;
         },
-        container: this._templater.parseHTML('<div class="c-notification__message"></div>'),
+        root: this._templater.parseHTML('<div class="c-notification__message"></div>'),
         autoAppend: true,
         prepend: true
       }

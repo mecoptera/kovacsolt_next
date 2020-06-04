@@ -23,18 +23,18 @@ export default class KSelectOption extends Bamboo {
   }
 
   get template() {
-    return [{ name: 'inside', markup: this }];
+    return [{ name: 'inside', useShadow: false, markup: this }];
   }
 
   connectedCallback() {
     super.connectedCallback();
 
-    this._state.set('markup', this._templater.render('inside'), { storeFunction: true });
+    this._state.set('markup', this._templater.render('inside'));
     this._state.set('content', this.textContent);
   }
 
   contentChangedCallback() {
-    this._state.set('markup', this._templater.render('inside'), { storeFunction: true });
+    this._state.set('markup', this._templater.render('inside'));
     this._state.set('content', this.textContent);
   }
 

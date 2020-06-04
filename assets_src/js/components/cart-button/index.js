@@ -30,20 +30,22 @@ export default class KCartButton extends Bamboo {
     return [
       {
         name: 'button',
+        useShadow: false,
         markup: html => this._state.get('count') > 0 ? html`<div class="q-cart-button__badge">${this._state.get('count')}</div>` : html``,
-        container: this._templater.parseHTML('<div></div>'),
+        root: this._templater.parseHTML('<div></div>'),
         autoAppend: true
       },
       {
         name: 'popup',
+        useShadow: false,
         markup: html => html`<div class="q-cart-button__panel"><k-area data-endpoint="${this._state.get('areaEndpoint')}"></k-area></div>`,
-        container: this._templater.parseHTML('<div class="q-cart-button__popup"></div>')
+        root: this._templater.parseHTML('<div class="q-cart-button__popup"></div>')
       }
     ];
   }
 
   _clickHandler(event) {
-    const container = this._templater.getContainer('popup');
+    const container = this._templater.getRoot('popup');
 
     if (container === event.target || container.contains(event.target)) { return false; }
 

@@ -6,16 +6,13 @@ const between = (value, min, max) => {
 
 export default class KResizer extends Bamboo {
   init() {
-    super.init({
-      className: 'q-resizer',
-      notifyParent: true
-    });
+    super.init({ className: 'q-resizer' });
 
     this._mouseMoveHandler = this._mouseMoveHandler.bind(this);
     this._mouseUpHandler = this._mouseUpHandler.bind(this);
   }
 
-  static get defaultState() {
+  static get initialState() {
     return {
       elementWidth: 100,
       elementLeft: 0,
@@ -24,12 +21,14 @@ export default class KResizer extends Bamboo {
   }
 
   static get observedAttributes() {
-    return ['data-design'];
+    return ['data-name', 'data-design-url', 'data-design-id'];
   }
 
   static get boundProperties() {
     return [
-      { name: 'dataDesign', as: 'design' }
+      { name: 'dataName', as: 'name' },
+      { name: 'dataDesignUrl', as: 'designUrl' },
+      { name: 'dataDesignId', as: 'designId' }
     ];
   }
 
@@ -42,6 +41,7 @@ export default class KResizer extends Bamboo {
   get template() {
     return [{
       name: 'resizer',
+      useShadow: false,
       markup: html => {
         const state = this._state.get();
         const width = state.elementWidth;
@@ -50,7 +50,7 @@ export default class KResizer extends Bamboo {
         const height = width * state.elementRatio * state.resizerRatio;
 
         const elementStyle = `width: ${width}%; height: ${height}%; left: ${left}%; top: ${top}%;`;
-        const backgroundStyle = `background-image: url('${state.design}')`;
+        const backgroundStyle = `background-image: url('${state.designUrl}')`;
 
         return html`
           <div class="q-resizer__element" style="${elementStyle}">
@@ -60,9 +60,13 @@ export default class KResizer extends Bamboo {
             <div data-handler="control" data-id="bottomRight" onmousedown="${this}" class="q-resizer__control q-resizer__control--bottom-right"></div>
             <div data-handler="control" data-id="bottomLeft" onmousedown="${this}" class="q-resizer__control q-resizer__control--bottom-left"></div>
           </div>
+          <input type="hidden" name="${state.name + '[id]'}" value="${state.designId}">
+          <input type="hidden" name="${state.name + '[width]'}" value="${state.elementWidth}">
+          <input type="hidden" name="${state.name + '[left]'}" value="${state.elementLeft}">
+          <input type="hidden" name="${state.name + '[top]'}" value="${state.elementTop}">
         `;
       },
-      container: this._templater.parseHTML('<div class="q-resizer__container"></div>'),
+      root: this._templater.parseHTML('<div class="q-resizer__container"></div>'),
       autoAppend: true
     }];
   }
@@ -89,7 +93,7 @@ export default class KResizer extends Bamboo {
       this._state.set('elementRatio', image.naturalHeight / image.naturalWidth);
     });
 
-    image.src = this._state.get('design');
+    image.src = this._state.get('designUrl');
 
     this.appendChild(image);
     this.removeChild(image);

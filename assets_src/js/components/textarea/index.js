@@ -38,22 +38,29 @@ export default class KTextarea extends Bamboo {
   }
 
   get template() {
-    return html => {
-      this.classList.toggle('c-input--hover', !this._state.get('disabled') && !this._state.get('isFocused') && this._state.get('isHovered') || false);
-      this.classList.toggle('c-input--focus', !this._state.get('disabled') && this._state.get('isFocused') || false);
-      this.classList.toggle('c-input--disabled', this._state.get('disabled') || false);
-      this.classList.toggle('c-input--error', this._state.get('error') || false);
-      this.classList.toggle('c-input--has-content', this._state.get('hasContent') || false);
+    return [
+      {
+        name: 'textarea',
+        useShadow: false,
+        markup: html => {
+          this.classList.toggle('c-input--hover', !this._state.get('disabled') && !this._state.get('isFocused') && this._state.get('isHovered') || false);
+          this.classList.toggle('c-input--focus', !this._state.get('disabled') && this._state.get('isFocused') || false);
+          this.classList.toggle('c-input--disabled', this._state.get('disabled') || false);
+          this.classList.toggle('c-input--error', this._state.get('error') || false);
+          this.classList.toggle('c-input--has-content', this._state.get('hasContent') || false);
 
-      return html`
-        <div class="c-input__field">
-          <textarea name="${this._state.get('name')}" id="${this._state.get('uuid')}" placeholder="${this._state.get('placeholder') || ' '}" class="c-input__input" data-handler="textarea" oninput="${this}" onmouseenter="${this}" onmouseleave="${this}" onfocus="${this}" onblur="${this}">${this._state.get('value')}</textarea>
-          ${this._state.get('label') ? html`<label class="c-input__label" for="${this._state.get('uuid')}">${this._state.get('label')}</label>` : ''}
-        </div>
-        ${!this._state.get('error') && this._state.get('helper') ? html`<div class="c-input__helper">${this._state.get('helper')}</div>` : ''}
-        ${this._state.get('error') ? html`<div class="c-input__error">${this._state.get('error')}</div>` : ''}
-      `;
-    };
+          return html`
+            <div class="c-input__field">
+              <textarea name="${this._state.get('name')}" id="${this._state.get('uuid')}" placeholder="${this._state.get('placeholder') || ' '}" class="c-input__input" data-handler="textarea" oninput="${this}" onmouseenter="${this}" onmouseleave="${this}" onfocus="${this}" onblur="${this}">${this._state.get('value')}</textarea>
+              ${this._state.get('label') ? html`<label class="c-input__label" for="${this._state.get('uuid')}">${this._state.get('label')}</label>` : ''}
+            </div>
+            ${!this._state.get('error') && this._state.get('helper') ? html`<div class="c-input__helper">${this._state.get('helper')}</div>` : ''}
+            ${this._state.get('error') ? html`<div class="c-input__error">${this._state.get('error')}</div>` : ''}
+          `;
+        },
+        root: this
+      }
+    ];
   }
 
   connectedCallback() {

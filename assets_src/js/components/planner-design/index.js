@@ -3,10 +3,7 @@ import Bamboo from '@dkocsis-emarsys/bamboo';
 
 export default class KPlannerDesign extends Bamboo {
   init() {
-    super.init({
-      className: 'q-planner-design',
-      listenChildren: true
-    });
+    super.init({ className: 'q-planner-design' });
 
     this._state.subscribe('baseProduct', this._loadBaseProductVariant.bind(this));
   }
@@ -33,30 +30,26 @@ export default class KPlannerDesign extends Bamboo {
   }
 
   get template() {
-    return html => {
-      const state = this._state.get();
-      const productStyle = state.baseProductVariantImage ? `background-image: url(${window.kovacsolt.baseUrl + state.baseProductVariantImage});` : '';
-      const zoneStyle = `width: ${state.zoneWidth}%; height: ${state.zoneHeight}%; left: ${state.zoneLeft}%; top: ${state.zoneTop}%;`;
+    return [
+      {
+        name: 'status',
+        useShadow: false,
+        markup: html => {
+          const state = this._state.get();
+          const productStyle = state.baseProductVariantImage ? `background-image: url(${window.kovacsolt.baseUrl + state.baseProductVariantImage});` : '';
+          const zoneStyle = `width: ${state.zoneWidth}%; height: ${state.zoneHeight}%; left: ${state.zoneLeft}%; top: ${state.zoneTop}%;`;
 
-      return html`
-        <div class="q-planner-design__product" style="${productStyle}">
-          <div class="q-planner-design__zone" style="${zoneStyle}">
-            ${state.designUrl ? html`<k-resizer data-design="${state.designUrl}"></k-resizer>` : null}
-          </div>
-        </div>
-        ${state.resizers && state.resizers.map((resizer, index) => html`
-          <input type="hidden" name="${state.name + '[' + index + '][id]'}" value="${state.designId}">
-          <input type="hidden" name="${state.name + '[' + index + '][width]'}" value="${resizer.state.elementWidth}">
-          <input type="hidden" name="${state.name + '[' + index + '][left]'}" value="${resizer.state.elementLeft}">
-          <input type="hidden" name="${state.name + '[' + index + '][top]'}" value="${resizer.state.elementTop}">
-        `)}
-      `;
-    };
-  }
-
-  childrenChangedCallback(collection) {
-    const childrenList = collection.get();
-    this._state.set('resizers', childrenList);
+          return html`
+            <div class="q-planner-design__product" style="${productStyle}">
+              <div class="q-planner-design__zone" style="${zoneStyle}">
+                ${state.designUrl ? html`<k-resizer data-name="${state.name}" data-design-url="${state.designUrl}" data-design-id="${state.designId}"></k-resizer>` : null}
+              </div>
+            </div>
+          `;
+        },
+        root: this
+      }
+    ];
   }
 
   _loadBaseProductVariant() {

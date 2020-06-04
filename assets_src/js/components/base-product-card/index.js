@@ -32,6 +32,7 @@ export default class KBaseProductCard extends Bamboo {
     return [
       {
         name: 'card',
+        useShadow: false,
         markup: html => {
           const data = this._state.get('detail');
 
@@ -41,11 +42,12 @@ export default class KBaseProductCard extends Bamboo {
             </div>
           `;
         },
-        container: this._templater.parseHTML('<div class="c-product__container"></div>'),
+        root: this._templater.parseHTML('<div class="c-product__container"></div>'),
         autoAppend: true
       },
       {
         name: 'info',
+        useShadow: false,
         markup: html => {
           const data = this._state.get('detail');
 
@@ -55,7 +57,7 @@ export default class KBaseProductCard extends Bamboo {
             </div>
           `;
         },
-        container: this._templater.parseHTML('<div></div>'),
+        root: this._templater.parseHTML('<div></div>'),
         autoAppend: true
       }
     ];

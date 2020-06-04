@@ -19,8 +19,9 @@ export default class KArea extends Bamboo {
   get template() {
     return [{
       name: 'area',
+      useShadow: false,
       markup: html => html`<div class="c-loader"></div>`,
-      container: this._templater.parseHTML('<div class="c-area__container"></div>'),
+      root: this._templater.parseHTML('<div class="c-area__container"></div>'),
       autoAppend: true
     }];
   }
@@ -38,6 +39,6 @@ export default class KArea extends Bamboo {
       method: 'get',
       url: endpoint,
       baseURL: window.kovacsolt.baseUrl
-    }).then(response => this._templater.getContainer('area').innerHTML = response.data.content);
+    }).then(response => this._templater.getRoot('area').innerHTML = response.data.content);
   }
 }
