@@ -10,19 +10,15 @@
 
         <div class="l-grid">
           <form class="u-mx-auto l-grid__col--6" method="post" action="{{ base_url('authentication/password') }}">
-            @csrf
-
-            @if (session('status'))
-              <div class="alert alert-success" role="alert">
-                {{ session('status') }}
-              </div>
+            @if ($this->session->flashdata('success'))
+              <k-notification data-status="success" class="u-mb-16">Minden szükséges információt elküldtünk e-mailben a megadott címre</k-notification>
             @endif
 
             <k-input
               data-name="email"
               data-label="E-mail cím"
-              data-value="{{ $email ?? old('email') }}"
-              @error('email')data-error="{{ $message }}" @enderror
+              data-value="{{ old('email') }}"
+              @error('email')data-error="{{ $errors['email'] }}" @enderror
             ></k-input>
 
             <div class="u-mt-8 u-text-center">

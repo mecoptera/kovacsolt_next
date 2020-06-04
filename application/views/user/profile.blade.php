@@ -18,6 +18,9 @@
             @if($this->session->flashdata('success'))
               <k-notification data-status="success" class="u-mb-16">A változtatások sikeresen mentésre kerültek a rendszerben</k-notification>
             @endif
+            @if ($this->session->flashdata('passwordSuccess'))
+              <k-notification data-status="success" class="u-mb-16">Minden szükséges információt elküldtünk e-mailben a megadott címre</k-notification>
+            @endif
 
               <div>
                 <k-input
@@ -44,7 +47,7 @@
               </div>
 
               <div class="l-form__field">
-                <a href="{{ base_url('user.password.reset') }}" class="c-link">Jelszó megváltoztatása</a>
+                <a href="{{ base_url('user/change_password') }}" class="c-link">Jelszó megváltoztatása</a>
                 <div class="u-helper">E-mailt fogunk küldeni, melyben egy linket találsz a jelszó megváltoztatásához</div>
               </div>
 

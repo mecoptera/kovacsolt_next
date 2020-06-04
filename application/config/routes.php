@@ -17,6 +17,8 @@ $route['admin/product_variant/(:num)'] = 'admin/product_variant/index/$1';
 $route['login'] = 'authentication/index';
 $route['logout'] = 'authentication/logout';
 $route['registration'] = 'authentication/registration';
+$route['user/activate'] = "user/activate";
+$route['user/activate/(:any)'] = "user/activate/$1";
 
 $route['contact'] = 'message/index';
 $route['privacy'] = 'page/privacy';

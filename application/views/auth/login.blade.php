@@ -23,7 +23,7 @@
               data-label="Jelszó"
               @error('password')data-error @enderror
             >
-              <template data-helper><a href="{{ base_url('authentication/password') }}">Elfelejtettem a jelszavam</a></template>
+              <template data-helper><a href="{{ base_url('authentication/password') }}" class="c-link">Elfelejtettem a jelszavam</a></template>
             </k-input>
 
             <k-checkbox data-name="remember" data-label="Emlékezz rám ezen a gépen"></k-checkbox>

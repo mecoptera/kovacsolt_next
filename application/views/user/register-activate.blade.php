@@ -10,7 +10,9 @@
           <div class="l-grid">
             <div class="u-mx-auto l-grid__col--6">
               <div class="l-grid__row u-text-center">
-                <div class="c-panel__status c-panel__status--success"></div>
+                <div class="c-panel__status c-panel__status--success">
+                  <k-icon data-icon="success" data-color="brand" data-size="24"></k-icon>
+                </div>
               </div>
 
               <div class="l-grid__row l-grid__row--center">
@@ -20,7 +22,7 @@
               </div>
               <div class="l-grid__row l-grid__row--center">
                 <div class="l-grid__col-sm-8 u-text-center">
-                  <a class="c-button c-button--outline" href="{{ route('page.welcome') }}">Vissza a kezdőoldalra</a>
+                  <a class="c-button c-button--outline" href="{{ base_url('login') }}">Vissza a bejelentkezéshez</a>
                 </div>
               </div>
             </div>

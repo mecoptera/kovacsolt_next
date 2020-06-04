@@ -39,7 +39,7 @@
         </div>
         <div class="q-menu__right">
         @if ($this->userModel->isLoggedIn())
-          <a href="{{ base_url('profile') }}" class="q-menu__link-button u-flex u-items-center">
+          <a href="{{ base_url('user/profile') }}" class="q-menu__link-button u-flex u-items-center">
         @else
           <a href="{{ base_url('login') }}" class="q-menu__link-button ">
         @endif

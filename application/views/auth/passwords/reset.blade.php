@@ -9,23 +9,12 @@
         <h1 class="c-panel__title">Új jelszó</h1>
 
         <div class="l-grid">
-          <form class="u-mx-auto l-grid__col--6" method="post" action="{{ route('password.update') }}">
-            @csrf
-
-            <input type="hidden" name="token" value="{{ $token }}">
-
-            <k-input
-              data-name="email"
-              data-label="E-mail cím"
-              data-value="{{ $email ?? old('email') }}"
-              @error('email')data-error="{{ $message }}" @enderror
-            ></k-input>
-
+          <form class="u-mx-auto l-grid__col--6" method="post" action="{{ current_url() }}">
             <k-input
               data-type="password"
               data-name="password"
               data-label="Jelszó"
-              @error('password')data-error="{{ $message }}" @enderror
+              @error('password')data-error="{{ $errors['password'] }}" @enderror
             >
             </k-input>
 
@@ -33,6 +22,7 @@
               data-type="password"
               data-name="password_confirmation"
               data-label="Jelszó újra"
+              @error('password_confirmation')data-error="{{ $errors['password_confirmation'] }}" @enderror
             >
             </k-input>
 

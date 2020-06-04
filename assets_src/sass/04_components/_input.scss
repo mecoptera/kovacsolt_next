@@ -50,7 +50,7 @@
     }
 
     .c-input--type-password & {
-      padding: 0 54px 0 8px;
+      padding: 0 48px 0 8px;
     }
 
     .c-input--focus & {
@@ -158,8 +158,8 @@
   &__password {
     cursor: pointer;
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 8px;
+    top: 7px;
   }
 
   &__helper,

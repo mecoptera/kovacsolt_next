@@ -37,6 +37,14 @@ class Migration_Create_users extends CI_Migration {
         'unsigned' => true,
         'default' => 0,
       ),
+      'created_at' => array(
+        'type' => 'TIMESTAMP',
+        'null' => true,
+      ),
+      'updated_at' => array(
+        'type' => 'TIMESTAMP',
+        'null' => true,
+      ),
     ));
     $this->dbforge->add_key('id', true);
     $this->dbforge->create_table('users');

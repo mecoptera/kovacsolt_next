@@ -11,13 +11,15 @@
   }
 
   &__status {
+    align-items: center;
     background-position: center;
     background-repeat: no-repeat;
     background-size: 96px;
     border: 8px solid var(--color-primary);
     border-radius: 100%;
-    display: inline-block;
+    display: inline-flex;
     height: 128px;
+    justify-content: center;
     margin: 0 auto 48px;
     width: 128px;
 

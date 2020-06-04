@@ -26,6 +26,7 @@ class Message extends MY_Controller {
 
     if ($this->form_validation->run() === false) {
       $this->session->set_flashdata('validationErrors', $this->form_validation->error_array());
+      $this->session->set_flashdata('old', $this->input->post());
 
       return redirect(current_url());
     }

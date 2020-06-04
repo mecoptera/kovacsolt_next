@@ -8,22 +8,20 @@
 
         <div class="l-grid">
           <form class="u-mx-auto l-grid__col--6" method="post" action="{{ base_url('registration') }}">
-            @csrf
-
             <k-input
               data-fluid
-              data-name="name"
+              data-name="fullname"
               data-label="Név"
-              @if (old('name'))data-value="{{ old('name') }}"@endif
-              @error('name')data-error="{{ $message }}" @enderror
+              data-value="{{ old('fullname') }}"
+              @error('name')data-error="{{ $errors['fullname'] }}"@enderror
             ></k-input>
 
             <k-input
               data-fluid
               data-name="email"
               data-label="E-mail cím"
-              @if (old('email'))data-value="{{ old('email') }}"@endif
-              @error('email')data-error="{{ $message }}" @enderror
+              data-value="{{ old('email') }}"
+              @error('email')data-error="{{ $errors['email'] }}"@enderror
             ></k-input>
 
             <k-input
@@ -31,7 +29,7 @@
               data-type="password"
               data-name="password"
               data-label="Jelszó"
-              @error('password')data-error="{{ $message }}" @enderror
+              @error('password')data-error="{{ $errors['password'] }}"@enderror
             >
             </k-input>
 
@@ -44,8 +42,8 @@
             >
             </k-input>
 
-            <k-checkbox data-name="remember">
-              <template data-label>Megértettem és elfogadom az&nbsp;<a href="{{ base_url('privacy') }}" target="_blank">Adatkezelési tájékoztatóban</a>&nbsp;leírtakat</template>
+            <k-checkbox data-name="accept" @error('accept')data-error="{{ $errors['accept'] }}"@enderror>
+              <template data-label>Megértettem és elfogadom az&nbsp;<a href="{{ base_url('privacy') }}" target="_blank" class="c-link">Adatkezelési tájékoztatóban</a>&nbsp;leírtakat</template>
             </k-checkbox>
 
             <div class="u-mt-8 u-text-center">
