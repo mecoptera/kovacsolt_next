@@ -281,10 +281,7 @@ ul.social li{
 
 <body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #222222;">
   <center style="width: 100%; background-color: #e2e4e8;">
-    <div style="display: none; font-size: 1px;max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
-      &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
-    </div>
-    <div style="max-width: 600px; margin: 0 auto;" class="email-container">
+    <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff;">
       <!-- BEGIN BODY -->
       <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
         <tr>
@@ -292,7 +289,7 @@ ul.social li{
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
               <tr>
                 <td align="center">
-                  <h1><a href="{{ base_url() }}"><img src="{{ asset('images/logo-full.svg') }}" alt="Kovácsolt póló"></a></h1>
+                  <h1><a href="{{ base_url() }}"><img src="{{ asset('images/logo-full.svg') }}" alt="Kovácsolt póló" style="text-decoration: none;"></a></h1>
                 </td>
               </tr>
             </table>
@@ -326,11 +323,27 @@ ul.social li{
             </table>
           </td>
         </tr>
+      <!-- 1 Column Text + Button : END -->
+      </table>
+      <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
+        <tr>
+          <td style="padding: 0 2.5em; text-align: center; background-color: #f4f4f4;">
+            <p>Szeretnél leiratkozni hírlevelünkről és nem értesülni a jobbnál jobb akciókról? Amennyiben igen, akkor <a href="#" style="text-decoration: none; color: #941f2a;">ezen a linken leiratkozhatsz</a>.</p>
+          </td>
+        </tr>
+      </table>
+
+    </div>
+  </center>
+</body>
+</html>
+
+@section('promo')
         <tr>
           <td class="bg_white">
             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
               <tr>
-                <td class="bg_light email-section" style="padding: 0; width: 100%;">
+                <td class="email-section" style="padding: 0; width: 100%; background-color: #f4f4f4;">
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                     <tr>
                       <td valign="middle" width="50%">
@@ -360,7 +373,7 @@ ul.social li{
                 </td>
               </tr><!-- end: tr -->
               <tr>
-                <td class="bg_light email-section" style="padding: 0; width: 100%;">
+                <td class="email-section" style="padding: 0; width: 100%; background-color: #f4f4f4;">
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                     <tr>
                       <td valign="middle" width="50%">
@@ -392,22 +405,9 @@ ul.social li{
             </table>
           </td>
         </tr><!-- end:tr -->
-        <tr>
-          <td valign="middle" class="bg_white" style="padding: 2em 0;">
-            <table>
-              <tr>
-                <td>
-                  <div class="text" style="padding: 0 2.5em; text-align: center;">
-                    <p><a href="#" class="btn btn-black-outline">Vásárolj nálunk</a></p>
-                  </div>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr><!-- end tr -->
-      <!-- 1 Column Text + Button : END -->
-      </table>
-      <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
+@endsection
+
+@section('social')
         <tr>
           <td valign="middle" class="bg_white footer">
             <table>
@@ -434,14 +434,4 @@ ul.social li{
             </table>
           </td>
         </tr><!-- end: tr -->
-        <tr>
-          <td class="bg_light" style="padding: 0 2.5em; text-align: center;">
-            <p>Szeretnél leiratkozni hírlevelünkről és nem értesülni a jobbnál jobb akciókról? Amennyiben igen, akkor <a href="#" style="color: #941f2a;">ezen a linken leiratkozhatsz</a>.</p>
-          </td>
-        </tr>
-      </table>
-
-    </div>
-  </center>
-</body>
-</html>
+@endsection

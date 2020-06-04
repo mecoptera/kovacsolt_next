@@ -38,6 +38,19 @@
  */
 
 /*
+ * --------------------------------------------------------------------
+ * LOAD PHP DOT ENV FILE
+ * --------------------------------------------------------------------
+ *
+ * And away we go...
+ *
+ */
+require_once __DIR__ . '/application/third_party/dotenv/autoloader.php';
+
+$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv->load();
+
+/*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
  *---------------------------------------------------------------
@@ -54,7 +67,7 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-	define('ENVIRONMENT', 'development');
+	define('ENVIRONMENT', getenv('ENVIRONMENT'));
 
 /*
  *---------------------------------------------------------------
@@ -305,6 +318,7 @@ switch (ENVIRONMENT)
 	}
 
 	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
+
 
 /*
  * --------------------------------------------------------------------

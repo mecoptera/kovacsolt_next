@@ -3,15 +3,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Authentication extends MY_Controller {
-  private $emailConfiguration = [
-    'protocol' => 'smtp',
-    'smtp_host' => 'localhost',
-    'smtp_port' => 18082,
-    'mailtype' => 'html',
-    'newline' => "\r\n",
-    'wordwrap' => false
-  ];
-
   protected $middlewares = [
     'Auth.isLoggedIn' => 'except::index|indexPost|registration|registrationPost|password|passwordPost|change_password|change_passwordPost'
   ];
@@ -102,11 +93,10 @@ class Authentication extends MY_Controller {
     $this->userModel->create();
     $activationHash = $this->userModel->createEmailActivation($this->input->post('email'));
     
-    $this->load->library('email', $this->emailConfiguration);
+    $this->load->library('email');
 
-    $this->email->from('admin@yourdomainname.com', 'Kovácsolt Póló');
+    $this->email->from('admin@kovacsoltpolo.hu', 'Kovácsolt Póló');
     $this->email->to($this->input->post('email'));
-    $this->email->cc('testcc@domainname.com');
     $this->email->subject('Fiók aktiválása');
     $this->email->message($this->slice->view('mail.activate-user', ['activationHash' => $activationHash]));
     $this->email->send();
@@ -138,11 +128,10 @@ class Authentication extends MY_Controller {
 
     $changeHash = $this->userModel->createPasswordChange($this->input->post('email'));
     
-    $this->load->library('email', $this->emailConfiguration);
+    $this->load->library('email');
 
-    $this->email->from('admin@yourdomainname.com', 'Kovácsolt Póló');
+    $this->email->from('admin@kovacsoltpolo.hu', 'Kovácsolt Póló');
     $this->email->to($this->input->post('email'));
-    $this->email->cc('testcc@domainname.com');
     $this->email->subject('Jelszó megváltoztatása');
     $this->email->message($this->slice->view('mail.password-change', ['changeHash' => $changeHash]));
     $this->email->send();

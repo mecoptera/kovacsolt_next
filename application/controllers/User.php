@@ -3,15 +3,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class User extends MY_Controller {
-  private $emailConfiguration = [
-    'protocol' => 'smtp',
-    'smtp_host' => 'localhost',
-    'smtp_port' => 18082,
-    'mailtype' => 'html',
-    'newline' => "\r\n",
-    'wordwrap' => false
-  ];
-
   protected $middlewares = [ 'Auth.isLoggedIn' => 'except::activate' ];
 
   public function __construct() {
@@ -52,11 +43,10 @@ class User extends MY_Controller {
   public function change_password() {
     $changeHash = $this->userModel->createPasswordChange($this->session->userdata('user')->email);
     
-    $this->load->library('email', $this->emailConfiguration);
+    $this->load->library('email');
 
-    $this->email->from('admin@yourdomainname.com', 'Kovácsolt Póló');
-    $this->email->to($this->session->userdata('user')->email);
-    $this->email->cc('testcc@domainname.com');
+    $this->email->from('krazyqwed@gmail.com', 'Kovácsolt Póló');
+    $this->email->to('krazyqwed@gmail.com');
     $this->email->subject('Jelszó megváltoztatása');
     $this->email->message($this->slice->view('mail.password-change', ['changeHash' => $changeHash]));
     $this->email->send();
