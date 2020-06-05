@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Cart_product_model extends CI_Model {
   public function getAllByCartId($cartId) {
-    return $this->db->query('SELECT * FROM `cart_products` WHERE `cart_id` = ?', [ $cartId ])->result();
+    return $this->db->query('SELECT * FROM `cart_products` WHERE `cart_id` = ?', [$cartId])->result();
   }
 
   public function updateOrCreate($cartId, $item) {

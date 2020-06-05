@@ -25,5 +25,5 @@
     <a href="{{ base_url('cart') }}" class="c-button c-button--small">Tovább a kosárhoz</a>
   </div>
 @else
-  <h4 class="u-text-center u-m-0">A kosár üres!</h4>
+  <h4 class="u-text-center u-m-0 u-pt-3">A kosár üres!</h4>
 @endif

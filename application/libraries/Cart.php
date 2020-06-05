@@ -31,12 +31,13 @@ class Cart {
     if ($this->CI->session->userdata('cart') !== null) {
       $this->items = $this->CI->session->userdata('cart');
     } elseif ($this->userId !== null) {
+      $this->CI->load->model('product_model', 'productModel');
       $cartItems = $this->CI->cartProductModel->getAllByCartId($this->cartId);
 
       foreach ($cartItems as $cartItem) {
         $this->items[$cartItem->unique_id] = [
           'uniqueId' => $cartItem->unique_id,
-          'product' => $cartItem->product,
+          'product' => $this->CI->productModel->get($cartItem->product_id),
           'extraData' => json_decode($cartItem->extra_data, true),
           'quantity' => $cartItem->quantity,
         ];
