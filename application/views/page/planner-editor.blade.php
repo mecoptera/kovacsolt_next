@@ -114,7 +114,7 @@
           @endif
 
           <div class="u-mt-16 u-p-8 u-text-center">
-            <p class="u-mb-0">Nem adtunk elég teret a kreativitásodnak? <a href="{{ base_url('page.contact') }}">Vedd fel velünk a kapcsolatot</a> és segítünk megvalósítani!</p>
+            <p class="u-mb-0">Nem adtunk elég teret a kreativitásodnak? <a href="{{ base_url('contact') }}" class="c-link">Vedd fel velünk a kapcsolatot</a> és segítünk megvalósítani!</p>
           </div>
         </div>
       </div>

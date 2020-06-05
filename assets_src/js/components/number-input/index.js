@@ -52,10 +52,11 @@ export default class KNumberInput extends Bamboo {
         useShadow: false,
         markup: html => html`
           <input type="hidden" name="${this._state.get('name')}" value="${this._state.get('value')}">
-          <div data-handler="decrease" onclick="${this}" class="c-number-input__button"><k-icon data-icon="minus"></k-icon></div>
+          <div data-handler="decrease" onclick="${this}" class="c-number-input__button"><k-icon data-icon="minus" data-color="inherit"></k-icon></div>
           <k-input data-value="${this._state.get('value')}" data-handler="input" oninput="${this}" onblur="${this}" class="c-number-input__input"></k-input>
-          <div data-handler="increase" onclick="${this}" class="c-number-input__button"><k-icon data-icon="plus"></k-icon></div>
-        `
+          <div data-handler="increase" onclick="${this}" class="c-number-input__button"><k-icon data-icon="plus" data-color="inherit"></k-icon></div>
+        `,
+        root: this
       }
     ];
   }

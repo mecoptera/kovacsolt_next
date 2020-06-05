@@ -26,6 +26,7 @@
                 <k-input
                   data-name="fullname"
                   data-label="Név"
+                  data-helper="Nem kötelező megadni"
                   data-value="{{ $user->fullname }}"
                 ></k-input>
               </div>
@@ -42,6 +43,7 @@
                 <k-input
                   data-name="phone"
                   data-label="Telefonszám"
+                  data-helper="Nem kötelező megadni"
                   data-value="{{ $user->phone }}"
                 ></k-input>
               </div>

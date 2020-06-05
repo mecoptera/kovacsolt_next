@@ -22,7 +22,7 @@
               </div>
               <div class="l-grid__row l-grid__row--center">
                 <div class="l-grid__col-sm-8 u-text-center">
-                  <a class="c-button c-button--outline" href="{{ base_url('login') }}">Vissza a bejelentkezéshez</a>
+                  <a class="c-button c-button--outline" href="{{ base_url($this->session->userdata('login_success_redirect') ? $this->session->userdata('login_success_redirect') : 'login') }}">Vissza a bejelentkezéshez</a>
                 </div>
               </div>
             </div>

@@ -12,7 +12,7 @@
           <k-input
             data-name="name"
             data-label="Név"
-            data-value="{{ old('name') }}"
+            data-value="{{ old('name') ? old('name') : ($this->userModel->isLoggedIn() ? $this->session->userdata('user')->fullname : '') }}"
             @error('name')data-error="{{ $errors['name'] }}"@enderror
           ></k-input>
 
@@ -43,7 +43,7 @@
           <k-input
             data-name="email"
             data-label="E-mail cím"
-            data-value="{{ old('email') }}"
+            data-value="{{ old('email') ? old('email') : ($this->userModel->isLoggedIn() ? $this->session->userdata('user')->email : '') }}"
             @error('email')data-error="{{ $errors['email'] }}"@enderror
           ></k-input>
 
@@ -51,8 +51,8 @@
             data-name="phone"
             data-label="Telefonszám"
             data-placeholder="Példa: 06 12 345 6789"
-            data-helper="Nem kötelező kitölteni"
-            data-value="{{ old('phone') }}"
+            data-helper="Nem kötelező megadni"
+            data-value="{{ old('phone') ? old('phone') : ($this->userModel->isLoggedIn() ? $this->session->userdata('user')->phone : '') }}"
           ></k-input>
 
           <div class="l-form__field u-text-center">

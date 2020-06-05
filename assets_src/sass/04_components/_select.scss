@@ -6,6 +6,7 @@
 
   &__opener {
     align-items: center;
+    background: var(--color-form-element-background);
     border-bottom: 2px solid var(--color-form-element);
     color: var(--color-form-element);
     cursor: pointer;
@@ -22,6 +23,7 @@
     }
 
     &--inline {
+      background: transparent;
       border-bottom-width: 0;
     }
 
@@ -78,6 +80,10 @@
 
     .c-select--hover & {
       color: var(--color-form-element-hover);
+    }
+
+    .c-select--focus & {
+      font-weight: 600;
     }
 
     .c-select--error & {

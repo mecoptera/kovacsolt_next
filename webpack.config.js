@@ -48,6 +48,6 @@ module.exports = {
         { from: './assets_src/*.*', flatten: true, globOptions: { ignore: ['index.js']} }
       ]
     }),
-    new MiniCssExtractPlugin({ filename: 'css/[name].css', chunkFilename: 'css/[name].css' })
+    new MiniCssExtractPlugin({ filename: 'css/[name].css' })
   ]
 };

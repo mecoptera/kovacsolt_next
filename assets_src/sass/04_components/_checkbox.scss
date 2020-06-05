@@ -83,6 +83,7 @@
       color: var(--color-primary);
 
       &:before {
+        background: var(--color-form-element-error-background);
         border: 2px solid var(--color-primary);
       }
     }

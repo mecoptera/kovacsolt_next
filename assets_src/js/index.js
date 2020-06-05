@@ -51,6 +51,17 @@ customElements.define('k-icon', KIcon);
 customElements.define('k-format', KFormat);
 
 (() => {
+  if (!document.querySelector('#js-order-shipping-data-section')) { return; }
+  
+  const sectionElement = document.querySelector('#js-order-shipping-data-section');
+  const selectElement = document.querySelector('#js-order-shipping-data-select');
+  selectElement.addEventListener('change', event => {
+    sectionElement.classList.toggle('u-hidden', event.target.value === 'personal');
+  });
+})();
+
+
+(() => {
   if (!document.querySelector('#js-select-product-sort_by')) { return; }
 
   const selectElement = document.querySelector('#js-select-product-sort_by');
@@ -129,7 +140,7 @@ customElements.define('k-format', KFormat);
     modal.close();
   };
 
-  modal.addFooterBtn('Mégse', 'c-button c-button--outline u-mr-4', modal.close.bind(this));
+  modal.addFooterBtn('Mégse', 'c-button c-button--outline u-mr-4', function() { modal.close(); });
   modal.addFooterBtn('Hozzáadom', 'c-button', addDesignToZone.bind(this));
 
   const modalOpeners = document.querySelectorAll('.js-design-modal-open');
@@ -212,9 +223,6 @@ customElements.define('k-format', KFormat);
       modal.close();
     };
 
-    modal.addFooterBtn('Mégse', 'c-button c-button--outline u-mr-4', () => { modal.close(); });
-    modal.addFooterBtn('Mentés', 'c-button', saveDesign.bind(this));
-
     modal.setContent(`
       <div class="c-panel">
         <div class="c-panel__content">
@@ -228,6 +236,10 @@ customElements.define('k-format', KFormat);
         </div>
       </div>
     `);
+
+    modal.addFooterBtn('Mégse', 'c-button c-button--outline u-mr-4', function() { modal.close(); });
+    modal.addFooterBtn('Mentés', 'c-button', saveDesign.bind(this));
+
     modal.open();
   });
 })();

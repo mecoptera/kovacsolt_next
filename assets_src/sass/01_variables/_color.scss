@@ -25,9 +25,12 @@
 
   --color-form-element: #a7bacc;
   --color-form-element-hover: #62788c;
+  --color-form-element-background: #f8f8f8;
   --color-form-element-disabled-background: #e8eaed;
+  --color-form-element-error-background: rgba(var(--color-primary-rgb), .05);
   --color-form-text: var(--color-text-body);
   --color-form-text-placeholder: #cbd7e2;
+  --color-form-text-error-placeholder: rgba(var(--color-primary-rgb), .45);
   --color-form-border: var(--color-primary);
   --color-form-border-active: var(--color-primary-mid);
 }

@@ -9,7 +9,7 @@ class Authentication extends MY_Controller {
 
   public function index() {
     if ($this->userModel->isLoggedIn()) {
-      return redirect('');
+      return redirect($this->session->userdata('login_success_redirect') ? $this->session->userdata('login_success_redirect') : '');
     }
 
     $this->session->set_userdata('login_error_redirect', 'authentication');
@@ -96,7 +96,7 @@ class Authentication extends MY_Controller {
     $this->load->library('email');
 
     $this->email->from('admin@kovacsoltpolo.hu', 'Kovácsolt Póló');
-    $this->email->to($this->input->post('email'));
+    $this->email->to(ENVIRONMENT === 'development' ? 'krazyqwed@gmail.com' : $this->input->post('email'));
     $this->email->subject('Fiók aktiválása');
     $this->email->message($this->slice->view('mail.activate-user', ['activationHash' => $activationHash]));
     $this->email->send();
@@ -131,7 +131,7 @@ class Authentication extends MY_Controller {
     $this->load->library('email');
 
     $this->email->from('admin@kovacsoltpolo.hu', 'Kovácsolt Póló');
-    $this->email->to($this->input->post('email'));
+    $this->email->to(ENVIRONMENT === 'development' ? 'krazyqwed@gmail.com' : $this->input->post('email'));
     $this->email->subject('Jelszó megváltoztatása');
     $this->email->message($this->slice->view('mail.password-change', ['changeHash' => $changeHash]));
     $this->email->send();

@@ -46,7 +46,7 @@
         @endif
             <k-icon data-icon="person" data-color="{{ isIndexPage() ? 'white' : 'text' }}" data-size="8"></k-icon>
             
-            @if ($this->userModel->isLoggedIn())
+            @if ($this->userModel->isLoggedIn() && mb_strlen($this->session->userdata('user')->fullname) !== 0)
               <span class="u-inline-block u-mx-2 u-text-xs u-uppercase u-font-bold {{ isIndexPage() ? 'u-text-white' : '' }}">
                 {{ mb_substr($this->session->userdata('user')->fullname, 0, 24) }}
               </span>

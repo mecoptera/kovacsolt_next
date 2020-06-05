@@ -25,7 +25,7 @@ class User extends MY_Controller {
     $userData = $this->userModel->getByEmail($this->session->userdata('user')->email);
     $this->userModel->login($userData);
 
-    redirect('profile');
+    redirect('user/profile');
   }
 
   public function activate($hash = null) {
@@ -34,19 +34,20 @@ class User extends MY_Controller {
       $userData = $this->userModel->getByEmail($email);
       $this->userModel->login($userData);
 
-      redirect('');
+      redirect('login');
     } else {
       $this->slice->view('user.register-activate');
     }
   }
 
   public function change_password() {
-    $changeHash = $this->userModel->createPasswordChange($this->session->userdata('user')->email);
+    $email = $this->session->userdata('user')->email;
+    $changeHash = $this->userModel->createPasswordChange($email);
     
     $this->load->library('email');
 
     $this->email->from('krazyqwed@gmail.com', 'Kovácsolt Póló');
-    $this->email->to('krazyqwed@gmail.com');
+    $this->email->to(ENVIRONMENT === 'development' ? 'krazyqwed@gmail.com' : $email);
     $this->email->subject('Jelszó megváltoztatása');
     $this->email->message($this->slice->view('mail.password-change', ['changeHash' => $changeHash]));
     $this->email->send();

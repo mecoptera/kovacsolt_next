@@ -44,7 +44,7 @@
     @foreach($products as $product)
       <div class="l-grid__col--3 u-flex u-flex-col">
         <k-product-card class="u-m-4 u-flex-auto" data-detail="{{ htmlspecialchars(json_encode($product), ENT_QUOTES, 'UTF-8') }}" data-url="{{ base_url('product/' . $product->id) }}">
-          <k-product-card-action data-label="Tovább a termékhez" data-url="{{ base_url('page/product/' . $product->id) }}" data-icon="eye"></k-product-card-action>
+          <k-product-card-action data-label="Termék megtekintése" data-url="{{ base_url('page/product/' . $product->id) }}"></k-product-card-action>
         </k-product-card>
       </div>
     @endforeach
@@ -56,7 +56,7 @@
 </div>
 
 <div class="q-contact c-panel">
-  <div class="l-container l-container--smaller l-container--padding c-panel__content u-mb-0">
+  <div class="l-container l-container--smaller l-container--padding c-panel__content u-mb-0 u-p-0 u-pt-12">
     <h2 class="c-panel__title u-text-white">Feliratkozás hírlevélre</h2>
     <p>Amennyiben a későbbiekben szeretnél értesülni a legújabb akciókról, ne habozz, add meg a címed lent.</p>
 

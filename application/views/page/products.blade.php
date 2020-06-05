@@ -68,7 +68,7 @@
         @foreach($products as $product)
           <div class="l-grid__col--4 u-flex u-flex-col">
             <k-product-card class="u-m-4 u-flex-auto" data-detail="{{ htmlspecialchars(json_encode($product), ENT_QUOTES, 'UTF-8') }}" data-url="{{ base_url('product/' . $product->id) }}">
-              <k-product-card-action data-label="Tovább a termékhez" data-url="{{ base_url('product/' . $product->id) }}" data-icon="eye"></k-product-card-action>
+              <k-product-card-action data-label="Termék megtekintése" data-url="{{ base_url('product/' . $product->id) }}"></k-product-card-action>
             </k-product-card>
           </div>
         @endforeach

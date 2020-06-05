@@ -10,27 +10,28 @@
 
         <div class="l-grid">
           <form class="l-form l-grid__col--6 l-grid__col--offset-" method="post" action="{{ current_url() }}">
-            <p class="u-text-center">Amennyiben kérdésed van, ajánlatot kérnél, vagy visszajelzést szeretnél adni, írj a <a href="mailto: hello@kovacsoltpolo.hu">hello@kovacsoltpolo.hu</a> címre, vagy hagyj üzenetet az űrlap kitöltésével.</p>
+            <p class="u-text-center">Amennyiben kérdésed van, ajánlatot kérnél, vagy visszajelzést szeretnél adni, írj a <a href="mailto: hello@kovacsoltpolo.hu" class="c-link">hello@kovacsoltpolo.hu</a> címre, vagy hagyj üzenetet az űrlap kitöltésével.</p>
 
             <k-input
               data-name="name"
-              data-label="Név"
+              data-label="Neved"
               data-value="{{ old('name') }}"
               @error('name')data-error="{{ $errors['name'] }}"@enderror
             ></k-input>
 
             <k-input
               data-name="email"
-              data-label="E-mail cím"
+              data-label="E-mail címed"
               data-value="{{ old('email') }}"
               @error('email')data-error="{{ $errors['email'] }}"@enderror
             ></k-input>
 
             <k-textarea
               data-name="message"
-              data-label="Üzenet"
+              data-label="Miben segíthetünk?"
               data-value="{{ old('message') }}"
               @error('message')data-error="{{ $errors['message'] }}"@enderror
+              class="u-mt-16"
             ></k-textarea>
 
             <k-checkbox data-name="accept" @error('accept')data-error="{{ $errors['accept'] }}"@enderror>

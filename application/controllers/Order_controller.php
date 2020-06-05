@@ -5,9 +5,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Order_controller extends MY_Controller {
   private $shippingMethods = [
     ['key' => 'personal', 'value' => 'Személyes átvétel', 'price' => 0],
-    ['key' => 'post', 'value' => 'Postai átvétel', 'price' => 800],
+    // ['key' => 'post', 'value' => 'Postai átvétel', 'price' => 800],
     ['key' => 'delivery', 'value' => 'Házhozszállítás, utánvét', 'price' => 1200],
-    ['key' => 'post_point', 'value' => 'Átvétel csomagponton', 'price' => 800]
+    // ['key' => 'post_point', 'value' => 'Átvétel csomagponton', 'price' => 800]
   ];
 
   private $paymentMethods = [
@@ -49,6 +49,13 @@ class Order_controller extends MY_Controller {
     $this->slice->view('page.order.profile', ['step' => 0, 'errors' => $this->session->flashdata('errors')]);
   }
 
+  public function registration() {
+    $this->session->set_userdata('login_error_redirect', 'order');
+    $this->session->set_userdata('login_success_redirect', 'order');
+
+    return redirect('registration');
+  }
+
   public function billing() {
     $this->load->helper('MY_form_helper');
 
@@ -61,6 +68,8 @@ class Order_controller extends MY_Controller {
 
   public function billingPost() {
     $this->load->library('form_validation');
+
+    $this->session->set_userdata('order.billingData', $this->input->post());
 
     $this->form_validation->set_error_delimiters('', '');
 
@@ -76,8 +85,6 @@ class Order_controller extends MY_Controller {
       'required' => 'Kötelező kitölteni',
       'valid_email' => 'Nem megfelelő e-mail formátum',
     ]);
-
-    $this->session->set_userdata('order.billingData', $this->input->post());
 
     if ($this->form_validation->run() === false) {
       $this->session->set_flashdata('validationErrors', $this->form_validation->error_array());
@@ -100,6 +107,8 @@ class Order_controller extends MY_Controller {
   public function shippingPost() {
     $this->load->library('form_validation');
 
+    $this->session->set_userdata('order.shippingData', $this->input->post());
+
     if ($this->input->post('shipping_method') === 'delivery') {
       $this->form_validation->set_error_delimiters('', '');
 
@@ -121,8 +130,6 @@ class Order_controller extends MY_Controller {
         return redirect(current_url());
       }
     }
-
-    $this->session->set_userdata('order.shippingData', $this->input->post());
 
     return redirect('order/payment');
   }
