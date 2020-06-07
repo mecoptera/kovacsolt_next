@@ -21,6 +21,7 @@ class Migration_Create_orders extends CI_Migration {
       'user_id' => array(
         'type' => 'INT',
         'unsigned' => true,
+        'null' => true,
       ),
       'billing_data' => array(
         'type' => 'LONGTEXT',

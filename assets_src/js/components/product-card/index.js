@@ -52,8 +52,8 @@ export default class KProductCard extends Bamboo {
           this.classList.toggle('c-product--hover', !!this._state.get('hover'));
           this.classList.toggle('c-product--hide-info', !!hideInfo);
 
-          const productImage = window.kovacsolt.baseUrl + 'media/variant/' + data.baseProductVariantId;
-          const designImage = window.kovacsolt.baseUrl + 'media/design/' + data.productVariantDesignId;
+          const productImage = data.baseProductVariantImage;
+          const designImage = data.productVariantDesignImage;
 
           return html`
             <div class="c-product__product-layer">

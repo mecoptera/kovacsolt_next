@@ -8,3 +8,11 @@ function asset($path) {
 
   return base_url('assets') . '/' . $path;
 }
+
+function media($type, $id, $size = 'original') {
+  $files = glob(FCPATH . 'uploads/' . $type . '/' . $id . '/' . $size . '.*', GLOB_BRACE);
+
+  if (!$files) { die('Error file'); }
+
+  return base_url('uploads') . '/' . $type . '/' . $id . '/' . basename($files[0]);
+}

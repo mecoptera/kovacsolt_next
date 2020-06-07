@@ -1,4 +1,35 @@
+<Files *.js.br>
+  AddType "text/javascript" .br
+  AddEncoding br .br
+</Files>
+<Files *.css.br>
+  AddType "text/css" .br
+  AddEncoding br .br
+</Files>
+<Files *.svg.br>
+  AddType "image/svg+xml" .br
+  AddEncoding br .br
+</Files>
+
+<Files *.js.gz>
+  AddType "text/javascript" .gz
+  AddEncoding gzip .gz
+</Files>
+<Files *.css.gz>
+  AddType "text/css" .gz
+  AddEncoding gzip .gz
+</Files>
+<Files *.svg.gz>
+  AddType "image/svg+xml" .gz
+  AddEncoding gzip .gz
+</Files>
+
+<Files *.webp>
+  AddType "image/webp" .webp
+</Files>
+
 RewriteEngine On
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php/$1 [L]
@@ -14,3 +45,16 @@ RewriteRule ^(postcss.config.js) - [F,L,NC]
 RewriteRule ^(tailwind.config.js) - [F,L,NC]
 RewriteRule ^(webpack.config.js) - [F,L,NC]
 
+RewriteCond %{HTTP:Accept-Encoding} br
+RewriteCond %{REQUEST_FILENAME}.br -f
+RewriteRule ^(.*)$ $1.br [L]
+
+RewriteCond %{HTTP:Accept-Encoding} gzip
+RewriteCond %{REQUEST_FILENAME}.gz -f
+RewriteRule ^(.*)$ $1.gz [L]
+
+RewriteCond %{HTTP_ACCEPT} image/webp
+RewriteCond %{REQUEST_FILENAME} (.*)\.(jpe?g|png)$
+RewriteCond %{QUERY_STRING} !^original=true
+RewriteCond %1\.webp -f
+RewriteRule (.+)\.(jpe?g|png)$ $1.webp [T=image/webp,E=accept:1,L]

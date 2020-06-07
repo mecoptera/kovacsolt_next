@@ -23,7 +23,7 @@ export default class KPlannerDesign extends Bamboo {
       { name: 'dataBaseProductViewId', as: 'baseProduct.view' },
       { name: 'dataBaseProductColorId', as: 'baseProduct.color' },
       { name: 'dataEndpoint', as: 'baseProduct.endpoint' },
-      { name: 'baseProductViewImage' },
+      { name: 'baseProductVariantImage' },
       { name: 'designId' },
       { name: 'designUrl' }
     ];
@@ -36,7 +36,7 @@ export default class KPlannerDesign extends Bamboo {
         useShadow: false,
         markup: html => {
           const state = this._state.get();
-          const productStyle = state.baseProductVariantImage ? `background-image: url(${window.kovacsolt.baseUrl + state.baseProductVariantImage});` : '';
+          const productStyle = state.baseProductVariantImage ? `background-image: url(${state.baseProductVariantImage});` : '';
           const zoneStyle = `width: ${state.zoneWidth}%; height: ${state.zoneHeight}%; left: ${state.zoneLeft}%; top: ${state.zoneTop}%;`;
 
           return html`
@@ -60,7 +60,7 @@ export default class KPlannerDesign extends Bamboo {
       url: `planner/variant/${this._state.get('baseProduct.id')}/${this._state.get('baseProduct.view')}/${this._state.get('baseProduct.color')}`,
       baseURL: window.kovacsolt.baseUrl
     }).then(response => {
-      this._state.set('baseProductVariantImage', 'media/variant/' + response.data.id);
+      this._state.set('baseProductVariantImage', response.data.base_product_variant_image);
       this._state.set('zoneWidth', response.data.base_product_zone_width);
       this._state.set('zoneHeight', response.data.base_product_zone_height);
       this._state.set('zoneLeft', response.data.base_product_zone_left);

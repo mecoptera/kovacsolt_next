@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Order_controller extends MY_Controller {
   private $shippingMethods = [
-    ['key' => 'personal', 'value' => 'Személyes átvétel', 'price' => 0],
+    // ['key' => 'personal', 'value' => 'Személyes átvétel', 'price' => 0],
     // ['key' => 'post', 'value' => 'Postai átvétel', 'price' => 800],
     ['key' => 'delivery', 'value' => 'Házhozszállítás, utánvét', 'price' => 1200],
     // ['key' => 'post_point', 'value' => 'Átvétel csomagponton', 'price' => 800]
@@ -24,7 +24,7 @@ class Order_controller extends MY_Controller {
     $this->load->model('base_product_view_model', 'baseProductViewModel');
     $this->load->model('base_product_color_model', 'baseProductColorModel');
 
-    $this->load->library('cart', [ 'singleton' => true ]);
+    $this->load->library('cart', ['singleton' => true]);
   }
 
   public function index() {
@@ -181,6 +181,12 @@ class Order_controller extends MY_Controller {
       return $carry;
     }, []);
 
+    $cartItems = array_map(function($cartItem) {
+      $cartItem['product']->base_product_variant_image = media('variant', $cartItem['product']->base_product_variant_id);
+      $cartItem['product']->product_variant_design_image = media('design', $cartItem['product']->product_variant_design_id);
+      return $cartItem;
+    }, $this->cart->get());
+
     $cartPrice = $this->cart->price();
 
     $this->slice->view('page/order/finalize', [
@@ -191,7 +197,7 @@ class Order_controller extends MY_Controller {
       'paymentData' => $this->session->userdata('order.paymentData'),
       'paymentMethodText' => $paymentMethod['value'],
       'finalizeData' => $this->session->userdata('order.finalizeData'),
-      'cartItems' => $this->cart->get(),
+      'cartItems' => $cartItems,
       'price' => $cartPrice,
       'shippingPrice' => $shippingPrice,
       'priceTotal' => $cartPrice + $shippingPrice

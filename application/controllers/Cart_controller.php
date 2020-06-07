@@ -15,7 +15,13 @@ class Cart_controller extends MY_Controller {
   }
 
   public function index() {
-    $this->slice->view('page/cart', [ 'cartItems' => $this->cart->get() ]);
+    $cartItems = array_map(function($cartItem) {
+      $cartItem['product']->base_product_variant_image = media('variant', $cartItem['product']->base_product_variant_id);
+      $cartItem['product']->product_variant_design_image = media('design', $cartItem['product']->product_variant_design_id);
+      return $cartItem;
+    }, $this->cart->get());
+
+    $this->slice->view('page/cart', ['cartItems' => $cartItems]);
   }
 
   public function indexPost() {

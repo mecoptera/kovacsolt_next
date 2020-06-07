@@ -13,7 +13,13 @@ class Planner extends MY_Controller {
   }
 
   public function types() {
-    $this->slice->view('page.planner-types', [ 'baseProducts' => $this->baseProductModel->getAll() ]);
+    $baseProducts = array_map(function($baseProduct) {
+      $baseProduct->base_product_variant_image = media('variant', $baseProduct->base_product_variant_id);
+      return $baseProduct;
+    }, $this->baseProductModel->getAll());
+
+
+    $this->slice->view('page.planner-types', [ 'baseProducts' => $baseProducts ]);
   }
 
   public function editor($baseProductId) {
@@ -29,6 +35,7 @@ class Planner extends MY_Controller {
 
   public function variant($baseProductId, $baseProductViewId, $baseProductColorId) {
     $baseProductVariant = $this->baseProductVariantModel->getByViewIdAndColorId($baseProductId, $baseProductViewId, $baseProductColorId);
+    $baseProductVariant->base_product_variant_image = media('variant', $baseProductVariant->id);
 
     return $this->output->json($baseProductVariant, 200);
   }

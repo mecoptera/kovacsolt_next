@@ -33,7 +33,8 @@ class Base_Product_Variant extends MY_Controller {
     $this->load->library('media');
 
     if (!empty($_FILES['image']['name'])) {
-      $this->media->upload('variant', $id);
+      $this->media->upload('variant', $id)->resize('small');
+
     }
 
     redirect('admin/base_product/edit/' . $baseProductVariant->base_product_id);
@@ -45,7 +46,7 @@ class Base_Product_Variant extends MY_Controller {
     $this->load->library('media');
 
     if (!empty($_FILES['image']['name'])) {
-      $this->media->upload('variant', $baseProductVariantId);
+      $this->media->upload('variant', $baseProductVariantId)->resize('small');
     }
 
     redirect('admin/base_product/edit/' . $baseProductId);

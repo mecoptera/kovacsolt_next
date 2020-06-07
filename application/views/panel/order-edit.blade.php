@@ -18,16 +18,16 @@
         <div class="card-body">
           <div><b>{{ $orderProduct->product->name }}</b></div>
 
-          <div style="position: relative; padding-bottom: calc(100% - 32px); margin: 16px auto; width: calc(100% - 32px); background-position: center; background-repeat: no-repeat; background-size: contain; background-image: url('{{ base_url('media/variant/' . $orderProduct->product->base_product_variant_id) }}')">
+          <div style="position: relative; padding-bottom: calc(100% - 32px); margin: 16px auto; width: calc(100% - 32px); background-position: center; background-repeat: no-repeat; background-size: contain; background-image: url('{{ $orderProduct->product->base_product_variant_image }}')">
             <div style="position: absolute; width: {{ $orderProduct->product->base_product_zone_width }}%; height: {{ $orderProduct->product->base_product_zone_height }}%; left: {{ $orderProduct->product->base_product_zone_left }}%; top: {{ $orderProduct->product->base_product_zone_top }}%;">
-              <img src="{{ base_url('media/design/' . $orderProduct->product->product_variant_design_id) }}" style="position: absolute; width: {{ $orderProduct->product->product_variant_design_width }}%; left: {{ $orderProduct->product->product_variant_design_left }}%; top: {{ $orderProduct->product->product_variant_design_top }}%;">
+              <img src="{{ $orderProduct->product->product_variant_design_image }}" style="position: absolute; width: {{ $orderProduct->product->product_variant_design_width }}%; left: {{ $orderProduct->product->product_variant_design_left }}%; top: {{ $orderProduct->product->product_variant_design_top }}%;">
             </div>
           </div>
 
           <div>Termék: <b>{{ $orderProduct->product->base_product_name }}</b></div>
           <div>Szín: <b>{{ $orderProduct->product->base_product_color_name }}</b></div>
           <div>Darab: <b>{{ $orderProduct->quantity }}</b></div>
-          <div><a href="{{ base_url('media/design/' . $orderProduct->product->product_variant_design_id) }}">Minta letöltése</a></div>
+          <div><a href="{{ $orderProduct->product->product_variant_design_image }}?original=true">Minta letöltése</a></div>
         </div>
       </div>
     </div>

@@ -16,7 +16,7 @@ class Order extends MY_Controller {
     ['key' => 'delivery', 'value' => 'Utánvétellel futárnak', 'available_for' => ['delivery']]
   ];
 
-  protected $middlewares = [ 'Auth.isLoggedInAsAdmin' => '' ];
+  protected $middlewares = ['Auth.isLoggedInAsAdmin' => ''];
 
   public function index() {
     $orders = $this->db->query('SELECT * FROM `orders`')->result();
@@ -66,6 +66,12 @@ class Order extends MY_Controller {
 
       return $carry;
     }, []);
+
+    $orderProducts = array_map(function($orderProduct) {
+      $orderProduct->product->base_product_variant_image = media('variant', $orderProduct->product->base_product_variant_id);
+      $orderProduct->product->product_variant_design_image = media('design', $orderProduct->product->product_variant_design_id);
+      return $orderProduct;
+    }, $orderProducts);
 
     $this->slice->view('panel.order-edit', [
       'order' => $order,

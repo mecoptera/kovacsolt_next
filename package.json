@@ -2,7 +2,10 @@
   "private": true,
   "scripts": {
     "start": "cross-env WATCH=true webpack --mode development",
-    "build:site": "webpack --mode production"
+    "build:site": "webpack --mode production && npm run compress:gz && npm run compress:br && npm run compress:webp",
+    "compress:gz": "gzipper -i js,css,svg ./assets",
+    "compress:br": "gzipper --brotli -i js,css,svg ./assets",
+    "compress:webp": "cd ./assets && webpc -r"
   },
   "devDependencies": {
     "@babel/core": "7.10.2",
@@ -31,11 +34,14 @@
   "dependencies": {
     "@dkocsis-emarsys/bamboo": "8.0.0",
     "axios": "0.19.2",
+    "brotli-gzip-webpack-plugin": "0.5.0",
     "classlist-polyfill": "1.2.0",
     "custom-event": "1.0.1",
     "document-register-element": "1.14.3",
+    "gzipper": "3.7.0",
     "popper.js": "1.16.1",
     "tailwindcss": "1.4.6",
-    "tingle.js": "0.15.3"
+    "tingle.js": "0.15.3",
+    "webp-converter-cli": "0.0.5"
   }
 }

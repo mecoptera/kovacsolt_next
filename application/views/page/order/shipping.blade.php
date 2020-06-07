@@ -13,6 +13,10 @@
               ${content} (<k-format data-value="${extra}" data-postfix="Ft"></k-format>)
             </div>
           </template>
+          
+          <input type="hidden" name="shipping_method" value="delivery">
+          
+        @if(false)
           <k-select
             id="js-order-shipping-data-select"
             data-name="shipping_method"
@@ -24,8 +28,11 @@
             <k-select-option data-value="{{ $shippingMethod['key'] }}" data-template="#js-select-option-shipping" data-extra="{{ $shippingMethod['price'] !== 0 ? $shippingMethod['price'] : 'Ingyenes' }}">{{ $shippingMethod['value'] }}</k-select-option>
           @endforeach
           </k-select>
-          
+        @endif
+        
+        @if(false)
           <div id="js-order-shipping-data-section" class="{{ isset($shippingData['shipping_method']) && $shippingData['shipping_method'] !== 'personal' ? '' : 'u-hidden' }}">
+        @endif
             <k-input
               data-name="name"
               data-label="Név"
@@ -71,7 +78,9 @@
               data-helper="Nem kötelező megadni"
               @if (isset($shippingData['phone']))data-value="{{ $shippingData['phone'] }}"@endif
             ></k-input>
+        @if(false)
           </div>
+        @endif
 
           <div class="l-form__field u-text-center">
             <input type="submit" class="c-button" value="Tovább a fizetési módokhoz">

@@ -119,9 +119,6 @@
 
             <div class="l-grid__col--6 u-p-3 u-text-right"><b>Telefonszám:</b></div>
             <div class="l-grid__col--6 u-p-3">{{ $shippingData['phone'] ? $shippingData['phone'] : '---' }}</div>
-
-            <div class="l-grid__col--6 u-p-3 u-text-right"><b>Megjegyzés a szállítással kapcsolatban:</b></div>
-            <div class="l-grid__col--6 u-p-3">{{ $shippingData['comment'] ? $shippingData['comment'] : '---' }}</div>
           </div>
         </div>
       </div>
@@ -131,7 +128,7 @@
           <form class="l-form" method="post" action="{{ base_url('order/finalize') }}">
             <k-textarea
               data-name="comment"
-              data-label="Egyéb megjegyzés"
+              data-label="Megjegyzés"
               data-helper="Nem kötelező kitölteni"
               @if (isset($finalizeData['comment']))data-value="{{ $finalizeData['comment'] }}"@endif
             ></k-textarea>

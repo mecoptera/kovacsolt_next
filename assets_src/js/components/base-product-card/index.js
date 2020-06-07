@@ -35,10 +35,11 @@ export default class KBaseProductCard extends Bamboo {
         useShadow: false,
         markup: html => {
           const data = this._state.get('detail');
+          const variantImage = data.baseProductVariantImage;
 
           return html`
             <div class="c-product__product-layer">
-              <div class="c-product__image" style="${'background-image: url(' + window.kovacsolt.baseUrl + 'media/variant/' + data.baseProductVariantId + ');'}"></div>
+              <div class="c-product__image" style="${'background-image: url(' + data.baseProductVariantImage + ');'}"></div>
             </div>
           `;
         },
