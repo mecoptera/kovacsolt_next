@@ -13,8 +13,8 @@ class Product extends MY_Controller {
   public function index($activeCategoryId) {
     $sortBy = $this->input->get('sort_by') ? $this->input->get('sort_by') : 'new';
     $products = array_map(function($product) {
-      $product->base_product_variant_image = media('variant', $product->base_product_variant_id);
-      $product->product_variant_design_image = media('design', $product->product_variant_design_id);
+      $product->base_product_variant_image = media('variant', $product->base_product_variant_id, 'small');
+      $product->product_variant_design_image = media('design', $product->product_variant_design_id, 'small');
       return $product;
     }, $this->productModel->getAllByProductCategoryId($activeCategoryId, $sortBy));
 

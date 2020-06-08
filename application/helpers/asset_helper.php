@@ -12,7 +12,7 @@ function asset($path) {
 function media($type, $id, $size = 'original') {
   $files = glob(FCPATH . 'uploads/' . $type . '/' . $id . '/' . $size . '.*', GLOB_BRACE);
 
-  if (!$files) { die('Error file'); }
+  if (!$files) { return base_url('uploads') . '/' . $type . '/' . $id; }
 
   return base_url('uploads') . '/' . $type . '/' . $id . '/' . basename($files[0]);
 }

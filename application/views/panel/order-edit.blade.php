@@ -63,6 +63,21 @@
       </div>
     </div>
   </div>
+  <div class="col-lg-6">
+    <div class="card shadow mb-4">
+      <div class="card-body">
+        <h3>Megjegyzés</h3>
+
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>{{ $finalizeData['comment'] ? $finalizeData['comment'] : '---' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="row">
@@ -104,10 +119,6 @@
             <tr>
               <td><b>Telefonszám</b></td>
               <td>{{ $shippingData['phone'] ? $shippingData['phone'] : '---' }}</td>
-            </tr>
-            <tr>
-              <td><b>Megjegyzés a szállítással kapcsolatban</b></td>
-              <td>{{ $shippingData['comment'] ? $shippingData['comment'] : '---' }}</td>
             </tr>
           </tbody>
         </table>

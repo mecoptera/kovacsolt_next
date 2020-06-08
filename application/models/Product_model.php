@@ -41,7 +41,7 @@ class Product_model extends CI_Model {
       LEFT JOIN `base_products` ON `base_products`.`id` = `products`.`base_product_id`
       WHERE `products`.`id` = ?
         AND `product_variants`.`default` = TRUE
-    ', [ $id ])->row();
+    ', [$id])->row();
   }
 
   public function getAll() {
@@ -109,7 +109,7 @@ class Product_model extends CI_Model {
   }
 
   public function _get($id) {
-    return $this->db->query('SELECT * FROM `products` WHERE `id` = ?', [ $id ])->row();
+    return $this->db->query('SELECT * FROM `products` WHERE `id` = ?', [$id])->row();
   }
 
   public function _insert($isAdmin = false) {
@@ -141,6 +141,6 @@ class Product_model extends CI_Model {
   }
 
   public function _delete($id) {
-    $this->db->query('DELETE FROM `products` WHERE `id` = ?', [ $id ]);
+    $this->db->query('DELETE FROM `products` WHERE `id` = ?', [$id]);
   }
 }

@@ -36,9 +36,9 @@
   <div class="col-lg-6">
     <div class="card shadow mb-4">
       <div class="card-body">
-        <div style="position: relative; padding-bottom: 100%; width: 100%; background-position: center; background-repeat: no-repeat; background-size: contain; background-image: url('{{ base_url('media/variant/' . $productVariant->base_product_variant_id) }}')">
+        <div style="position: relative; padding-bottom: 100%; width: 100%; background-position: center; background-repeat: no-repeat; background-size: contain; background-image: url('{{ $productVariant->base_product_variant_image }}')">
           <div style="position: absolute; width: {{ $productVariant->base_product_zone_width }}%; height: {{ $productVariant->base_product_zone_height }}%; left: {{ $productVariant->base_product_zone_left }}%; top: {{ $productVariant->base_product_zone_top }}%;">
-            <img id="design" src="{{ base_url('media/design/' . $productVariant->design_id) }}" style="position: absolute; width: {{ $productVariant->design_width }}%; left: {{ $productVariant->design_left }}%; top: {{ $productVariant->design_top }}%;">
+            <img id="design" src="{{ $productVariant->design_image }}" style="position: absolute; width: {{ $productVariant->design_width }}%; left: {{ $productVariant->design_left }}%; top: {{ $productVariant->design_top }}%;">
           </div>
         </div>
       </div>

@@ -27,11 +27,16 @@ class Base_Product extends MY_Controller {
     $this->load->model('base_product_variant_model', 'baseProductVariantModel');
     $this->load->model('base_product_zone_model', 'baseProductZoneModel');
 
+    $baseProductVariants = array_map(function($baseProductVariant) {
+      $baseProductVariant->image = media('variant', $baseProductVariant->id);
+      return $baseProductVariant;
+    }, $this->baseProductVariantModel->getAllByBaseProductId($id));
+
     $this->slice->view('panel/baseproduct-edit', [
       'baseProduct' => $this->baseProductModel->_get($id),
       'baseProductViews' => $this->baseProductViewModel->getByBaseProductId($id),
       'baseProductColors' => $this->baseProductColorModel->getByBaseProductId($id),
-      'baseProductVariants' => $this->baseProductVariantModel->getAllByBaseProductId($id),
+      'baseProductVariants' => $baseProductVariants,
       'baseProductZones' => $this->baseProductZoneModel->getByBaseProductId($id),
     ]);
   }

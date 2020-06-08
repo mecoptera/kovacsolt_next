@@ -10,10 +10,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
   <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
   <link rel="manifest" href="{{ asset('site.webmanifest') }}">
-
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,700&display=swap&subset=latin-ext" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/tailwind.css') }}">
 
   <script>
     window.kovacsolt = {
@@ -97,6 +94,8 @@
     </nav>
   </div>
 
+  <link rel="stylesheet" href="{{ asset('css/tailwind.css') }}">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,700&display=swap&subset=latin-ext" rel="stylesheet">
   <script src="{{ asset('js/main.js') }}"></script>
 </body>
 </html>

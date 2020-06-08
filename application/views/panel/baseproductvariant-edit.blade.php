@@ -47,7 +47,7 @@
             <label for="image">Kép:</label>
             <input type="file" name="image" class="form-control" id="image">
             <div class="mt-4">
-              <img src="{{ base_url('media/variant/' . $baseProductVariant->id) }}" style="width: 100px; height: 100px;">
+              <img src="{{ $baseProductVariant->image }}" style="width: 100px; height: 100px;">
             </div>
           </div>
 

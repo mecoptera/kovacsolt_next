@@ -3,7 +3,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Product_Variant extends MY_Controller {
-  protected $middlewares = [ 'Auth.isLoggedInAsAdmin' => '' ];
+  protected $middlewares = ['Auth.isLoggedInAsAdmin' => ''];
 
   public function __construct() {
     parent::__construct();
@@ -12,7 +12,11 @@ class Product_Variant extends MY_Controller {
   }
 
   public function index($id) {
-    $this->slice->view('panel/productvariant-edit', [ 'productVariant' => $this->productVariantModel->get($id) ]);
+    $productVariant = $this->productVariantModel->get($id);
+    $productVariant->base_product_variant_image = media('variant', $productVariant->base_product_variant_id);
+    $productVariant->design_image = media('design', $productVariant->design_id);
+
+    $this->slice->view('panel/productvariant-edit', ['productVariant' => $productVariant]);
   }
 
   public function indexPost($id) {

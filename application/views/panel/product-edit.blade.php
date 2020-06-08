@@ -77,8 +77,8 @@
               @foreach($baseProductVariants as $baseProductVariant)
                 <div class="col-lg-3 mb-4">
                   <label class="card p-4" style="cursor: pointer;">
-                    <input type="radio" name="base_product_variant_id" value="{{ $baseProductVariant->id }}" url="{{ base_url('media/variant/' . $baseProductVariant->id) }}">
-                    <div style="background-image: url({{ base_url('media/variant/' . $baseProductVariant->id) }}); background-size: contain; background-position: center; background-repeat: no-repeat; width: 100%; padding-bottom: 100%;"></div>
+                    <input type="radio" name="base_product_variant_id" value="{{ $baseProductVariant->id }}" url="{{ $baseProductVariant->image }}">
+                    <div style="background-image: url({{ $baseProductVariant->image }}); background-size: contain; background-position: center; background-repeat: no-repeat; width: 100%; padding-bottom: 100%;"></div>
                     <span class="u-uppercase u-font-bold">{{ $baseProductVariant->base_product_view_name }} | {{ $baseProductVariant->base_product_color_name }}</span>
                   </label>
                 </div>
@@ -92,8 +92,8 @@
               @foreach($designs as $design)
                 <div class="col-lg-3 mb-4">
                   <label class="card p-4" style="cursor: pointer;">
-                    <input type="radio" name="design_id" value="{{ $design->id }}" url="{{ base_url('media/design/' . $design->id) }}">
-                    <div style="background-image: url({{ base_url('media/design/' . $design->id) }}); background-size: contain; background-position: center; background-repeat: no-repeat; width: 100%; padding-bottom: 100%;"></div>
+                    <input type="radio" name="design_id" value="{{ $design->id }}" url="{{ $design->image }}">
+                    <div style="background-image: url({{ $design->image }}); background-size: contain; background-position: center; background-repeat: no-repeat; width: 100%; padding-bottom: 100%;"></div>
                     <span class="u-uppercase u-font-bold">{{ $design->name }}</span>
                   </label>
                 </div>
@@ -134,18 +134,18 @@
                     @endif
                   </td>
                   <td>
-                    <div style="position: relative; width: 128px; height: 128px; background-position: center; background-repeat: no-repeat; background-size: contain; background-image: url('{{ base_url('media/variant/' . $productVariant->base_product_variant_id) }}')">
+                    <div style="position: relative; width: 128px; height: 128px; background-position: center; background-repeat: no-repeat; background-size: contain; background-image: url('{{ $productVariant->base_product_variant_image }}')">
                       <div style="position: absolute; width: {{ $productVariant->base_product_zone_width }}%; height: {{ $productVariant->base_product_zone_height }}%; left: {{ $productVariant->base_product_zone_left }}%; top: {{ $productVariant->base_product_zone_top }}%;">
-                        <img id="design" src="{{ base_url('media/design/' . $productVariant->design_id) }}" style="position: absolute; width: {{ $productVariant->design_width }}%; left: {{ $productVariant->design_left }}%; top: {{ $productVariant->design_top }}%;">
+                        <img id="design" src="{{ $productVariant->design_image }}" style="position: absolute; width: {{ $productVariant->design_width }}%; left: {{ $productVariant->design_left }}%; top: {{ $productVariant->design_top }}%;">
                       </div>
                     </div>
                   </td>
                   <td>
-                    <div style="position: relative; width: 128px; height: 128px; background-position: center; background-repeat: no-repeat; background-size: contain; background-image: url('{{ base_url('media/variant/' . $productVariant->base_product_variant_id) }}')">
+                    <div style="position: relative; width: 128px; height: 128px; background-position: center; background-repeat: no-repeat; background-size: contain; background-image: url('{{ $productVariant->base_product_variant_image }}')">
                     </div>
                   </td>
                   <td>
-                    <div style="position: relative; width: 128px; height: 128px; background-position: center; background-repeat: no-repeat; background-size: contain; background-image: url('{{ base_url('media/design/' . $productVariant->design_id) }}')">
+                    <div style="position: relative; width: 128px; height: 128px; background-position: center; background-repeat: no-repeat; background-size: contain; background-image: url('{{ $productVariant->design_image }}')">
                     </div>
                   </td>
                   <td>

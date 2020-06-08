@@ -28,12 +28,28 @@ class Product extends MY_Controller {
 
     $product = $this->productModel->_get($id);
 
+    $baseProductVariants = array_map(function($baseProductVariant) {
+      $baseProductVariant->image = media('variant', $baseProductVariant->id);
+      return $baseProductVariant;
+    }, $this->baseProductVariantModel->getAllByBaseProductId($product->base_product_id));
+
+    $designs = array_map(function($design) {
+      $design->image = media('design', $design->id);
+      return $design;
+    }, $this->designModel->getAdmin());
+
+    $productVariants = array_map(function($productVariant) {
+      $productVariant->base_product_variant_image = media('variant', $productVariant->base_product_variant_id);
+      $productVariant->design_image = media('design', $productVariant->design_id);
+      return $productVariant;
+    }, $this->productVariantModel->getByProductId($id));
+
     $this->slice->view('panel/product-edit', [
-      'product' => $this->productModel->_get($id),
+      'product' => $product,
       'baseProducts' => $this->baseProductModel->getAll(),
-      'baseProductVariants' => $this->baseProductVariantModel->getAllByBaseProductId($product->base_product_id),
-      'designs' => $this->designModel->getAdmin(),
-      'productVariants' => $this->productVariantModel->getByProductId($id),
+      'baseProductVariants' => $baseProductVariants,
+      'designs' => $designs,
+      'productVariants' => $productVariants,
     ]);
   }
 

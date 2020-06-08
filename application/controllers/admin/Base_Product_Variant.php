@@ -17,9 +17,10 @@ class Base_Product_Variant extends MY_Controller {
     $this->load->model('base_product_zone_model', 'baseProductZoneModel');
 
     $baseProductVariant = $this->baseProductVariantModel->get($id);
+    $baseProductVariant->image = media('variant', $baseProductVariant->id);
 
     $this->slice->view('panel/baseproductvariant-edit', [
-      'baseProductVariant' => $this->baseProductVariantModel->get($id),
+      'baseProductVariant' => $baseProductVariant,
       'baseProductViews' => $this->baseProductViewModel->getByBaseProductId($baseProductVariant->base_product_id),
       'baseProductColors' => $this->baseProductColorModel->getByBaseProductId($baseProductVariant->base_product_id),
       'baseProductZones' => $this->baseProductZoneModel->getByBaseProductId($baseProductVariant->base_product_id),
