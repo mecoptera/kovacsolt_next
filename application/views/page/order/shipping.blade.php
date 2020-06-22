@@ -29,58 +29,64 @@
           @endforeach
           </k-select>
         @endif
-        
-        @if(false)
-          <div id="js-order-shipping-data-section" class="{{ isset($shippingData['shipping_method']) && $shippingData['shipping_method'] !== 'personal' ? '' : 'u-hidden' }}">
-        @endif
-            <k-input
-              data-name="name"
-              data-label="Név"
-              @if (isset($shippingData['name']))data-value="{{ $shippingData['name'] }}"@endif
-              @error('name')data-error="{{ $errors['name'] }}"@enderror
-            ></k-input>
 
-            <k-input
-              data-name="zip"
-              data-label="Irányítószám"
-              data-placeholder="Példa: 1123"
-              @if (isset($shippingData['zip']))data-value="{{ $shippingData['zip'] }}"@endif
-              @error('zip')data-error="{{ $errors['zip'] }}"@enderror
-            ></k-input>
+          <k-checkbox id="js-order-shipping-data-same" data-name="same_as_billing" data-label="A szállítási adatok megegyeznek a számlázási adatokkal"></k-checkbox>
+          
+          <div id="js-order-shipping-data-wrapper">
+            <div id="js-order-shipping-data-section">
+              <k-input
+                data-name="name"
+                data-label="Név"
+                data-value="{{ $shippingData['name'] }}"
+                @error('name')data-error="{{ $errors['name'] }}"@enderror
+                data-required
+              ></k-input>
 
-            <k-input
-              data-name="city"
-              data-label="Város"
-              data-placeholder="Példa: Budapest"
-              @if (isset($shippingData['city']))data-value="{{ $shippingData['city'] }}"@endif
-              @error('city')data-error="{{ $errors['city'] }}"@enderror
-            ></k-input>
+              <k-input
+                data-name="zip"
+                data-label="Irányítószám"
+                data-placeholder="Példa: 1123"
+                data-value="{{ $shippingData['zip'] }}"
+                @error('zip')data-error="{{ $errors['zip'] }}"@enderror
+                data-required
+              ></k-input>
 
-            <k-input
-              data-name="address"
-              data-label="Cím"
-              data-placeholder="Példa: Ferenc tér 32. 4/10"
-              @if (isset($shippingData['address']))data-value="{{ $shippingData['address'] }}"@endif
-              @error('address')data-error="{{ $errors['address'] }}"@enderror
-            ></k-input>
+              <k-input
+                data-name="city"
+                data-label="Város"
+                data-placeholder="Példa: Budapest"
+                data-value="{{ $shippingData['city'] }}"
+                @error('city')data-error="{{ $errors['city'] }}"@enderror
+                data-required
+              ></k-input>
 
-            <k-input
-              data-name="email"
-              data-label="E-mail cím"
-              @if (isset($shippingData['email']))data-value="{{ $shippingData['email'] }}"@endif
-              @error('email')data-error="{{ $errors['email'] }}"@enderror
-            ></k-input>
+              <k-input
+                data-name="address"
+                data-label="Cím"
+                data-placeholder="Példa: Ferenc tér 32. 4/10"
+                data-value="{{ $shippingData['address'] }}"
+                @error('address')data-error="{{ $errors['address'] }}"@enderror
+                data-required
+              ></k-input>
 
-            <k-input
-              data-name="phone"
-              data-label="Telefonszám"
-              data-placeholder="Példa: 06 12 345 6789"
-              data-helper="Nem kötelező megadni"
-              @if (isset($shippingData['phone']))data-value="{{ $shippingData['phone'] }}"@endif
-            ></k-input>
-        @if(false)
+              <k-input
+                data-type="email"
+                data-name="email"
+                data-label="E-mail cím"
+                data-value="{{ $shippingData['email'] }}"
+                @error('email')data-error="{{ $errors['email'] }}"@enderror
+                data-required
+              ></k-input>
+
+              <k-input
+                data-name="phone"
+                data-label="Telefonszám"
+                data-placeholder="Példa: 06 12 345 6789"
+                data-helper="Nem kötelező megadni"
+                data-value="{{ $shippingData['phone'] }}"
+              ></k-input>
+            </div>
           </div>
-        @endif
 
           <div class="l-form__field u-text-center">
             <input type="submit" class="c-button" value="Tovább a fizetési módokhoz">

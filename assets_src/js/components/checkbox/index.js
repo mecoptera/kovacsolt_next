@@ -72,7 +72,7 @@ export default class KCheckbox extends Bamboo {
   }
 
   get value() {
-    return this.querySelector('input').value;
+    return this.querySelector('input').checked;
   }
 
   contentChangedCallback() {
@@ -88,7 +88,6 @@ export default class KCheckbox extends Bamboo {
   }
 
   _inputFocusHandler() {
-    console.log(this._state.get('error'));
     this._state.set('isFocused', true);
     this._state.set('error', false);
   }

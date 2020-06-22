@@ -53,10 +53,22 @@ customElements.define('k-format', KFormat);
 (() => {
   if (!document.querySelector('#js-order-shipping-data-section')) { return; }
   
+  const wrapperElement = document.querySelector('#js-order-shipping-data-wrapper');
   const sectionElement = document.querySelector('#js-order-shipping-data-section');
-  const selectElement = document.querySelector('#js-order-shipping-data-select');
-  selectElement.addEventListener('change', event => {
-    sectionElement.classList.toggle('u-hidden', event.target.value === 'personal');
+  const checkboxElement = document.querySelector('#js-order-shipping-data-same');
+
+  setTimeout(() => {
+    if (checkboxElement.value) {
+      wrapperElement.removeChild(sectionElement);
+    }
+  });
+
+  checkboxElement.addEventListener('change', event => {
+    if (checkboxElement.value) {
+      wrapperElement.removeChild(sectionElement);
+    } else {
+      wrapperElement.appendChild(sectionElement);
+    }
   });
 })();
 

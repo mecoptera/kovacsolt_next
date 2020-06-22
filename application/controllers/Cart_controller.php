@@ -39,8 +39,14 @@ class Cart_controller extends MY_Controller {
   }
 
   public function menu_button() {
+    $cartItems = array_map(function($cartItem) {
+      $cartItem['product']->base_product_variant_image = media('variant', $cartItem['product']->base_product_variant_id);
+      $cartItem['product']->product_variant_design_image = media('design', $cartItem['product']->product_variant_design_id);
+      return $cartItem;
+    }, $this->cart->get());
+
     return $this->output->json([
-      'content' => $this->slice->view('page/areas/cart-button', [ 'cartItems' => $this->cart->get() ])
+      'content' => $this->slice->view('page/areas/cart-button', ['cartItems' => $cartItems])
     ], 200);
   }
 }

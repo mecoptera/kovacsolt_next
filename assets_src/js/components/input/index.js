@@ -24,12 +24,13 @@ export default class KInput extends Bamboo {
   static get stateOptions() {
     return {
       disabled: { type: 'boolean' },
+      required: { type: 'boolean' },
       light: { type: 'boolean' }
     };
   }
 
   static get observedAttributes() {
-    return ['data-type', 'data-name', 'data-value', 'data-placeholder', 'data-label', 'data-helper', 'data-disabled', 'data-error', 'data-light'];
+    return ['data-type', 'data-name', 'data-value', 'data-placeholder', 'data-label', 'data-helper', 'data-disabled', 'data-error', 'data-required', 'data-light'];
   }
 
   static get boundProperties() {
@@ -42,6 +43,7 @@ export default class KInput extends Bamboo {
       { name: 'dataHelper', as: 'helper' },
       { name: 'dataDisabled', as: 'disabled' },
       { name: 'dataError', as: 'error' },
+      { name: 'dataRequired', as: 'required' },
       { name: 'dataLight', as: 'light' }
     ];
   }
@@ -52,7 +54,7 @@ export default class KInput extends Bamboo {
         name: 'input',
         useShadow: false,
         markup: html => {
-          const inputType = this._state.get('type') === 'password' && this._state.get('showPassword') ? 'text' : (this._state.get('type') || 'text');
+          const inputType = (this._state.get('type') === 'password' && this._state.get('showPassword')) ? 'text' : ((this._state.get('type') || 'text'));
           const isReadOnly = this._state.get('preparing') ? 'readonly' : null;
 
           this.classList.add(`c-input--type-${inputType}`);
@@ -65,8 +67,30 @@ export default class KInput extends Bamboo {
 
           return html`
             <div class="c-input__field">
-              <input readonly="${isReadOnly}" autocomplete="on" class="c-input__input" type="${inputType}" name="${this._state.get('name')}" id="${this._state.get('uuid')}" value="${this._state.get('value')}" disabled="${this._state.get('disabled') ? 'disabled' : null}" placeholder="${this._state.get('placeholder') || ' '}" data-handler="input" onmouseenter="${this}" onmouseleave="${this}" onfocus="${this}" onblur="${this}" oninput="${this}">
-              ${this._state.get('label') ? html`<label class="c-input__label" for="${this._state.get('uuid')}">${this._state.get('label')}</label>` : ''}
+              <input
+                readonly="${isReadOnly}"
+                autocomplete="on"
+                class="c-input__input"
+                type="${inputType}"
+                name="${this._state.get('name')}"
+                id="${this._state.get('uuid')}"
+                value="${this._state.get('value')}" 
+                disabled="${this._state.get('disabled') ? 'disabled' : null}"
+                required="${this._state.get('required') ? 'required' : null}"
+                placeholder="${this._state.get('placeholder') || ' '}"
+                data-handler="input"
+                onmouseenter="${this}"
+                onmouseleave="${this}"
+                onfocus="${this}"
+                onblur="${this}"
+                oninput="${this}"
+              >
+              ${this._state.get('label') ? html`
+                <label class="c-input__label" for="${this._state.get('uuid')}">
+                  ${this._state.get('label')}
+                  ${this._state.get('required') ? html`<span class="u-font-bold u-text-color-brand">*</span>` : ''}
+                </label>
+              ` : ''}
               ${this._state.get('type') === 'password' ? html`<div class="c-input__password" data-handler="password" onclick=${this}><k-icon data-icon="eye" data-color="${this._state.get('showPassword') ? 'brand' : 'text'}" data-size="8"></k-icon></div>` : ''}
             </div>
             ${!this._state.get('error') && this._state.get('helper') ? html`<div class="c-input__helper">${this._state.get('helper')}</div>` : ''}

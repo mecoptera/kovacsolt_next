@@ -57,8 +57,6 @@ class Order_controller extends MY_Controller {
   }
 
   public function billing() {
-    $this->load->helper('MY_form_helper');
-
     $this->slice->view('page.order.billing', [
       'step' => 1,
       'billingData' => $this->session->userdata('order.billingData'),
@@ -107,9 +105,21 @@ class Order_controller extends MY_Controller {
   public function shippingPost() {
     $this->load->library('form_validation');
 
-    $this->session->set_userdata('order.shippingData', $this->input->post());
+    if ($this->input->post('same_as_billing')) {
+      $billingData = $this->session->userdata('order.billingData');
+      $this->session->set_userdata('order.shippingData', [
+        'same_as_billing' => true,
+        'shipping_method' => $this->input->post('shipping_method'),
+        'name' => $billingData['name'],
+        'zip' => $billingData['zip'],
+        'city' => $billingData['city'],
+        'address' => $billingData['address'],
+        'email' => $billingData['email'],
+        'phone' => $billingData['phone']
+      ]);
+    } else {
+      $this->session->set_userdata('order.shippingData', $this->input->post());
 
-    if ($this->input->post('shipping_method') === 'delivery') {
       $this->form_validation->set_error_delimiters('', '');
 
       $this->form_validation->set_rules('name', null, 'required', ['required' => 'Kötelező kitölteni']);
