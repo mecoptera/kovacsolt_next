@@ -27,20 +27,11 @@
           href="{{ base_url('order/shipping') }}"
         @endif
       >
-        <span class="q-order-steps__text">Átvételi mód</span>
-      </a>
-
-      <a
-        class="q-order-steps__step {{ $step > 2 ? ($step === 3 ? 'q-order-steps__step--current' : 'q-order-steps__step--done') : '' }}"
-        @if($step > 3)
-          href="{{ base_url('order/payment') }}"
-        @endif
-      >
-        <span class="q-order-steps__text">Fizetési mód</span>
+        <span class="q-order-steps__text">Szállítási adatok</span>
       </a>
 
       <a class="q-order-steps__step {{ $step > 3 ? ($step === 4 ? 'q-order-steps__step--current' : 'q-order-steps__step--done') : '' }}">
-        <span class="q-order-steps__text">Véglegesítés</span>
+        <span class="q-order-steps__text">Rendelés összesítése</span>
       </a>
     </div>
 

@@ -123,7 +123,7 @@
         </div>
       </div>
 
-      <div class="l-grid">
+      <div class="l-grid u-mt-16">
         <div class="l-grid__col--6 l-grid__col--offset-3">
           <form class="l-form" method="post" action="{{ base_url('order/finalize') }}">
             <k-textarea

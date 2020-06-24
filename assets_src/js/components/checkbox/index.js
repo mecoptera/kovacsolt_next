@@ -20,12 +20,13 @@ export default class KCheckbox extends Bamboo {
 
   static get stateOptions() {
     return {
-      disabled: { type: 'boolean' }
+      disabled: { type: 'boolean' },
+      required: { type: 'boolean' }
     };
   }
 
   static get observedAttributes() {
-    return ['data-name', 'data-value', 'data-placeholder', 'data-label', 'data-helper', 'data-disabled', 'data-error'];
+    return ['data-name', 'data-value', 'data-placeholder', 'data-label', 'data-helper', 'data-disabled', 'data-error', 'data-required'];
   }
 
   static get boundProperties() {
@@ -36,7 +37,8 @@ export default class KCheckbox extends Bamboo {
       { name: 'dataLabel', as: 'label' },
       { name: 'dataHelper', as: 'helper' },
       { name: 'dataDisabled', as: 'disabled' },
-      { name: 'dataError', as: 'error' }
+      { name: 'dataError', as: 'error' },
+      { name: 'dataRequired', as: 'required' }
     ];
   }
 
@@ -53,9 +55,30 @@ export default class KCheckbox extends Bamboo {
 
           return html`
             <div class="c-checkbox__field" data-handler="input" onmouseenter="${this}" onmouseleave="${this}">
-              <input type="checkbox" data-handler="input" onfocus="${this}" onblur="${this}" name="${this._state.get('name')}" id="${this._state.get('uuid')}" value="${this._state.get('value')}" disabled="${this._state.get('disabled') ? 'disabled' : null}" placeholder="${this._state.get('placeholder') || ' '}" class="c-checkbox__checkbox">
-              ${this._state.get('label') ? html`<label class="c-checkbox__label" for="${this._state.get('uuid')}">${this._state.get('label')}</label>` : ''}
-              ${this._templater.hasMarkup('label') ? html`<label class="c-checkbox__label" for="${this._state.get('uuid')}">${this._templater.render('label')()}</label>` : ''}
+              <input
+                type="checkbox"
+                data-handler="input"
+                onfocus="${this}"
+                onblur="${this}"
+                name="${this._state.get('name')}"
+                id="${this._state.get('uuid')}"
+                value="${this._state.get('value')}"
+                disabled="${this._state.get('disabled') ? 'disabled' : null}"
+                placeholder="${this._state.get('placeholder') || ' '}"
+                class="c-checkbox__checkbox"
+              >
+              ${this._state.get('label') ? html`
+                <label class="c-checkbox__label" for="${this._state.get('uuid')}">
+                  <div>${this._state.get('label')}</div>
+                  ${this._state.get('required') ? html`<div class="u-font-bold u-text-color-brand u-ml-1">*</div>` : ''}
+                </label>
+              ` : ''}
+              ${this._templater.hasMarkup('label') ? html`
+                <label class="c-checkbox__label" for="${this._state.get('uuid')}">
+                  <div>${this._templater.render('label')()}</div>
+                  ${this._state.get('required') ? html`<div class="u-font-bold u-text-color-brand u-ml-1">*</div>` : ''}
+                </label>
+              ` : ''}
             </div>
             ${!this._state.get('error') && this._state.get('helper') ? html`<div class="c-checkbox__helper">${this._state.get('helper')}</div>` : ''}
             ${this._state.get('error') ? html`<div class="c-checkbox__error">${this._state.get('error')}</div>` : ''}

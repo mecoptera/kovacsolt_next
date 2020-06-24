@@ -87,8 +87,8 @@ export default class KInput extends Bamboo {
               >
               ${this._state.get('label') ? html`
                 <label class="c-input__label" for="${this._state.get('uuid')}">
-                  ${this._state.get('label')}
-                  ${this._state.get('required') ? html`<span class="u-font-bold u-text-color-brand">*</span>` : ''}
+                  <div>${this._state.get('label')}</div>
+                  ${this._state.get('required') ? html`<div class="u-font-bold u-text-color-brand u-ml-1">*</div>` : ''}
                 </label>
               ` : ''}
               ${this._state.get('type') === 'password' ? html`<div class="c-input__password" data-handler="password" onclick=${this}><k-icon data-icon="eye" data-color="${this._state.get('showPassword') ? 'brand' : 'text'}" data-size="8"></k-icon></div>` : ''}

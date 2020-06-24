@@ -141,7 +141,9 @@ class Order_controller extends MY_Controller {
       }
     }
 
-    return redirect('order/payment');
+    $this->session->set_userdata('order.paymentData', ['payment_method' => 'card']);
+
+    return redirect('order/finalize');
   }
 
   public function payment() {

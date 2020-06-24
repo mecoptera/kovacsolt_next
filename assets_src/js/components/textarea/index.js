@@ -21,8 +21,15 @@ export default class KTextarea extends Bamboo {
     };
   }
 
+  static get stateOptions() {
+    return {
+      disabled: { type: 'boolean' },
+      required: { type: 'boolean' }
+    };
+  }
+
   static get observedAttributes() {
-    return ['data-name', 'data-value', 'data-placeholder', 'data-label', 'data-helper', 'data-disabled', 'data-error'];
+    return ['data-name', 'data-value', 'data-placeholder', 'data-label', 'data-helper', 'data-disabled', 'data-error', 'data-required'];
   }
 
   static get boundProperties() {
@@ -33,7 +40,8 @@ export default class KTextarea extends Bamboo {
       { name: 'dataLabel', as: 'label' },
       { name: 'dataHelper', as: 'helper' },
       { name: 'dataDisabled', as: 'disabled' },
-      { name: 'dataError', as: 'error' }
+      { name: 'dataError', as: 'error' },
+      { name: 'dataRequired', as: 'required' },
     ];
   }
 
@@ -51,8 +59,26 @@ export default class KTextarea extends Bamboo {
 
           return html`
             <div class="c-input__field">
-              <textarea name="${this._state.get('name')}" id="${this._state.get('uuid')}" placeholder="${this._state.get('placeholder') || ' '}" class="c-input__input" data-handler="textarea" oninput="${this}" onmouseenter="${this}" onmouseleave="${this}" onfocus="${this}" onblur="${this}">${this._state.get('value')}</textarea>
-              ${this._state.get('label') ? html`<label class="c-input__label" for="${this._state.get('uuid')}">${this._state.get('label')}</label>` : ''}
+              <textarea
+                name="${this._state.get('name')}"
+                id="${this._state.get('uuid')}"
+                disabled="${this._state.get('disabled') ? 'disabled' : null}"
+                required="${this._state.get('required') ? 'required' : null}"
+                placeholder="${this._state.get('placeholder') || ' '}"
+                class="c-input__input"
+                data-handler="textarea"
+                oninput="${this}"
+                onmouseenter="${this}"
+                onmouseleave="${this}"
+                onfocus="${this}"
+                onblur="${this}"
+              >${this._state.get('value')}</textarea>
+              ${this._state.get('label') ? html`
+                <label class="c-input__label" for="${this._state.get('uuid')}">
+                  <div>${this._state.get('label')}</div>
+                  ${this._state.get('required') ? html`<div class="u-font-bold u-text-color-brand u-ml-1">*</div>` : ''}
+                </label>
+              ` : ''}
             </div>
             ${!this._state.get('error') && this._state.get('helper') ? html`<div class="c-input__helper">${this._state.get('helper')}</div>` : ''}
             ${this._state.get('error') ? html`<div class="c-input__error">${this._state.get('error')}</div>` : ''}
