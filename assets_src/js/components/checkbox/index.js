@@ -21,12 +21,13 @@ export default class KCheckbox extends Bamboo {
   static get stateOptions() {
     return {
       disabled: { type: 'boolean' },
+      checked: { type: 'boolean' },
       required: { type: 'boolean' }
     };
   }
 
   static get observedAttributes() {
-    return ['data-name', 'data-value', 'data-placeholder', 'data-label', 'data-helper', 'data-disabled', 'data-error', 'data-required'];
+    return ['data-name', 'data-value', 'data-placeholder', 'data-label', 'data-helper', 'data-disabled', 'data-checked', 'data-error', 'data-required'];
   }
 
   static get boundProperties() {
@@ -37,6 +38,7 @@ export default class KCheckbox extends Bamboo {
       { name: 'dataLabel', as: 'label' },
       { name: 'dataHelper', as: 'helper' },
       { name: 'dataDisabled', as: 'disabled' },
+      { name: 'dataChecked', as: 'checked' },
       { name: 'dataError', as: 'error' },
       { name: 'dataRequired', as: 'required' }
     ];
@@ -64,6 +66,7 @@ export default class KCheckbox extends Bamboo {
                 id="${this._state.get('uuid')}"
                 value="${this._state.get('value')}"
                 disabled="${this._state.get('disabled') ? 'disabled' : null}"
+                checked="${this._state.get('checked') ? 'checked' : null}"
                 placeholder="${this._state.get('placeholder') || ' '}"
                 class="c-checkbox__checkbox"
               >

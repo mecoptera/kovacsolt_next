@@ -118,7 +118,8 @@ class Order_controller extends MY_Controller {
         'phone' => $billingData['phone']
       ]);
     } else {
-      $this->session->set_userdata('order.shippingData', $this->input->post());
+      $postData = array_merge($this->input->post(), ['same_as_billing' => false]);
+      $this->session->set_userdata('order.shippingData', $postData);
 
       $this->form_validation->set_error_delimiters('', '');
 
@@ -219,7 +220,42 @@ class Order_controller extends MY_Controller {
   public function finalizePost() {
     $this->session->set_userdata('order.finalizeData', $this->input->post());
 
+    require_once APPPATH . '/third_party/simple-pay/SimplePay.php';
+
     $visibleOrderId = number_format(mt_rand(100000, 999999), 0, ',', '-');
+    $this->session->set_userdata('order.id', $visibleOrderId);
+    $this->session->set_userdata('order.inProgress', true);
+
+    $order = [
+      'visibleOrderId' => $visibleOrderId,
+      'billingData' => $this->session->userdata('order.billingData'),
+      'shippingData' => $this->session->userdata('order.shippingData'),
+    ];
+
+    $cartItems = $this->cart->get();
+
+    $url = SimplePay::pay($order, $cartItems, $this->cart->price());
+
+    return redirect($url);
+  }
+
+  public function result() {
+    require_once APPPATH . '/third_party/simple-pay/SimplePay.php';
+
+    $result = SimplePay::result();
+
+    if ($result['e'] === 'SUCCESS' && $this->session->userdata('order.inProgress')) {
+      $this->session->set_userdata('order.inProgress', false);
+      return $this->handleSuccess();
+    } else if ($result['e'] === 'SUCCESS') {
+      return $this->slice->view('page/order/success', ['orderId' => $this->session->userdata('order.id')]);
+    } else {
+      return $this->handleError();
+    }
+  }
+
+  private function handleSuccess() {
+    $visibleOrderId = $this->session->userdata('order.id');
 
     $this->db->query('
       INSERT INTO `orders` (`order_id`, `visible_order_id`, `user_id`, `billing_data`, `shipping_data`, `payment_data`, `finalize_data`, `status`, `created_at`, `updated_at`)
@@ -257,27 +293,12 @@ class Order_controller extends MY_Controller {
       );
     }
 
-    $this->session->set_userdata('order.id', $visibleOrderId);
-
-    if ($this->session->userdata('order.paymentData')['payment_method'] === 'card') {
-      $order = $this->db->query('SELECT * FROM `orders` WHERE `id` = ?', [$orderId])->row();
-
-      require_once APPPATH . '/third_party/simple-pay/SimplePay.php';
-
-      $url = SimplePay::test($order, $cartItems, $this->cart->price());
-
-      return redirect($url);
-    }
-
-    return redirect('order/success');
-  }
-
-  public function success() {
     $this->cart->empty();
-    $this->slice->view('page/order/success', ['orderId' => $this->session->userdata('order.id')]);
+
+    return $this->slice->view('page/order/success', ['orderId' => $this->session->userdata('order.id')]);
   }
 
-  public function error() {
-    $this->slice->view('page/order/error');
+  private function handleError() {
+    return $this->slice->view('page/order/error');
   }
 }

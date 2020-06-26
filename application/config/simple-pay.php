@@ -42,11 +42,7 @@ return [
   'SANDBOX' => true,
 
   //common return URL
-  'URL' => base_url(),
-  'URL_SUCCESS' => base_url() . 'order/success',
-  'URL_FAIL' => base_url() . 'order/error',
-  'URL_CANCEL' => base_url() . 'order/error',
-  'URL_TIMEOUT' => base_url() . 'order/error',
+  'URL' => base_url('order/result'),
 
   //optional uniq URL for events
   /*

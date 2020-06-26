@@ -129,7 +129,7 @@ class Cart {
   }
 
   private function updateDatabase($uniqueId) {
-    if (!$this->userId) { return; }
+    if ($this->userId === null) { return; }
 
     $key = array_search($uniqueId, array_column($this->items, 'uniqueId'));
 
@@ -152,9 +152,9 @@ class Cart {
       return false;
     }
 
-    $foundItem = array_filter($this->items, function($value, $key) use ($productId, $extraData) {
-      return $value['product']->id === $productId && $value['extraData'] == $extraData;
-    }, ARRAY_FILTER_USE_BOTH);
+    $foundItem = array_values(array_filter($this->items, function($value, $key) use ($productId, $extraData) {
+      return $value['product']->id === $productId && json_encode($value['extraData']) === json_encode($extraData);
+    }, ARRAY_FILTER_USE_BOTH));
 
     return count($foundItem) > 0 ? $foundItem[0] : false;
   }

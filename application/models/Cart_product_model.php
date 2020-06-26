@@ -17,7 +17,7 @@ class Cart_product_model extends CI_Model {
       $item['uniqueId'],
       $cartId,
       $item['product']->id,
-      $item['extraData'],
+      json_encode($item['extraData']),
       $item['quantity'],
       date('Y-m-d H:i:s'),
       date('Y-m-d H:i:s'),

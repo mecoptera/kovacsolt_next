@@ -30,7 +30,7 @@
           </k-select>
         @endif
 
-          <k-checkbox id="js-order-shipping-data-same" data-name="same_as_billing" data-label="A szállítási adatok megegyeznek a számlázási adatokkal"></k-checkbox>
+          <k-checkbox id="js-order-shipping-data-same" data-name="same_as_billing" data-label="A szállítási adatok megegyeznek a számlázási adatokkal" {{ $shippingData['same_as_billing'] ? 'data-checked' : '' }}></k-checkbox>
           
           <div id="js-order-shipping-data-wrapper">
             <div id="js-order-shipping-data-section">

@@ -5,24 +5,22 @@ require_once 'SimplePayV21.php';
 class SimplePay {
   protected static $CI;
 
-  public static function test($order, $cartItems, $price) {
+  public static function pay($order, $cartItems, $price) {
     self::$CI = &get_instance();
     $config = require_once APPPATH . 'config/simple-pay.php';
 
-    // new SimplePayStart instance
     $trx = new SimplePayStart;
-    //add config data
     $trx->addConfig($config);
 
-    $billingData = json_decode($order->billing_data, true);
-    $shippingData = json_decode($order->shipping_data, true);
+    $billingData = $order['billingData'];
+    $shippingData = $order['shippingData'];
     $timeoutInSec = 600;
 
     foreach ($cartItems as $cartItem) {
       $trx->addItems(array(
-        'ref' => $cartItem['product']->id,
+        'ref' => $cartItem['product']->base_product_name,
         'title' => $cartItem['product']->name,
-        'description' => $cartItem['product']->id,
+        'description' => '#' . $cartItem['product']->id,
         'amount' => $cartItem['quantity'],
         'price' => $cartItem['product']->price * (1 - $cartItem['product']->discount / 100),
         'tax' => 0
@@ -34,16 +32,13 @@ class SimplePay {
     //add transaction data
     $trx->addData('currency', 'HUF');
     $trx->addData('total', $price);
-    $trx->addData('orderRef', $order->order_id);
-    $trx->addData('customer', 'v2 START Tester');
+    $trx->addData('orderRef', $order['visibleOrderId']);
+    $trx->addData('customer', $billingData['name']);
     $trx->addData('customerEmail', $billingData['email']);
     $trx->addData('language', 'HU');
     $trx->addData('timeout ', date("c", time() + $timeoutInSec));
     $trx->addData('methods', array('CARD'));
-    $trx->addGroupData('urls', 'success', $config['URL_SUCCESS']);
-    $trx->addGroupData('urls', 'fail', $config['URL_FAIL']);
-    $trx->addGroupData('urls', 'cancel', $config['URL_CANCEL']);
-    $trx->addGroupData('urls', 'timeout', $config['URL_TIMEOUT']);
+    $trx->addData('url', $config['URL']);
 
     // invoice
     $trx->addGroupData('invoice', 'name', $billingData['name']);
@@ -68,5 +63,22 @@ class SimplePay {
     $trx->runStart();
 
     return $trx->returnData['paymentUrl'];
+  }
+
+  public static function result() {
+    self::$CI = &get_instance();
+    $config = require_once APPPATH . 'config/simple-pay.php';
+
+    $trx = new SimplePayBack;
+    $trx->addConfig($config);
+
+    $result = [];
+    if (isset($_REQUEST['r']) && isset($_REQUEST['s'])) {
+      if ($trx->isBackSignatureCheck($_REQUEST['r'], $_REQUEST['s'])) {
+        $result = $trx->getRawNotification();
+      }
+    }
+
+    return $result;
   }
 }
