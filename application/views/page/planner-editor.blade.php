@@ -33,7 +33,7 @@
               </div>
 
               <div class="u-p-8">
-                <button class="c-button"><span class="c-icon c-icon--small c-icon--white c-icon--cart"></span>Hozzáadás kosárhoz</button>
+                <button class="c-button"><k-icon data-icon="cart" data-color="inherit" class="u-mr-2"></k-icon>Hozzáadás kosárhoz</button>
               </div>
 
               <div class="q-planner-settings__title">Beállítások</div>

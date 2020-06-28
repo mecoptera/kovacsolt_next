@@ -78,9 +78,15 @@
   &__link-button {
     padding: 8px;
     transition: background .2s;
-
+    
     @include hover {
-      background: rgba(#fff, .1);
+      background: #fff;
+    }
+
+    .q-menu--alternative & {
+      @include hover {
+        background: rgba(#fff, .1);
+      }
     }
   }
 }

@@ -3,7 +3,8 @@
 @section('title', 'Fiók aktivállása')
 
 @section('body')
-<p>Kedves leendő felhasználó!</p>
+<p><b>Kedves leendő felhasználó!</b></p>
+
 <p>
   Ezt a levelet azért kaptad, mert új fiókot regisztráltál rendszerünkbe.<br/>
   Amennyiben te kezdeményezted, úgy a lenti gomb megnyomásával aktiválhatod a regisztrációd.<br/>

@@ -6,7 +6,7 @@ class Order_controller extends MY_Controller {
   private $shippingMethods = [
     // ['key' => 'personal', 'value' => 'Személyes átvétel', 'price' => 0],
     // ['key' => 'post', 'value' => 'Postai átvétel', 'price' => 800],
-    ['key' => 'delivery', 'value' => 'Házhozszállítás, utánvét', 'price' => 1200],
+    ['key' => 'delivery', 'value' => 'Házhozszállítás', 'price' => 1200],
     // ['key' => 'post_point', 'value' => 'Átvétel csomagponton', 'price' => 800]
   ];
 
@@ -257,6 +257,40 @@ class Order_controller extends MY_Controller {
   private function handleSuccess() {
     $visibleOrderId = $this->session->userdata('order.id');
 
+    $shippingMethodKey = $this->session->userdata('order.shippingData')['shipping_method'];
+    $shippingMethod = array_reduce($this->shippingMethods, function($carry, $method) use ($shippingMethodKey) {
+      if ($shippingMethodKey === $method['key']) {
+        $carry = $method;
+      }
+
+      return $carry;
+    }, []);
+
+    $shippingPrice = array_reduce($this->shippingMethods, function($carry, $method) use ($shippingMethodKey) {
+      if ($shippingMethodKey === $method['key']) {
+        $carry = $method['price'];
+      }
+
+      return $carry;
+    }, 0);
+
+    $paymentMethodKey = $this->session->userdata('order.paymentData')['payment_method'];
+    $paymentMethod = array_reduce($this->paymentMethods, function($carry, $method) use ($paymentMethodKey) {
+      if ($paymentMethodKey === $method['key']) {
+        $carry = $method;
+      }
+
+      return $carry;
+    }, []);
+
+    $cartItems = array_map(function($cartItem) {
+      $cartItem['product']->base_product_variant_image = media('variant', $cartItem['product']->base_product_variant_id);
+      $cartItem['product']->product_variant_design_image = media('design', $cartItem['product']->product_variant_design_id);
+      return $cartItem;
+    }, $this->cart->get());
+
+    $cartPrice = $this->cart->price();
+
     $this->db->query('
       INSERT INTO `orders` (`order_id`, `visible_order_id`, `user_id`, `billing_data`, `shipping_data`, `payment_data`, `finalize_data`, `status`, `created_at`, `updated_at`)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
@@ -275,8 +309,6 @@ class Order_controller extends MY_Controller {
 
     $orderId = $this->db->insert_id();
 
-    $cartItems = $this->cart->get();
-
     foreach($cartItems as $item) {
       $this->db->query('
         INSERT INTO `order_products` (`order_id`, `product_id`, `extra_data`, `price`, `quantity`, `status`, `created_at`, `updated_at`)
@@ -292,6 +324,26 @@ class Order_controller extends MY_Controller {
         ]
       );
     }
+
+    $this->load->library('email');
+
+    $this->email->from('admin@kovacsoltpolo.hu', 'Kovácsolt Póló');
+    $this->email->to(ENVIRONMENT === 'development' ? 'krazyqwed@gmail.com' : $this->input->post('email'));
+    $this->email->subject('Fiók aktiválása');
+    $this->email->message($this->slice->view('mail.activate-user', [
+      'orderId' => $this->session->userdata('order.id'),
+      'billingData' => $this->session->userdata('order.billingData'),
+      'shippingData' => $this->session->userdata('order.shippingData'),
+      'shippingMethodText' => $shippingMethod['value'],
+      'paymentData' => $this->session->userdata('order.paymentData'),
+      'paymentMethodText' => $paymentMethod['value'],
+      'finalizeData' => $this->session->userdata('order.finalizeData'),
+      'cartItems' => $cartItems,
+      'price' => $cartPrice,
+      'shippingPrice' => $shippingPrice,
+      'priceTotal' => $cartPrice + $shippingPrice
+    ]));
+    $this->email->send();
 
     $this->cart->empty();
 
