@@ -1,0 +1,49 @@
+.q-profile-button {
+  align-items: center;
+  cursor: pointer;
+  display: inline-flex;
+  position: relative;
+
+  &__popup {
+    bottom: -16px;
+    box-shadow: var(--shadow-level-2);
+    display: none;
+    min-width: 200px;
+    position: absolute;
+    right: 0;
+    transform: translateY(100%);
+    z-index: 2;
+
+    &--visible {
+      display: block;
+    }
+
+    &:before {
+      border: 8px solid transparent;
+      border-bottom-color: #fff;
+      border-top-width: 0;
+      content: '';
+      filter: drop-shadow(0 0 4px rgba(var(--color-secondary-rgb), .1));
+      position: absolute;
+      right: 8px;
+      top: -8px;
+    }
+  }
+
+  &__panel {
+    background: #fff;
+    cursor: default;
+    position: relative;
+  }
+
+  &__link {
+    color: var(--color-primary);
+    display: block;
+    padding: 12px;
+
+    @include hover {
+      background: var(--color-form-element-background);
+      color: var(--color-primary-mid);
+    }
+  }
+}

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Kovácsolt Póló - @yield('title')</title>
+  <title>@yield('title') - Kovácsolt Póló</title>
 
   <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
   <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
@@ -37,10 +37,15 @@
         </div>
         <div class="q-menu__right">
         @if ($this->userModel->isLoggedIn())
-          <a href="{{ base_url('user/profile') }}" class="q-menu__link-button u-flex u-items-center">
+          <k-profile-button class="q-menu__link-button">
+            <k-icon data-icon="person" data-color="{{ isIndexPage() ? 'white' : 'text' }}" data-size="8"></k-icon>
+            <span class="u-inline-block u-mx-2 u-text-xs u-uppercase u-font-bold {{ isIndexPage() ? 'u-text-white' : '' }}">
+              {{ mb_substr($this->session->userdata('user')->fullname, 0, 24) }}
+            </span>
+          </k-profile-button>
+          <!--<a href="{{ base_url('user/profile') }}" class="q-menu__link-button u-flex u-items-center"></a>-->
         @else
-          <a href="{{ base_url('login') }}" class="q-menu__link-button ">
-        @endif
+          <a href="{{ base_url('login') }}" class="q-menu__link-button">
             <k-icon data-icon="person" data-color="{{ isIndexPage() ? 'white' : 'text' }}" data-size="8"></k-icon>
             
             @if ($this->userModel->isLoggedIn() && mb_strlen($this->session->userdata('user')->fullname) !== 0)
@@ -49,6 +54,7 @@
               </span>
             @endif
           </a>
+        @endif
 
           <k-cart-button data-count="{{ cartItemsCount() }}" data-cart-url="{{ base_url('cart') }}" data-area-endpoint="cart/menu_button" class="q-menu__link-button ">
             <k-icon data-icon="cart" data-color="{{ isIndexPage() ? 'white' : 'text' }}" data-size="8"></k-icon>

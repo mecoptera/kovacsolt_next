@@ -7,6 +7,8 @@ export default class KCartButton extends Bamboo {
       className: 'q-cart-button',
       listenChildren: true
     });
+
+    this._outsideClick = this._outsideClick.bind(this);
   }
 
   static get observedAttributes() {
@@ -52,5 +54,21 @@ export default class KCartButton extends Bamboo {
     this.appendChild(container);
 
     container.classList.toggle('q-cart-button__popup--visible');
+
+    document.addEventListener('click', this._outsideClick, true);
+  }
+
+  _outsideClick(event) {
+    const container = this._templater.getRoot('popup');
+
+    if (container === event.target || container.contains(event.target)) { return false; }
+
+    if (container.classList.contains('q-cart-button__popup--visible') && (this === event.target || this.contains(event.target))) {
+      event.stopPropagation();
+    }
+
+    container.classList.remove('q-cart-button__popup--visible');
+
+    document.removeEventListener('click', this._outsideClick);
   }
 }

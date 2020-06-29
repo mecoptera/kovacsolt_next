@@ -1,6 +1,6 @@
 @extends('mail.email-skeleton')
 
-@section('title', 'Fiók aktivállása')
+@section('title', 'Fiók aktiválása')
 
 @section('body')
 <p><b>Kedves leendő felhasználó!</b></p>

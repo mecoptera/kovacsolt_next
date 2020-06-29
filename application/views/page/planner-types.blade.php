@@ -1,6 +1,6 @@
 @extends('layouts.page')
 
-@section('title', 'Tervező')
+@section('title', 'Tervezhető termékek')
 
 @section('content')
   <div class="l-container">

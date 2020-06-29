@@ -55,16 +55,18 @@ class User_model extends CI_Model {
   }
 
   public function activateEmail($hash) {
-    $email = $this->db->query('SELECT `email` FROM `user_activations` WHERE `hash` = ?', [$hash])->row()->email;
+    $activation = $this->db->query('SELECT `email` FROM `user_activations` WHERE `hash` = ?', [$hash])->row();
 
-    $this->db->query('UPDATE `users` SET `email_verified_at` = ? WHERE `email` = ?', [
+    if (!$activation) { return false; }
+
+    $this->db->query('UPDATE `users` SET `email_verified_at` = ? WHERE `email` = ? AND `email_verified_at` = NULL', [
       date('Y-m-d H:i:s'),
-      $email
+      $activation->email
     ]);
 
     $this->db->query('DELETE FROM `user_activations` WHERE `hash` = ?', [$hash]);
 
-    return $email;
+    return $activation->email;
   }
 
   public function createPasswordChange($email) {

@@ -1,5 +1,7 @@
 @extends('layouts.page')
 
+@section('title', 'Fiók aktiváló levél újraküldése')
+
 @section('content')
   <div class="l-container">
     <div class="c-panel">

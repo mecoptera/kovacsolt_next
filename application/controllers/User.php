@@ -31,6 +31,9 @@ class User extends MY_Controller {
   public function activate($hash = null) {
     if ($hash) {
       $email = $this->userModel->activateEmail($hash);
+
+      if (!$email) { return show_404(); }
+
       $userData = $this->userModel->getByEmail($email);
       $this->userModel->login($userData);
 

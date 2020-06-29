@@ -1,5 +1,7 @@
 @extends('layouts.page')
 
+@section('title', 'Regisztráció')
+
 @section('content')
   <div class="l-container">
     <div class="c-panel">
@@ -14,6 +16,7 @@
               data-label="Név"
               data-value="{{ old('fullname') }}"
               @error('name')data-error="{{ $errors['fullname'] }}"@enderror
+              data-required
             ></k-input>
 
             <k-input
@@ -22,6 +25,7 @@
               data-label="E-mail cím"
               data-value="{{ old('email') }}"
               @error('email')data-error="{{ $errors['email'] }}"@enderror
+              data-required
             ></k-input>
 
             <k-input
@@ -30,6 +34,7 @@
               data-name="password"
               data-label="Jelszó"
               @error('password')data-error="{{ $errors['password'] }}"@enderror
+              data-required
             >
             </k-input>
 
@@ -39,10 +44,11 @@
               data-name="password_confirmation"
               data-label="Jelszó újra"
               @error('password')data-error @enderror
+              data-required
             >
             </k-input>
 
-            <k-checkbox data-name="accept" @error('accept')data-error="{{ $errors['accept'] }}"@enderror>
+            <k-checkbox data-name="accept" @error('accept')data-error="{{ $errors['accept'] }}"@enderror data-required>
               <template data-label>Megértettem és elfogadom az&nbsp;<a href="{{ base_url('privacy') }}" target="_blank" class="c-link">Adatkezelési tájékoztatóban</a>&nbsp;leírtakat</template>
             </k-checkbox>
 
